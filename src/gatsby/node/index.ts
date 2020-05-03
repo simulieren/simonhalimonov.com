@@ -1,24 +1,30 @@
+import { GatsbyNode } from "gatsby"
+// import path from "path"
 const path = require("path")
-
+const resolve = path.resolve
+// @ts-ignore
+// import createPaginatedPages from "gatsby-paginate"
 const createPaginatedPages = require("gatsby-paginate")
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
+const createPages: GatsbyNode["createPages"] = async ({
+  graphql,
+  actions,
+  reporter,
+}) => {
   const { createPage } = actions
 
-  const BlogPostTemplate = path.resolve("./src/templates/Blog/BlogPost.tsx")
-  const BlogPostsTemplate = path.resolve("./src/templates/Blog/BlogPosts.tsx")
-  const BlogTagPostsTemplate = path.resolve(
-    "./src/templates/Blog/BlogTagPosts.tsx"
-  )
-  const BlogCategoryPostsTemplate = path.resolve(
+  const BlogPostTemplate = resolve("./src/templates/Blog/BlogPost.tsx")
+  const BlogPostsTemplate = resolve("./src/templates/Blog/BlogPosts.tsx")
+  const BlogTagPostsTemplate = resolve("./src/templates/Blog/BlogTagPosts.tsx")
+  const BlogCategoryPostsTemplate = resolve(
     "./src/templates/Blog/BlogCategoryPosts.tsx"
   )
 
-  const BlogPostsResult = await graphql(`
+  const BlogPostsResult = await graphql<any>(`
     {
       allWordpressPost {
         edges {
@@ -126,9 +132,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const BlogPosts = BlogPostsResult.data.allWordpressPost.edges
+  const BlogPosts = BlogPostsResult?.data?.allWordpressPost?.edges
 
-  BlogPosts.forEach((post, index) => {
+  BlogPosts.forEach((post: any, index: number) => {
     createPage({
       path: `/post/${post.node.slug}`,
       component: BlogPostTemplate,
@@ -144,10 +150,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const BlogTagPosts = new Map()
   const BlogCategoryPosts = new Map()
 
-  BlogPosts.forEach((post) => {
+  BlogPosts.forEach((post: any) => {
     const tags = post.node.tags
     if (tags && tags.length > 0) {
-      tags.forEach((tag) => {
+      tags.forEach((tag: any) => {
         if (BlogTagPosts.has(tag.slug)) {
           BlogTagPosts.set(tag.slug, [...BlogTagPosts.get(tag.slug), post])
         } else {
@@ -157,7 +163,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
     const categories = post.node.categories
     if (categories && categories.length > 0) {
-      categories.forEach((category) => {
+      categories.forEach((category: any) => {
         if (BlogCategoryPosts.has(category.slug)) {
           BlogCategoryPosts.set(category.slug, [
             ...BlogCategoryPosts.get(category.slug),
@@ -195,7 +201,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         context: {
           group: BlogCategoryPosts.get(BlogCategorySlug),
           slug: BlogCategorySlug,
-          allInstaNode: BlogPostsResult.data.allInstaNode,
+          allInstaNode: BlogPostsResult?.data?.allInstaNode,
         },
       })
     })
@@ -208,15 +214,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     pageLength: 2,
     pathPrefix: "posts",
     context: {
-      allInstaNode: BlogPostsResult.data.allInstaNode,
+      allInstaNode: BlogPostsResult?.data?.allInstaNode,
     },
   })
 
+  /**
+   * Load all templates necessary for rendering pages
+   */
   // Work Pages
-  const WorkPageTemplate = path.resolve("./src/templates/Work/WorkPage.tsx")
-  const WorkPagesTemplate = path.resolve("./src/templates/Work/WorkPages.tsx")
+  const WorkPageTemplate = resolve("./src/templates/Work/WorkPage.tsx")
+  const WorkPagesTemplate = resolve("./src/templates/Work/WorkPages.tsx")
 
-  const WorkPagesResult = await graphql(`
+  /**
+   * Query all pages and then render them
+   * with the correct template and pass the id
+   */
+
+  const WorkPagesResult = await graphql<any>(`
     {
       allWordpressPage(filter: { path: { regex: "/work/./" } }) {
         edges {
@@ -267,9 +281,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const WorkPages = WorkPagesResult.data.allWordpressPage.edges
+  const WorkPages = WorkPagesResult?.data?.allWordpressPage?.edges
 
-  WorkPages.forEach((work, index) => {
+  WorkPages.forEach((work: any, index: number) => {
     createPage({
       path: `/work/${work.node.slug}`,
       component: WorkPageTemplate,
@@ -290,3 +304,5 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     },
   })
 }
+
+module.exports.createPages = createPages

@@ -12,16 +12,13 @@ import H from "../../components/Typography/H"
 import P from "../../components/Typography/P"
 import S from "../../components/Typography/S"
 
-import { Post, CategoryTagInfo, InstagramFeed } from "../../contracts/post"
-import { CommentEdges } from "../../contracts/comment"
+import { Page } from "../../contracts/page"
 
 import { decodeHtmlCharCodes, capitalizeFirstLetter } from "../../utils"
 
 export interface Props {
   data: {
-    wordpressPage: Post // TODO: Create page interface
-    allCommentsYaml: CommentEdges
-    allInstaNode: InstagramFeed
+    wordpressPage: Page // TODO: Create page interface
   }
   pageContext: {
     previous: {
@@ -85,7 +82,7 @@ export const WorkPage = (props: Props) => {
               to={`/work/${props.pageContext.next.slug}`}
               title={props.pageContext.next.slug}
             >
-              <S type="primary">Go to Previous Project</S>
+              <S type="primary">Previous</S>
               <H>{props.pageContext.next.title}</H>
             </Link>
           </Box>
@@ -96,7 +93,7 @@ export const WorkPage = (props: Props) => {
               to={`/work/${props.pageContext.previous.slug}`}
               title={props.pageContext.previous.slug}
             >
-              <S type="primary">Go to Next Project</S>
+              <S type="primary">Next</S>
               <H>{props.pageContext.previous.title}</H>
             </Link>
           </Box>
@@ -109,7 +106,7 @@ export const WorkPage = (props: Props) => {
 export default WorkPage
 
 export const query = graphql`
-  query($id: Int!, $slug: String!) {
+  query($id: Int!) {
     wordpressPage(wordpress_id: { eq: $id }) {
       title
       content
@@ -142,18 +139,6 @@ export const query = graphql`
               srcSetWebp
             }
           }
-        }
-      }
-    }
-    allCommentsYaml(filter: { slug: { eq: $slug } }) {
-      edges {
-        node {
-          id
-          name
-          email
-          message
-          date
-          slug
         }
       }
     }

@@ -1,5 +1,4 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
 import { Box, Grid } from "theme-ui"
 
@@ -9,45 +8,19 @@ import HTML from "../../components/HTML/HTML"
 
 import { Page } from "../../contracts/page"
 
+/**
+ * Template for a full width page
+ */
 export interface Props {
   location: Location
+  data: {
+    wordpressPage: Page
+  }
 }
-
 export default (props: Props) => {
   const {
-    wordpressPage,
-  }: {
-    wordpressPage: Page
-  } = useStaticQuery(graphql`
-    query {
-      wordpressPage(slug: { eq: "about-me" }) {
-        id
-        content
-        slug
-        title
-        type
-        excerpt
-        date
-        status
-        featured_media {
-          localFile {
-            childImageSharp {
-              fluid(quality: 85) {
-                aspectRatio
-                src
-                srcSet
-                sizes
-                base64
-                tracedSVG
-                srcWebp
-                srcSetWebp
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
+    data: { wordpressPage },
+  } = props
 
   const fluid: FluidObject | null =
     wordpressPage?.featured_media?.localFile?.childImageSharp?.fluid || null

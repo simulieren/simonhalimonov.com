@@ -1,3 +1,8 @@
+// We register the TypeScript evaluator in gatsby-config so we don't need to do
+// it in any other .js file. It automatically reads TypeScript config from
+// tsconfig.json.
+require("ts-node").register()
+
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
@@ -86,13 +91,6 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: "./src/data/comments",
-        name: "comments",
-      },
-    },
-    {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: process.env.GATSBY_GOOGLE_ANALYTICS,
@@ -121,6 +119,8 @@ module.exports = {
           "/tag/*",
           "/category/*",
           "/about",
+          "/work/*",
+          "/work",
         ],
       },
     },

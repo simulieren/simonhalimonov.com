@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "lib": [
             "dom",
             "dom.iterable",
@@ -21,7 +21,6 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "isolatedModules": true,
         "noEmit": true,
         "strictNullChecks": true,
         "strictBindCallApply": true,
