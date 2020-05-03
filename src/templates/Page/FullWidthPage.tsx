@@ -13,21 +13,22 @@ import { Page } from "../../contracts/page"
  */
 export interface Props {
   location: Location
-  data: {
-    wordpressPage: Page
+  pageContext: {
+    page: { node: Page }
   }
 }
 export default (props: Props) => {
   const {
-    data: { wordpressPage },
+    pageContext: { page },
   } = props
+  console.log("page", page)
 
   const fluid: FluidObject | null =
-    wordpressPage?.featured_media?.localFile?.childImageSharp?.fluid || null
+    page.node?.featured_media?.localFile?.childImageSharp?.fluid || null
 
   return (
     <>
-      <SEO title={wordpressPage?.title} />
+      <SEO title={page.node?.title} />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[1]}>
         <Box>
           {fluid && fluid?.src?.length > 0 && (
@@ -40,13 +41,13 @@ export default (props: Props) => {
             >
               <Image
                 fluid={fluid}
-                alt={wordpressPage?.title}
-                title={wordpressPage?.title}
+                alt={page.node?.title}
+                title={page.node?.title}
               />
             </Box>
           )}
 
-          <HTML html={wordpressPage.content} />
+          <HTML html={page.node.content} />
         </Box>
       </Grid>
     </>

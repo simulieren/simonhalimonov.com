@@ -13,6 +13,11 @@ import Transition from "../Transition/Transition"
 export interface Props {
   children: React.ReactNode
   location: Location
+  pageContext: {
+    lang: string
+    id?: number
+    slug?: string
+  }
 }
 
 export class Layout extends Component<Props> {
@@ -59,11 +64,14 @@ export class Layout extends Component<Props> {
             },
           }}
         >
-          <Header location={this.props.location} />
+          <Header
+            location={this.props.location}
+            lang={this.props.pageContext.lang}
+          />
           <ParallaxProvider>
             <Transition location={this.props.location}>
               <main>{this.props.children}</main>
-              <Footer />
+              <Footer lang={this.props.pageContext.lang} />
             </Transition>
           </ParallaxProvider>
         </Box>

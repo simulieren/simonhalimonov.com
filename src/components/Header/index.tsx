@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import { Grid, Box, useColorMode } from "theme-ui"
 import { Sun, Moon } from "react-feather"
 import { motion } from "framer-motion"
@@ -9,10 +9,107 @@ import S from "../Typography/S"
 
 export interface Props {
   location: Location
+  lang: string
 }
 
-export const Header = (props: Props) => {
+interface MenuNode {
+  node: {
+    items: {
+      object: string
+      title: string
+      url: string
+    }[]
+    name: string
+  }
+}
+
+const MenuItem = ({ title, url }: MenuNode["node"]["items"][0]) => (
+  <S>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.1 }}
+    >
+      <Link to={url} title={title}>
+        {title}
+      </Link>
+    </motion.div>
+  </S>
+)
+
+const normalizeLinks = (links: MenuNode["node"]["items"]) => {
+  const normalizedItems = links.map((item) => {
+    if (item.object === "custom") {
+      return item
+    } else {
+      try {
+        const url = new URL(item.url)
+        return { ...item, url: url.pathname }
+      } catch (error) {
+        return item
+      }
+    }
+  })
+  return normalizedItems
+}
+
+export const Header = ({ lang }: Props) => {
+  // Switching color themes
   const [colorMode, setColorMode] = useColorMode()
+
+  /**
+   * Query all menu items and site languages
+   */
+  const query = useStaticQuery(graphql`
+    query {
+      allWordpressWpApiMenusMenusItems {
+        edges {
+          node {
+            name
+            items {
+              title
+              url
+              object
+            }
+          }
+        }
+      }
+      site {
+        siteMetadata {
+          languages {
+            default {
+              name
+              locale
+              pathPrefix
+            }
+            german {
+              name
+              locale
+              pathPrefix
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const menuEdges = query.allWordpressWpApiMenusMenusItems.edges
+  const languages = query.site.siteMetadata.languages
+
+  /**
+   * Check if lang is available
+   * Otherwise use default as fallback language
+   */
+  const currentMenuLang = lang || languages.default.locale
+
+  const currentMenuItems: MenuNode["node"]["items"] = menuEdges.filter(
+    (edge: MenuNode) => edge.node.name.includes(`[${currentMenuLang}]`)
+  )[0].node.items
+
+  /**
+   * Remove IP/domain of headless WP links
+   */
+  const normalizedItems = normalizeLinks(currentMenuItems)
 
   return (
     <Grid
@@ -34,45 +131,15 @@ export const Header = (props: Props) => {
           </motion.div>
         </Box>
       </Link>
-      <S>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-        >
-          <Link to="/work" title="Work">
-            Work
-          </Link>
-        </motion.div>
-      </S>
-      <S>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <Link to="/posts" title="Blog">
-            Blog
-          </Link>
-        </motion.div>
-      </S>
-      <S>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <Link to="/about" title="About">
-            About
-          </Link>
-        </motion.div>
-      </S>
+      {normalizedItems.map((item, index) => (
+        <MenuItem key={index} {...item} />
+      ))}
 
       <S
         sx={{
           "&:hover": { opacity: 0.5, cursor: "pointer" },
         }}
-        onClick={(e) => {
+        onClick={() => {
           setColorMode(colorMode === "default" ? "dark" : "default")
         }}
       >

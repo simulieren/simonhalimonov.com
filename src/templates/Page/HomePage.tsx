@@ -4,19 +4,19 @@ import { Flex, Box, Grid } from "theme-ui"
 import { motion, AnimatePresence } from "framer-motion"
 import { Parallax } from "react-scroll-parallax"
 
-import SEO from "../components/SEO"
+import SEO from "../../components/SEO"
 
-import H from "../components/Typography/H"
-import P from "../components/Typography/P"
-import S from "../components/Typography/S"
+import H from "../../components/Typography/H"
+import P from "../../components/Typography/P"
+import S from "../../components/Typography/S"
 
-import useInterval from "../utils/useInterval"
+import useInterval from "../../utils/useInterval"
 
-import WorkSlider from "../components/WorkSlider/WorkSlider"
-import Section from "../components/Layout/Section"
+import WorkSlider from "../../components/WorkSlider/WorkSlider"
+import Section from "../../components/Layout/Section"
 
-import { ChildImageSharp, InstagramFeed } from "../contracts/post"
-import InviewMotion from "../components/InviewMotion/InviewMotion"
+import { ChildImageSharp, InstagramFeed } from "../../contracts/post"
+import InviewMotion from "../../components/InviewMotion/InviewMotion"
 
 export interface Props {
   data: {
@@ -76,7 +76,7 @@ const AnimateWords = () => {
   )
 }
 
-export const IndexPage = (props: Props) => {
+export default (props: Props) => {
   const workpages = props.data.allWordpressPage.nodes
 
   return (
@@ -156,39 +156,39 @@ export const IndexPage = (props: Props) => {
             <Box
               sx={{
                 position: "sticky",
-                top: 0,
+                top: [3, 4],
               }}
             >
-              <H as="a" href="#design" title="Design" sx={{ display: "block" }}>
+              <S as="a" href="#design" title="Design" sx={{ display: "block" }}>
                 <InviewMotion>Design</InviewMotion>
-              </H>
-              <H
+              </S>
+              <S
                 as="a"
                 href="#development"
                 title="Development"
                 sx={{ display: "block" }}
               >
                 <InviewMotion>Development</InviewMotion>
-              </H>
-              <H
+              </S>
+              <S
                 as="a"
                 href="#mission"
                 title="Mission"
                 sx={{ display: "block" }}
               >
                 <InviewMotion>Mission</InviewMotion>
-              </H>
-              <H
+              </S>
+              <S
                 as="a"
                 href="#teaching"
                 title="Teaching"
                 sx={{ display: "block" }}
               >
                 <InviewMotion>Teaching</InviewMotion>
-              </H>
-              <H as="a" href="#hire" title="Hire" sx={{ display: "block" }}>
+              </S>
+              <S as="a" href="#hire" title="Hire" sx={{ display: "block" }}>
                 <InviewMotion>Hire</InviewMotion>
-              </H>
+              </S>
             </Box>
           </Box>
           <Box sx={{ gridColumn: ["4/13"] }}>
@@ -395,8 +395,6 @@ export const IndexPage = (props: Props) => {
     </>
   )
 }
-
-export default IndexPage
 
 export const query = graphql`
   query {

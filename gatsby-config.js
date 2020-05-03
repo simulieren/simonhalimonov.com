@@ -1,3 +1,4 @@
+// Source: https://gist.github.com/JohnAlbin/2fc05966624dffb20f4b06b4305280f9
 // We register the TypeScript evaluator in gatsby-config so we don't need to do
 // it in any other .js file. It automatically reads TypeScript config from
 // tsconfig.json.
@@ -18,6 +19,20 @@ module.exports = {
       email: "hello@simonhalimonov.de",
       linkedin: "https://www.linkedin.com/in/simon-halimonov-745431181/",
       github: "https://github.com/simulieren",
+    },
+    languages: {
+      // Define the default language
+      default: {
+        name: "English",
+        locale: "en_US",
+        pathPrefix: "",
+      },
+      // Define more languages here ...
+      german: {
+        name: "Deutsch",
+        locale: "de_DE",
+        pathPrefix: "/de",
+      },
     },
   },
   plugins: [

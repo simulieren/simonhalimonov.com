@@ -6,7 +6,12 @@ import { Grid, Box } from "theme-ui"
 import S from "../Typography/S"
 import GridHelper from "../GridHelper/GridHelper"
 
-export const Footer = () => {
+interface Props {
+  lang: string
+}
+
+export const Footer = ({ lang }: Props) => {
+  // TODO: i18n support for en and de
   const { site } = useStaticQuery(graphql`
     query {
       site {

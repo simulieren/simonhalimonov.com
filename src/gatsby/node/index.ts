@@ -219,10 +219,13 @@ const createPages: GatsbyNode["createPages"] = async ({
   })
 
   /**
-   * Load all templates necessary for rendering pages
+   * Get all template directories necessary for rendering pages
    */
-  // Work Pages
-  const WorkPageTemplate = resolve("./src/templates/Work/WorkPage.tsx")
+  const DefaultPage = resolve("./src/templates/Page/DefaultPage.tsx")
+  const HomePage = resolve("./src/templates/Page/HomePage.tsx")
+  const FullWidthPage = resolve("./src/templates/Page/FullWidthPage.tsx")
+  const CoverPage = resolve("./src/templates/Page/CoverPage.tsx")
+  // const WorkPageTemplate = resolve("./src/templates/Work/WorkPage.tsx")
   const WorkPagesTemplate = resolve("./src/templates/Work/WorkPages.tsx")
 
   /**
@@ -230,11 +233,14 @@ const createPages: GatsbyNode["createPages"] = async ({
    * with the correct template and pass the id
    */
 
-  const WorkPagesResult = await graphql<any>(`
+  const PagesResult = await graphql<any>(`
     {
-      allWordpressPage(filter: { path: { regex: "/work/./" } }) {
+      allWordpressPage {
         edges {
           node {
+            acf {
+              project
+            }
             id
             slug
             status
@@ -242,19 +248,11 @@ const createPages: GatsbyNode["createPages"] = async ({
             wordpress_id
             title
             excerpt
+            content
             path
+            polylang_current_lang
             date(formatString: "MMMM DD, YYYY")
             modified(formatString: "MMMM DD, YYYY")
-            author {
-              id
-              name
-              url
-              description
-              link
-              slug
-              path
-              wordpress_id
-            }
             featured_media {
               localFile {
                 childImageSharp {
@@ -276,32 +274,70 @@ const createPages: GatsbyNode["createPages"] = async ({
     }
   `)
 
-  if (WorkPagesResult.errors) {
+  if (PagesResult.errors) {
     reporter.panicOnBuild("Error while running GraphQL query.")
     return
   }
 
-  const WorkPages = WorkPagesResult?.data?.allWordpressPage?.edges
+  const Pages = PagesResult?.data?.allWordpressPage?.edges
 
-  WorkPages.forEach((work: any, index: number) => {
-    createPage({
-      path: `/work/${work.node.slug}`,
-      component: WorkPageTemplate,
+  Pages.forEach((page: any) => {
+    const pageOptions = {
+      path: page.node.path,
+      component: DefaultPage,
       context: {
-        id: work.node.wordpress_id,
-        slug: work.node.slug,
-        previous: index === 0 ? null : WorkPages[index - 1].node,
-        next: index === WorkPages.length - 1 ? null : WorkPages[index + 1].node,
+        id: page.node.wordpress_id,
+        slug: page.node.slug,
+        lang: page.node.polylang_current_lang,
+        page, // Pass all the page data as context data
       },
-    })
-  })
+    }
 
-  createPage({
-    path: `/work`,
-    component: WorkPagesTemplate,
-    context: {
-      edges: WorkPages,
-    },
+    // Get all project pages
+    const WorkPages = PagesResult?.data?.allWordpressPage?.edges.filter(
+      (edge: any) =>
+        // Check if it is a project
+        edge.node.acf.project &&
+        // Match the language to the index language
+        page.node.polylang_current_lang === edge.node.polylang_current_lang
+    )
+
+    switch (page.node.template) {
+      case "":
+        // Default template
+        createPage({ ...pageOptions })
+        break
+      case "templates/template-full-width.php":
+        // Full width template
+        createPage({ ...pageOptions, component: FullWidthPage })
+        break
+      case "templates/template-cover.php":
+        // Cover template
+        createPage({ ...pageOptions, component: CoverPage })
+        break
+      case "templates/template-home.php":
+        // Homepage template
+        createPage({
+          ...pageOptions,
+          component: HomePage,
+          // Pass edges as context data
+          context: { ...pageOptions.context, edges: WorkPages },
+        })
+        break
+      case "templates/template-index.php":
+        // Index template for projects
+        createPage({
+          ...pageOptions,
+          component: WorkPagesTemplate,
+          // Pass edges as context data
+          context: { ...pageOptions.context, edges: WorkPages },
+        })
+        break
+
+      default:
+        createPage({ ...pageOptions })
+        break
+    }
   })
 }
 

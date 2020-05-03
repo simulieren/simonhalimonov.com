@@ -7,8 +7,6 @@ import SEO from "../../components/SEO"
 
 import WorkPageTeaser from "./WorkPageTeaser"
 
-import { Post, InstagramFeed } from "../../contracts/post"
-
 export interface Props {
   pathContext: {
     edges: any[] // TODO: Add types
@@ -39,12 +37,7 @@ export default (props: Props) => {
         gap={[3, 4, 5]}
         columns={[1, "1fr 1fr"]}
       >
-        {edges
-          .filter(
-            (edge) =>
-              edge.node.path !== "/work/" && edge.node.path.includes("/work/")
-          )
-          .map(WorkPageTeaser)}
+        {edges.map(WorkPageTeaser)}
       </Grid>
     </>
   )
