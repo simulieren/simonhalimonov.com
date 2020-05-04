@@ -3,7 +3,11 @@ import { Global } from "@emotion/core"
 import { ParallaxProvider } from "react-scroll-parallax"
 import { Box } from "theme-ui"
 
-// Import fonts
+/**
+ * Import fonts
+ * Use a 'typeface-...' npm package or another local
+ * font for optimal performance
+ */
 import "typeface-ibm-plex-sans"
 
 import Header from "../Header"

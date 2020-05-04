@@ -1,6 +1,6 @@
 import React from "react"
-import { Flex, Box, Grid } from "theme-ui"
-import { graphql, Link } from "gatsby"
+import { Box, Grid } from "theme-ui"
+import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
 
 import SEO from "../../components/SEO"
@@ -9,39 +9,41 @@ import SEO from "../../components/SEO"
 import HTML from "../../components/HTML/HTML"
 
 import H from "../../components/Typography/H"
-import P from "../../components/Typography/P"
 import S from "../../components/Typography/S"
 
 import { Page } from "../../contracts/page"
 
-import { decodeHtmlCharCodes, capitalizeFirstLetter } from "../../utils"
+import { decodeHtmlCharCodes } from "../../utils"
 
 export interface Props {
-  data: {
-    wordpressPage: Page // TODO: Create page interface
-  }
   pageContext: {
     previous: {
       slug: string
+      title: string
+      path: string
     }
     next: {
       slug: string
+      title: string
+      path: string
+    }
+    page: {
+      node: Page
     }
   }
   location: Location
 }
 
-export const WorkPage = (props: Props) => {
+export const CoverPage = (props: Props) => {
+  const pageContext = props?.pageContext
+  const page = pageContext?.page?.node
+
   const fluid: FluidObject | null =
-    props?.data?.wordpressPage?.featured_media?.localFile?.childImageSharp
-      ?.fluid || null
+    page?.featured_media?.localFile?.childImageSharp?.fluid || null
 
   return (
     <>
-      <SEO
-        title={props.data.wordpressPage.title}
-        description={props.data.wordpressPage.excerpt}
-      />
+      <SEO title={page.title} description={page.excerpt} />
       <Box>
         <Box as="article" sx={{ mb: [4, 5] }}>
           {fluid && fluid?.src?.length > 0 && (
@@ -52,22 +54,18 @@ export const WorkPage = (props: Props) => {
                 "& img": { objectFit: "cover" },
               }}
             >
-              <Image
-                fluid={fluid}
-                alt={props.data.wordpressPage.title}
-                title={props.data.wordpressPage.title}
-              />
+              <Image fluid={fluid} alt={page.title} title={page.title} />
             </Box>
           )}
 
           <Box sx={{ maxWidth: "70ch", mx: "auto", mb: [2, 4] }}>
-            <H sx={{ textAlign: "center" }}>
-              {decodeHtmlCharCodes(props.data.wordpressPage.title)}
+            <H as="h1" sx={{ textAlign: "center" }}>
+              {decodeHtmlCharCodes(page.title)}
             </H>
           </Box>
 
           <Box sx={{ px: [3, 4] }}>
-            <HTML html={props.data.wordpressPage.content} />
+            <HTML html={page.content} />
           </Box>
         </Box>
       </Box>
@@ -76,25 +74,22 @@ export const WorkPage = (props: Props) => {
         gap={[3, 4, 5]}
         columns={[2]}
       >
-        {props.pageContext.next && props.pageContext.next.slug && (
+        {pageContext?.next?.slug && (
           <Box>
-            <Link
-              to={`/work/${props.pageContext.next.slug}`}
-              title={props.pageContext.next.slug}
-            >
-              <S type="primary">Previous</S>
-              <H>{props.pageContext.next.title}</H>
+            <Link to={pageContext.next.path} title={pageContext.next.slug}>
+              <S>Previous</S>
+              <H>{pageContext.next.title}</H>
             </Link>
           </Box>
         )}
-        {props.pageContext.previous && props.pageContext.previous.slug && (
+        {pageContext?.previous?.slug && (
           <Box>
             <Link
-              to={`/work/${props.pageContext.previous.slug}`}
-              title={props.pageContext.previous.slug}
+              to={pageContext.previous.slug}
+              title={pageContext.previous.slug}
             >
-              <S type="primary">Next</S>
-              <H>{props.pageContext.previous.title}</H>
+              <S>Next</S>
+              <H>{pageContext.previous.title}</H>
             </Link>
           </Box>
         )}
@@ -103,44 +98,4 @@ export const WorkPage = (props: Props) => {
   )
 }
 
-export default WorkPage
-
-export const query = graphql`
-  query($id: Int!) {
-    wordpressPage(wordpress_id: { eq: $id }) {
-      title
-      content
-      excerpt
-      date(formatString: "MMMM DD, YYYY")
-      modified(formatString: "MMMM DD, YYYY")
-      author {
-        id
-        name
-        url
-        description
-        link
-        slug
-        path
-        wordpress_id
-      }
-      slug
-      wordpress_id
-      featured_media {
-        localFile {
-          childImageSharp {
-            fluid(quality: 85) {
-              aspectRatio
-              src
-              srcSet
-              sizes
-              base64
-              tracedSVG
-              srcWebp
-              srcSetWebp
-            }
-          }
-        }
-      }
-    }
-  }
-`
+export default CoverPage

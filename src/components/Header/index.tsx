@@ -106,10 +106,14 @@ export const Header = ({ lang }: Props) => {
     (edge: MenuNode) => edge.node.name.includes(`[${currentMenuLang}]`)
   )[0].node.items
 
+  // Get the first menu item
+  const homepageLink = currentMenuItems[0]
+
   /**
    * Remove IP/domain of headless WP links
+   * Skip the first link with slice
    */
-  const normalizedItems = normalizeLinks(currentMenuItems)
+  const normalizedItems = normalizeLinks(currentMenuItems).slice(1)
 
   return (
     <Grid
@@ -124,7 +128,7 @@ export const Header = ({ lang }: Props) => {
       columns={[6, 12]}
       gap={[3, 4, 5]}
     >
-      <Link to="/" title="Home">
+      <Link to={homepageLink.url} title={homepageLink.title}>
         <Box sx={{ "svg path": { fill: "text" } }}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <Logo />
