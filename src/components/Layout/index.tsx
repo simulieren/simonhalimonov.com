@@ -6,9 +6,11 @@ import { Box } from "theme-ui"
 /**
  * Import fonts
  * Use a 'typeface-...' npm package or another local
+ * `npm i typeface-...`
  * font for optimal performance
  */
 import "typeface-ibm-plex-sans"
+import "typeface-ibm-plex-serif"
 
 import Header from "../Header"
 import Footer from "../Footer"
@@ -47,6 +49,9 @@ export class Layout extends Component<Props> {
               border: "1px solid transparent",
               borderColor: "currentColor",
               padding: "2px 4px",
+            },
+            "em, i": {
+              fontFamily: "IBM Plex Serif",
             },
             ".parallax-inner": {
               /* https://easings.net/en#easeOutCubic */

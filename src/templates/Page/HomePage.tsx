@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { Flex, Box, Grid } from "theme-ui"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { Parallax } from "react-scroll-parallax"
 
 import SEO from "../../components/SEO"
@@ -10,74 +10,23 @@ import H from "../../components/Typography/H"
 import P from "../../components/Typography/P"
 import S from "../../components/Typography/S"
 
-import useInterval from "../../utils/useInterval"
-
-import WorkSlider from "../../components/WorkSlider/WorkSlider"
-import Section from "../../components/Layout/Section"
-
-import { ChildImageSharp, InstagramFeed } from "../../contracts/post"
 import InviewMotion from "../../components/InviewMotion/InviewMotion"
 
+import WorkSlider from "../../components/WorkSlider/WorkSlider"
+import { AnimateWords } from "../../components/AnimateWords/AnimateWords"
+import Section from "../../components/Layout/Section"
+
+import { Page } from "../../contracts/page"
+
 export interface Props {
-  data: {
-    file: ChildImageSharp
-    allInstaNode: InstagramFeed
-    allWordpressPage: {
-      nodes: [
-        {
-          featured_media: any
-          path: string
-          slug: string
-          status: "publish"
-          title: string
-        }
-      ]
-    }
+  pageContext: {
+    edges: [{ node: Page }]
   }
   location: Location
 }
 
-const AnimateWords = () => {
-  const words = [
-    " remote freelancer",
-    " digital product designer",
-    " React developer",
-    " frontend developer",
-    " fullstack JavaScript teacher",
-    " User Experience engineer",
-    " failing writer",
-    " constant learner",
-  ]
-
-  const [index, setIndex] = React.useState(0)
-
-  useInterval(() => {
-    setIndex((index + 1) % words.length)
-  }, 2000)
-
-  return (
-    <AnimatePresence>
-      {words.map(
-        (word, i) =>
-          i === index && (
-            <motion.span
-              key={word}
-              style={{ position: "absolute", marginLeft: ".25em" }}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -40 }}
-              transition={{ duration: 0.5 }}
-            >
-              {word}
-            </motion.span>
-          )
-      )}
-    </AnimatePresence>
-  )
-}
-
-export default (props: Props) => {
-  const workpages = props.data.allWordpressPage.nodes
+export const Homepage = (props: Props) => {
+  const workpages = props.pageContext.edges
 
   return (
     <>
@@ -395,6 +344,8 @@ export default (props: Props) => {
     </>
   )
 }
+
+export default Homepage
 
 export const query = graphql`
   query {

@@ -31,7 +31,7 @@ const BlockSlider = ({ sx, ...rest }) => {
     top: "0px",
     bottom: "0px",
     "& > div": {
-      backgroundColor: "background",
+      backgroundColor: "text",
       position: "absolute",
       left: "0px",
       right: "0px",
@@ -76,7 +76,7 @@ const WorkSliderItem = ({ data, current, index, time }: ItemProps) => (
         exit={{ opacity: 0, x: 100 }}
         transition={{ duration: 1 }}
       >
-        <Link to={`/work/${data.slug}`}>
+        <Link to={data?.path}>
           <S>View Project</S>
           <P>{data?.title}</P>
         </Link>
@@ -163,6 +163,7 @@ interface Props {
 
 export default (props: Props) => {
   const { time, data } = props
+  console.log("data", data)
   const [state, setState] = useState({
     index: 0,
   })
@@ -195,7 +196,7 @@ export default (props: Props) => {
             state.index === i && (
               <WorkSliderItem
                 key={i}
-                data={d}
+                data={d.node}
                 current={state.index}
                 index={i}
                 time={time}

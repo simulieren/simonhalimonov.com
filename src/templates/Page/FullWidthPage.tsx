@@ -17,11 +17,10 @@ export interface Props {
     page: { node: Page }
   }
 }
-export default (props: Props) => {
+export const FullWidthPage = (props: Props) => {
   const {
     pageContext: { page },
   } = props
-  console.log("page", page)
 
   const fluid: FluidObject | null =
     page.node?.featured_media?.localFile?.childImageSharp?.fluid || null
@@ -53,3 +52,5 @@ export default (props: Props) => {
     </>
   )
 }
+
+export default FullWidthPage

@@ -115,6 +115,35 @@ export const Header = ({ lang }: Props) => {
    */
   const normalizedItems = normalizeLinks(currentMenuItems).slice(1)
 
+  /**
+   * SVG to Base64 for Favicon
+   */
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      let logo = document.querySelector("#logo")
+      let svg = new XMLSerializer().serializeToString(
+        //@ts-ignore
+        logo
+      )
+      if (colorMode === "dark") {
+        svg = svg.replace(`fill="#000"`, `fill="#fff"`)
+      } else if (colorMode === "default") {
+        svg = svg.replace(`fill="#fff"`, `fill="#000"`)
+      }
+      const encodedData = window.btoa(svg)
+
+      const link = document.createElement("link")
+      const oldLink = document.querySelector(`link[rel="icon"]`)
+      link.id = "dynamic-favicon"
+      link.rel = "icon"
+      link.href = `data:image/svg+xml;base64,${encodedData}`
+      if (oldLink) {
+        document.head.removeChild(oldLink)
+      }
+      document.head.appendChild(link)
+    }
+  }, [colorMode])
+
   return (
     <Grid
       className="header-container"

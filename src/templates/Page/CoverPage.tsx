@@ -15,6 +15,9 @@ import { Page } from "../../contracts/page"
 
 import { decodeHtmlCharCodes } from "../../utils"
 
+/**
+ * Template for cover page
+ */
 export interface Props {
   pageContext: {
     previous: {
