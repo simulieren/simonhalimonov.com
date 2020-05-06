@@ -7,6 +7,7 @@ import SEO from "../../components/SEO"
 import HTML from "../../components/HTML/HTML"
 
 import { Page } from "../../contracts/page"
+import { Preview } from "../../contracts/preview"
 
 /**
  * Template for a full width page
@@ -14,20 +15,25 @@ import { Page } from "../../contracts/page"
 export interface Props {
   location: Location
   pageContext: {
-    page: { node: Page }
+    page: { node: Page | Preview }
   }
 }
 export const FullWidthPage = (props: Props) => {
-  const {
-    pageContext: { page },
-  } = props
+  const pageContext = props?.pageContext
+  const page = pageContext?.page?.node
 
   const fluid: FluidObject | null =
-    page.node?.featured_media?.localFile?.childImageSharp?.fluid || null
+    page?.featured_media?.localFile?.childImageSharp?.fluid || null
+
+  const title = page?.title || page?.post_title
+
+  const excerpt = page?.excerpt || page?.post_excerpt
+
+  const content = page?.content || page?.post_content
 
   return (
     <>
-      <SEO title={page.node?.title} />
+      <SEO title={title} description={excerpt} />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[1]}>
         <Box>
           {fluid && fluid?.src?.length > 0 && (
@@ -38,15 +44,11 @@ export const FullWidthPage = (props: Props) => {
                 "& img": { objectFit: "cover" },
               }}
             >
-              <Image
-                fluid={fluid}
-                alt={page.node?.title}
-                title={page.node?.title}
-              />
+              <Image fluid={fluid} alt={title} title={title} />
             </Box>
           )}
 
-          <HTML html={page.node.content} />
+          <HTML html={content} />
         </Box>
       </Grid>
     </>

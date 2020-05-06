@@ -10,6 +10,7 @@ import SocialSidebar from "../../components/SocialSidebar/SocialSidebar"
 import H from "../../components/Typography/H"
 
 import { Page } from "../../contracts/page"
+import { Preview } from "../../contracts/preview"
 
 import { decodeHtmlCharCodes } from "../../utils"
 
@@ -26,7 +27,7 @@ export interface Props {
       path: string
     }
     page: {
-      node: Page
+      node: Page | Preview
     }
   }
   location: Location
@@ -38,23 +39,30 @@ export const DefaultPage = (props: Props) => {
 
   const fluid: FluidObject | null =
     page?.featured_media?.localFile?.childImageSharp?.fluid || null
+
+  const title = page?.title || page?.post_title
+
+  const excerpt = page?.excerpt || page?.post_excerpt
+
+  const content = page?.content || page?.post_content
+
   return (
     <>
-      <SEO title={page.title} description={page.excerpt} />
+      <SEO title={title} description={excerpt} />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
         <Box as="article" sx={{ pb: [4, 5], gridColumn: ["1/13", "1/10"] }}>
           <Box
             sx={{ maxWidth: ["100%", "800px"], mx: "auto", px: [0, 0, 0, 3] }}
           >
-            <H as="h1">{decodeHtmlCharCodes(page.title)}</H>
+            <H as="h1">{decodeHtmlCharCodes(title)}</H>
           </Box>
           {fluid && fluid?.src?.length > 0 && (
             <Box sx={{ my: [2, 3] }}>
-              <Image fluid={fluid} alt={page.title} title={page.title} />
+              <Image fluid={fluid} alt={title} title={title} />
             </Box>
           )}
 
-          <HTML html={page.content} />
+          <HTML html={content} />
         </Box>
 
         <Box sx={{ gridColumn: ["1/13", "10/13"] }}>

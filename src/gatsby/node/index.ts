@@ -225,6 +225,7 @@ const createPages: GatsbyNode["createPages"] = async ({
   const HomePage = resolve("./src/templates/Page/HomePage.tsx")
   const FullWidthPage = resolve("./src/templates/Page/FullWidthPage.tsx")
   const CoverPage = resolve("./src/templates/Page/CoverPage.tsx")
+  // TODO: Remove work page and reorder page structure
   // const WorkPageTemplate = resolve("./src/templates/Work/WorkPage.tsx")
   const WorkPagesTemplate = resolve("./src/templates/Work/WorkPages.tsx")
 
@@ -238,9 +239,6 @@ const createPages: GatsbyNode["createPages"] = async ({
       allWordpressPage {
         edges {
           node {
-            acf {
-              project
-            }
             id
             slug
             status
@@ -295,11 +293,15 @@ const createPages: GatsbyNode["createPages"] = async ({
 
     // Get all project pages
     const WorkPages = PagesResult?.data?.allWordpressPage?.edges.filter(
-      (edge: any) =>
+      (edge: any) => {
+        console.log("edge", edge)
         // Check if it is a project
-        edge.node.acf.project &&
-        // Match the language to the index language
-        page.node.polylang_current_lang === edge.node.polylang_current_lang
+        return (
+          edge.node.template === "templates/template-project.php" &&
+          // Match the language to the index language
+          page.node.polylang_current_lang === edge.node.polylang_current_lang
+        )
+      }
     )
 
     switch (page.node.template) {
@@ -315,6 +317,10 @@ const createPages: GatsbyNode["createPages"] = async ({
         // Cover template
         createPage({ ...pageOptions, component: CoverPage })
         break
+      case "templates/template-project.php":
+        // Cover template
+        createPage({ ...pageOptions, component: CoverPage })
+        break
       case "templates/template-home.php":
         // Homepage template
         createPage({
@@ -324,7 +330,7 @@ const createPages: GatsbyNode["createPages"] = async ({
           context: { ...pageOptions.context, edges: WorkPages },
         })
         break
-      case "templates/template-index.php":
+      case "templates/template-work-index.php":
         // Index template for projects
         createPage({
           ...pageOptions,
@@ -341,4 +347,21 @@ const createPages: GatsbyNode["createPages"] = async ({
   })
 }
 
+// WP Preview
+// Implement the Gatsby API “onCreatePage”. This is
+// called after every page is created.
+const onCreatePage: GatsbyNode["onCreatePage"] = async ({ page, actions }) => {
+  const { createPage } = actions
+
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/preview/)) {
+    page.matchPath = "/preview/*"
+
+    // Update the page.
+    createPage(page)
+  }
+}
+
 module.exports.createPages = createPages
+module.exports.onCreatePage = onCreatePage

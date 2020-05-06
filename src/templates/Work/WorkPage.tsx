@@ -105,42 +105,42 @@ export const WorkPage = (props: Props) => {
 
 export default WorkPage
 
-export const query = graphql`
-  query($id: Int!) {
-    wordpressPage(wordpress_id: { eq: $id }) {
-      title
-      content
-      excerpt
-      date(formatString: "MMMM DD, YYYY")
-      modified(formatString: "MMMM DD, YYYY")
-      author {
-        id
-        name
-        url
-        description
-        link
-        slug
-        path
-        wordpress_id
-      }
-      slug
-      wordpress_id
-      featured_media {
-        localFile {
-          childImageSharp {
-            fluid(quality: 85) {
-              aspectRatio
-              src
-              srcSet
-              sizes
-              base64
-              tracedSVG
-              srcWebp
-              srcSetWebp
-            }
-          }
-        }
-      }
-    }
-  }
-`
+// export const query = graphql`
+//   query($id: Int!) {
+//     wordpressPage(wordpress_id: { eq: $id }) {
+//       title
+//       content
+//       excerpt
+//       date(formatString: "MMMM DD, YYYY")
+//       modified(formatString: "MMMM DD, YYYY")
+//       author {
+//         id
+//         name
+//         url
+//         description
+//         link
+//         slug
+//         path
+//         wordpress_id
+//       }
+//       slug
+//       wordpress_id
+//       featured_media {
+//         localFile {
+//           childImageSharp {
+//             fluid(quality: 85) {
+//               aspectRatio
+//               src
+//               srcSet
+//               sizes
+//               base64
+//               tracedSVG
+//               srcWebp
+//               srcSetWebp
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `

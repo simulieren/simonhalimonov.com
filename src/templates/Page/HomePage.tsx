@@ -1,5 +1,4 @@
 import React from "react"
-import { graphql } from "gatsby"
 import { Flex, Box, Grid } from "theme-ui"
 import { motion } from "framer-motion"
 import { Parallax } from "react-scroll-parallax"
@@ -346,31 +345,3 @@ export const Homepage = (props: Props) => {
 }
 
 export default Homepage
-
-export const query = graphql`
-  query {
-    allWordpressPage(filter: { path: { regex: "/work/./" } }) {
-      nodes {
-        slug
-        path
-        status
-        title
-        featured_media {
-          localFile {
-            childImageSharp {
-              fluid(quality: 85) {
-                aspectRatio
-                src
-                srcSet
-                sizes
-                base64
-                srcWebp
-                srcSetWebp
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`

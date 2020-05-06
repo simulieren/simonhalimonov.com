@@ -10,10 +10,10 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `${process.env.GATSBY_SITE_NAME}`,
-    description: `${process.env.GATSBY_SITE_DESCRIPTION}`,
-    author: `@${process.env.GATSBY_SITE_AUTHOR}`,
-    siteUrl: `${process.env.GATSBY_SITE_URL_PROTOCOL}://${process.env.GATSBY_SITE_URL_PATH}`,
+    title: `Simon Halimonov`,
+    description: `Portfolio and Blog about UI/UX Design and Development`,
+    author: `@SimonHalimonov`,
+    siteUrl: `http://localhost:8000`,
     social: {
       twitter: "https://www.twitter.com/SimonHalimonov",
       email: "hello@simonhalimonov.de",
@@ -51,13 +51,13 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: `${process.env.GATSBY_SITE_NAME}`,
-        short_name: `${process.env.GATSBY_SITE_NAME}`,
+        name: `Simon Halimonov`,
+        short_name: `Simon Halimonov`,
         start_url: "/",
-        background_color: process.env.GATSBY_PRIMARY_ACCENT_COLOR || "#0047E0",
-        theme_color: process.env.GATSBY_PRIMARY_ACCENT_COLOR || "#0047E0",
+        background_color: "#000000",
+        theme_color: "#000000",
         display: "minimal-ui",
-        icon: "src/images/logo.png",
+        icon: "static/logo.png",
       },
     },
     "gatsby-plugin-catch-links",
@@ -80,7 +80,7 @@ module.exports = {
           },
         ],
         hostingWPCOM: false,
-        useACF: true,
+        useACF: false,
         verboseOutput: false,
         perPage: 100,
         // This doesn't work well with gatsby-wordpress-inline-images

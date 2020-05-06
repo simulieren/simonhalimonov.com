@@ -8,14 +8,16 @@ import SEO from "../../components/SEO"
 import WorkPageTeaser from "./WorkPageTeaser"
 
 export interface Props {
-  pathContext: {
+  pageContext: {
     edges: any[] // TODO: Add types
   }
   location: Location
 }
 
 export default (props: Props) => {
-  const { edges } = props.pathContext
+  console.log("props", props)
+  const { edges } = props.pageContext
+  console.log("edges", edges)
   const { site } = useStaticQuery(graphql`
     query {
       site {

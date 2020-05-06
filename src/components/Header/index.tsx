@@ -106,8 +106,9 @@ export const Header = ({ lang }: Props) => {
     (edge: MenuNode) => edge.node.name.includes(`[${currentMenuLang}]`)
   )[0].node.items
 
-  // Get the first menu item
-  const homepageLink = currentMenuItems[0]
+  // Get the first menu item it will be normalized to a relative path
+  // This menu item will be used for the logo
+  const homepageLink = normalizeLinks([currentMenuItems[0]])[0]
 
   /**
    * Remove IP/domain of headless WP links

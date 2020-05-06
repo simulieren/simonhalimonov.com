@@ -2,6 +2,10 @@ import React from "react"
 import { Box, Grid } from "theme-ui"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
+import { motion } from "framer-motion"
+import { Parallax } from "react-scroll-parallax"
+
+import StaticImage from "../../components/Image/Image"
 
 import SEO from "../../components/SEO"
 
@@ -12,6 +16,7 @@ import H from "../../components/Typography/H"
 import S from "../../components/Typography/S"
 
 import { Page } from "../../contracts/page"
+import { Preview } from "../../contracts/preview"
 
 import { decodeHtmlCharCodes } from "../../utils"
 
@@ -20,18 +25,18 @@ import { decodeHtmlCharCodes } from "../../utils"
  */
 export interface Props {
   pageContext: {
-    previous: {
+    previous?: {
       slug: string
       title: string
       path: string
     }
-    next: {
+    next?: {
       slug: string
       title: string
       path: string
     }
     page: {
-      node: Page
+      node: Page | Preview
     }
   }
   location: Location
@@ -44,31 +49,103 @@ export const CoverPage = (props: Props) => {
   const fluid: FluidObject | null =
     page?.featured_media?.localFile?.childImageSharp?.fluid || null
 
+  const title = page?.title || page?.post_title
+
+  const excerpt = page?.excerpt || page?.post_excerpt
+
+  const content = page?.content || page?.post_content
+
   return (
     <>
-      <SEO title={page.title} description={page.excerpt} />
+      <SEO title={title} description={excerpt} />
       <Box>
         <Box as="article" sx={{ mb: [4, 5] }}>
-          {fluid && fluid?.src?.length > 0 && (
+          <Box
+            sx={{
+              position: "relative",
+              width: "100%",
+              height: ["50vh", "75vh", "80vh"],
+              overflow: "hidden",
+              mb: [2, 4],
+            }}
+          >
             <Box
               sx={{
-                width: "100%",
-                mb: [2, 4],
-                "& img": { objectFit: "cover" },
+                position: "absolute",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              <Image fluid={fluid} alt={page.title} title={page.title} />
+              <Parallax y={[-10, 10]}>
+                <motion.div
+                  initial={{ opacity: 1, x: -100, rotate: 5 }}
+                  animate={{ opacity: 1, x: -50, rotate: 0 }}
+                  transition={{ duration: 2.5, yoyo: Infinity }}
+                >
+                  <Box
+                    sx={{
+                      maxHeight: "75vh",
+                      position: "relative",
+                      width: "50vw",
+                      height: "80vh",
+                      "& img": {
+                        objectFit: "contain !important",
+                      },
+                    }}
+                  >
+                    <StaticImage filename="leaf-01.png" />
+                  </Box>
+                </motion.div>
+              </Parallax>
+              <Parallax y={[-10, 10]}>
+                <motion.div
+                  initial={{ opacity: 1, x: -100, rotate: 5 }}
+                  animate={{ opacity: 1, x: -50, rotate: 0 }}
+                  transition={{ duration: 2.5, yoyo: Infinity }}
+                >
+                  <Box
+                    sx={{
+                      maxHeight: "75vh",
+                      position: "relative",
+                      width: "50vw",
+                      height: "80vh",
+                      right: "-70%",
+                      "& img": {
+                        objectFit: "contain !important",
+                      },
+                    }}
+                  >
+                    <StaticImage filename="leaf-03.png" />
+                  </Box>
+                </motion.div>
+              </Parallax>
             </Box>
-          )}
+            <Parallax y={[-20, 20]}>
+              <Box
+                sx={{
+                  p: [3, 4, 5],
+                  "& img": {
+                    objectFit: "contain !important",
+                    maxHeight: "75vh",
+                  },
+                }}
+              >
+                {fluid && fluid?.src?.length > 0 && (
+                  <Image fluid={fluid} alt={title} title={title} />
+                )}
+              </Box>
+            </Parallax>
+          </Box>
 
           <Box sx={{ maxWidth: "70ch", mx: "auto", mb: [2, 4] }}>
             <H as="h1" sx={{ textAlign: "center" }}>
-              {decodeHtmlCharCodes(page.title)}
+              {decodeHtmlCharCodes(title)}
             </H>
           </Box>
 
           <Box sx={{ px: [3, 4] }}>
-            <HTML html={page.content} />
+            <HTML html={content} />
           </Box>
         </Box>
       </Box>
