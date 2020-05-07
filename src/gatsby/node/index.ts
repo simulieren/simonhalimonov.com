@@ -225,8 +225,6 @@ const createPages: GatsbyNode["createPages"] = async ({
   const HomePage = resolve("./src/templates/Page/HomePage.tsx")
   const FullWidthPage = resolve("./src/templates/Page/FullWidthPage.tsx")
   const CoverPage = resolve("./src/templates/Page/CoverPage.tsx")
-  // TODO: Remove work page and reorder page structure
-  // const WorkPageTemplate = resolve("./src/templates/Work/WorkPage.tsx")
   const WorkPagesTemplate = resolve("./src/templates/Work/WorkPages.tsx")
 
   /**
