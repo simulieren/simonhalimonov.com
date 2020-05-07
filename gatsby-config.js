@@ -126,18 +126,19 @@ module.exports = {
     "gatsby-plugin-advanced-sitemap",
     {
       resolve: "gatsby-plugin-offline",
-      options: {
-        precachePages: [
-          "",
-          "/posts/*",
-          "/post/*",
-          "/tag/*",
-          "/category/*",
-          "/about",
-          "/work/*",
-          "/work",
-        ],
-      },
+      // Disabled for now
+      // options: {
+      //   precachePages: [
+      //     "",
+      //     "/posts/*",
+      //     "/post/*",
+      //     "/tag/*",
+      //     "/category/*",
+      //     "/about",
+      //     "/work/*",
+      //     "/work",
+      //   ],
+      // },
     },
   ],
 }

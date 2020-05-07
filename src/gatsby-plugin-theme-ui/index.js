@@ -4,12 +4,14 @@ export default {
     text: "#111",
     textlight: "#333",
     background: "#eee",
+    background2: "#ddd",
     primary: "#111",
     modes: {
       dark: {
         text: "#eee",
         textlight: "#ccc",
         background: "#111",
+        background2: "#222",
         primary: "#111",
       },
     },

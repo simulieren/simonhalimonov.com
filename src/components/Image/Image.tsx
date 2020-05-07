@@ -28,10 +28,11 @@ export const Image = (props: ImageProps) => (
       }
     `}
     render={(data) => {
-      const image = data.images.edges.find((n) => {
-        console.log("n", n)
-        return n.node.relativePath.includes(props.filename)
-      })
+      const image = data.images.edges.find(
+        (n: { node: { relativePath: string } }) => {
+          return n.node.relativePath.includes(props.filename)
+        }
+      )
       if (!image) {
         return null
       }

@@ -13,6 +13,7 @@ import HTML from "../components/HTML/HTML"
 
 import { ChildImageSharp } from "../contracts/post"
 import { Page } from "../contracts/page"
+import { Preview } from "../contracts/preview"
 
 export interface Props {
   data: {
@@ -25,7 +26,7 @@ export default () => {
   const {
     wordpressPage,
   }: {
-    wordpressPage: Page
+    wordpressPage: Page | Preview
   } = useStaticQuery(graphql`
     query {
       wordpressPage(slug: { eq: "kitchensink" }) {
@@ -60,7 +61,12 @@ export default () => {
   const fluid: FluidObject | null =
     wordpressPage?.featured_media?.localFile?.childImageSharp?.fluid || null
 
-  const [layout, setLayout] = React.useState<"sidebar" | "fullwidth">("sidebar")
+  const title = wordpressPage?.title?.rendered || wordpressPage?.post_title
+
+  const content =
+    wordpressPage?.content?.rendered || wordpressPage?.post_content
+
+  const [layout, setLayout] = React.useState<"default" | "fullwidth">("default")
 
   if (layout === "fullwidth") {
     return (
@@ -76,26 +82,23 @@ export default () => {
                   "& img": { objectFit: "cover" },
                 }}
               >
-                <Image
-                  fluid={fluid}
-                  alt={wordpressPage?.title}
-                  title={wordpressPage?.title}
-                />
+                <Image fluid={fluid} alt={title} title={title} />
               </Box>
             )}
             <Box>
-              <H onClick={() => setLayout("sidebar")} sx={{ mb: [2, 4] }}>
+              <H onClick={() => setLayout("default")} sx={{ mb: [2, 4] }}>
                 ↳ Click to view Layout with Sidebar 👀
               </H>
             </Box>
 
-            <HTML html={wordpressPage.content} />
+            <HTML html={content} />
           </Box>
         </Grid>
       </>
     )
   }
 
+  // `default` layout
   return (
     <>
       <SEO title="Kitchensink" />
@@ -115,15 +118,11 @@ export default () => {
                 "& img": { objectFit: "cover" },
               }}
             >
-              <Image
-                fluid={fluid}
-                alt={wordpressPage?.title}
-                title={wordpressPage?.title}
-              />
+              <Image fluid={fluid} alt={title} title={title} />
             </Box>
           )}
 
-          <HTML html={wordpressPage.content} />
+          <HTML html={content} />
         </Box>
 
         <Box sx={{ gridColumn: ["1/13", "10/13"] }}>

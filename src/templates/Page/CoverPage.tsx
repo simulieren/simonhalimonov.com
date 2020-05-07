@@ -65,6 +65,7 @@ export const CoverPage = (props: Props) => {
               position: "relative",
               width: "100%",
               height: ["50vh", "75vh", "80vh"],
+              backgroundColor: "background2",
               overflow: "hidden",
               mb: [2, 4],
             }}

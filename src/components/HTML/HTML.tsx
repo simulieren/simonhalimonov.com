@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Flex, Box } from "theme-ui"
+import { jsx, Box } from "theme-ui"
 import parse, { domToReact } from "html-react-parser"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { ghcolors } from "react-syntax-highlighter/dist/esm/styles/prism"
@@ -95,11 +95,12 @@ const options = {
           as={name}
           sx={{
             maxWidth,
+            width: "64px",
             mx: "auto",
             px,
             my: [4],
             border: "1px solid transparent",
-            borderColor: "text",
+            borderColor: "textlight",
           }}
         />
       )
@@ -110,9 +111,13 @@ const options = {
         mx: "auto",
         mb: [5, 5, 5, 5],
         pb: [2, 3, 4],
-        "& .gatsby-image-wrapper": {
+        "& .gatsby-image-wrapper, & > img": {
           width: "100% !important",
+          maxWidth: "100% !important",
           overflow: "visible !important",
+        },
+        '& img[aria-hidden="true"]': {
+          opacity: 0,
         },
       }
 
@@ -190,7 +195,7 @@ const options = {
                 pl: [0],
                 "& li": {
                   width: "100%",
-                  minWidth: "60%",
+                  minWidth: "50%",
                   "& figure": {
                     p: [2],
                     m: 0,
@@ -257,6 +262,31 @@ const options = {
       )
     }
 
+    // Button
+    if (name === "a") {
+      if (attribs?.class?.includes("wp-block-button__link")) {
+        return (
+          <Box
+            as={name}
+            sx={{
+              maxWidth,
+              display: "inline-block",
+              mx: "auto",
+              width: "auto",
+              py: [2],
+              my: 2,
+              px,
+              border: "1px solid transparent",
+              borderColor: "text",
+              cursor: "pointer",
+            }}
+          >
+            {domToReact(children, options)}
+          </Box>
+        )
+      }
+    }
+
     if (name === "div") {
       // Buttons Block
       if (attribs?.class?.includes("wp-block-buttons")) {
@@ -265,6 +295,7 @@ const options = {
             as={name}
             sx={{
               maxWidth,
+              width: "auto",
               mx: "auto",
               px,
               mb: [2, 4],
@@ -283,21 +314,21 @@ const options = {
             sx={{
               maxWidth,
               mx: "auto",
+              width: "auto",
               py: [2],
               my: 2,
               px,
               display: "flex",
               flexDirection: ["column", "row"],
-              border: "1px solid transparent",
-              borderColor: "text",
-              cursor: "pointer",
             }}
           >
             {domToReact(children, options)}
           </Box>
         )
       }
+
       // Cover Block
+      // FIXME: cover is not supported because it uses a CSS background-image
       if (attribs?.class?.includes("wp-block-cover")) {
         console.warn(
           "This block is not supported: wp-block-cover. \r\n It was not rendered in the page."
@@ -329,6 +360,7 @@ const options = {
       if (attribs?.class?.includes("wp-block-media-text")) {
         const styles = {
           mx: "auto",
+          pb: [3, 4],
           px: [3, 0],
           "& .wp-block-media-text__media, & .wp-block-media-text__content": {
             width: "50% !important",
@@ -336,8 +368,17 @@ const options = {
           },
           "& .wp-block-media-text__media": {
             m: 0,
+            display: "flex",
+            flexDirection: ["column"],
+            justifyContent: "center",
+            alignItems: "center",
             "& .gatsby-image-wrapper": {
               width: "100% !important",
+            },
+            // This fixes a weird bug where the base64 image doesn't
+            // disappear when img scrolled into view
+            '& img[aria-hidden="true"]': {
+              opacity: "0 !important",
             },
           },
           "& .wp-block-media-text__content": {
@@ -345,7 +386,10 @@ const options = {
             display: "flex",
             flexDirection: ["column"],
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: "flex-start",
+            "& > *": {
+              mx: 0,
+            },
           },
         }
         const flexDirection = attribs?.class?.includes("has-media-on-the-right")
@@ -411,9 +455,13 @@ const options = {
   },
 }
 
-const parseFunctions = (html: string) => {
-  html = decodeHtmlCharCodes(html)
-  return parse(html, options)
+const parseFunctions = (html: string | undefined) => {
+  if (typeof html === "string") {
+    html = decodeHtmlCharCodes(html)
+    return parse(html, options)
+  } else {
+    return null
+  }
 }
 
 export default ({ html, sx }: { html: string; sx?: any }) => (
@@ -423,6 +471,7 @@ export default ({ html, sx }: { html: string; sx?: any }) => (
       mr: [-20, -40],
       mb: [3, 4],
       position: "relative",
+      gridColumn: ["1/5", "1/5"],
       ...sx,
     }}
     className="post-content"

@@ -26,6 +26,10 @@ export interface Props {
   }
 }
 
+/**
+ * This is the main layout component that is being wrapped around each page
+ * Here we add Global states, styles, settings and components like the header and footer.
+ */
 export class Layout extends Component<Props> {
   target: RefObject<HTMLDivElement> = createRef()
 
@@ -44,6 +48,9 @@ export class Layout extends Component<Props> {
             },
             body: {
               margin: 0,
+            },
+            img: {
+              maxWidth: "100%",
             },
             kbd: {
               border: "1px solid transparent",

@@ -1,5 +1,6 @@
 import React from "react"
 import { Router } from "@reach/router"
+import { Box } from "theme-ui"
 
 import DefaultPage from "../templates/Page/DefaultPage"
 import CoverPage from "../templates/Page/CoverPage"
@@ -11,8 +12,24 @@ import HTML from "../components/HTML/HTML"
 import { PreviewResponse, Preview } from "../contracts/preview"
 import { Templates } from "../contracts/templates"
 
+const ToggleLayout: React.FC<{ toggleLayout: any; layout: Templates }> = (
+  props
+) => {
+  return (
+    <>
+      <Box
+        onClick={props?.toggleLayout}
+        sx={{ position: "absolute", right: 0, top: 0, zIndex: 100 }}
+      >
+        Current Layout: {props.layout}
+      </Box>
+      {props.children}
+    </>
+  )
+}
+
 export interface Props {
-  location: Location
+  location?: Location
   path: string
 }
 
@@ -23,7 +40,19 @@ const PreviewComponent = (props: Props) => {
   const [preview, setPreview] = React.useState<Preview | null | false>(null)
   const [layout, setLayout] = React.useState<Templates | null>(null)
 
-  const [a, b, id, rev, type, c, wpnonce] = pathname.split("/")
+  const [a, b, id, rev, type, c, wpnonce] = pathname!.split("/")
+
+  const toggleLayout = () => {
+    const templates: Templates[] = [
+      "",
+      "templates/template-full-width.php",
+      "templates/template-cover.php",
+    ]
+
+    const currentIndex = templates.findIndex((x) => x === layout)
+
+    setLayout(templates[(currentIndex + 1) % templates.length])
+  }
 
   const handlePreview = () => {
     const rootURL = "http://34.83.12.100/wp-json"
@@ -63,24 +92,30 @@ const PreviewComponent = (props: Props) => {
   switch (layout) {
     case "":
       return (
-        <DefaultPage
-          pageContext={{ page: { node: preview } }}
-          location={location}
-        />
+        <ToggleLayout toggleLayout={toggleLayout} layout={layout}>
+          <DefaultPage
+            pageContext={{ page: { node: preview } }}
+            location={location}
+          />
+        </ToggleLayout>
       )
     case "templates/template-cover.php" || "templates/template-project.php":
       return (
-        <CoverPage
-          pageContext={{ page: { node: preview } }}
-          location={location}
-        />
+        <ToggleLayout toggleLayout={toggleLayout} layout={layout}>
+          <CoverPage
+            pageContext={{ page: { node: preview } }}
+            location={location}
+          />
+        </ToggleLayout>
       )
     case "templates/template-full-width.php":
       return (
-        <FullWidthPage
-          pageContext={{ page: { node: preview } }}
-          location={location}
-        />
+        <ToggleLayout toggleLayout={toggleLayout} layout={layout}>
+          <FullWidthPage
+            pageContext={{ page: { node: preview } }}
+            location={location}
+          />
+        </ToggleLayout>
       )
 
     default:

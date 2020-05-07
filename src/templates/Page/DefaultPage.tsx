@@ -50,20 +50,36 @@ export const DefaultPage = (props: Props) => {
     <>
       <SEO title={title} description={excerpt} />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
-        <Box as="article" sx={{ pb: [4, 5], gridColumn: ["1/13", "1/10"] }}>
+        <Grid
+          as="article"
+          sx={{ p: [3, 4], pb: [4, 5], gridColumn: ["1/13", "1/10"] }}
+          gap={[3, 4, 5]}
+          columns={[4]}
+        >
           <Box
-            sx={{ maxWidth: ["100%", "800px"], mx: "auto", px: [0, 0, 0, 3] }}
+            sx={{
+              maxWidth: ["100%", "800px"],
+              mx: "auto",
+              px: [0, 0, 0, 3],
+              gridColumn: ["1/5", "2/4"],
+            }}
           >
             <H as="h1">{decodeHtmlCharCodes(title)}</H>
           </Box>
           {fluid && fluid?.src?.length > 0 && (
-            <Box sx={{ my: [2, 3] }}>
+            <Box sx={{ my: [2, 3], gridColumn: ["1/5", "1/5"] }}>
               <Image fluid={fluid} alt={title} title={title} />
             </Box>
           )}
 
-          <HTML html={content} />
-        </Box>
+          <Grid
+            sx={{ gridColumn: ["1/5", "1/5"], position: "relative" }}
+            gap={[3, 4, 5]}
+            columns={[4]}
+          >
+            <HTML html={content} />
+          </Grid>
+        </Grid>
 
         <Box sx={{ gridColumn: ["1/13", "10/13"] }}>
           <SocialSidebar />

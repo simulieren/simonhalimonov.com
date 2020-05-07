@@ -82,6 +82,89 @@ They also have 1-click install setups.
 
 ---
 
+## Folder structure
+
+```bash
+./src
+├── components # React components folder
+│   ├── AnimateWords
+│   │   └── AnimateWords.tsx
+│   ├── Footer
+│   │   └── index.tsx
+│   ├── GridHelper
+│   │   └── GridHelper.tsx
+│   ├── HTML
+│   │   └── HTML.tsx
+│   ├── Header
+│   │   └── index.tsx
+│   ├── Image
+│   │   └── Image.tsx
+│   ├── Instagram
+│   │   └── index.tsx
+│   ├── InviewMotion
+│   │   └── InviewMotion.tsx
+│   ├── Layout # Common layout components
+│   │   ├── Section.tsx
+│   │   └── index.tsx
+│   ├── Logo
+│   │   └── Logo.tsx
+│   ├── SEO # Component used for SEO
+│   │   └── index.tsx
+│   ├── SocialSidebar
+│   │   └── SocialSidebar.tsx
+│   ├── Transition # Component used for page transitions
+│   │   └── Transition.tsx
+│   ├── Twitter
+│   │   └── index.tsx
+│   ├── Typography # Folder for typography components
+│   │   ├── H.tsx
+│   │   ├── P.tsx
+│   │   └── S.tsx
+│   └── WorkSlider
+│       └── WorkSlider.tsx
+├── contracts # TypeScript definitions
+│   ├── page.ts
+│   ├── post.ts
+│   ├── preview.ts
+│   ├── templates.ts
+│   └── util.ts
+├── gatsby # Internal GatsbyJS code
+│   ├── config
+│   │   └── index.ts
+│   ├── node
+│   │   └── index.ts
+│   ├── shouldUpdateScroll.js
+│   └── wrapPageElement.js
+├── gatsby-plugin-theme-ui
+│   └── index.js # Theme settings
+├── images
+│   ├── leaf-01.png # folder
+│   ...
+├── pages # Static pages
+│   ├── 404.tsx # Custom 404 page
+│   ├── kitchensink.tsx # Page to test WordPress Gutenberg Blocks
+│   └── preview.tsx # Page used for previews
+├── templates
+│   ├── Blog # All post related page templates
+│   │   ├── BlogCategoryPosts.tsx
+│   │   ├── BlogPost.tsx
+│   │   ├── BlogPostTeaser.tsx
+│   │   ├── BlogPosts.tsx
+│   │   └── BlogTagPosts.tsx
+│   └── Page # All custom page templates
+│       ├── CoverPage.tsx
+│       ├── DefaultPage.tsx
+│       ├── FullWidthPage.tsx
+│       ├── HomePage.tsx # Page used for the homepage
+│       ├── WorkIndex.tsx # Page used to display all work projects
+│       └── WorkIndexTeaser.tsx # Component used in WorkIndex page
+└── utils # Utility function folder
+    ├── index.ts
+    └── useInterval.tsx
+```
+
+---
+
 ## Credits
 
 This is based on a version of [Gatsby Wordpress Typescript Blog Boilerplate](https://github.com/sagar7993/gatsby-wordpress-typescript-scss-blog) by [sagar7993](https://github.com/sagar7993). It is heavily modified from the original.

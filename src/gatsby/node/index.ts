@@ -18,6 +18,7 @@ const createPages: GatsbyNode["createPages"] = async ({
 }) => {
   const { createPage } = actions
 
+  // Get all Blog template paths
   const BlogPostTemplate = resolve("./src/templates/Blog/BlogPost.tsx")
   const BlogPostsTemplate = resolve("./src/templates/Blog/BlogPosts.tsx")
   const BlogTagPostsTemplate = resolve("./src/templates/Blog/BlogTagPosts.tsx")
@@ -235,7 +236,6 @@ const createPages: GatsbyNode["createPages"] = async ({
    * Query all pages and then render them
    * with the correct template and pass the id
    */
-
   const PagesResult = await graphql<{
     allWordpressPage: { edges: [{ node: Page }] }
   }>(`
@@ -284,6 +284,7 @@ const createPages: GatsbyNode["createPages"] = async ({
   const Pages = PagesResult?.data?.allWordpressPage?.edges
 
   Pages?.forEach((page) => {
+    // Default page options
     const pageOptions = {
       path: page.node.path || "",
       component: DefaultPage,
