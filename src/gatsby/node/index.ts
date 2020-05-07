@@ -1,10 +1,11 @@
-import { GatsbyNode } from "gatsby"
-// import path from "path"
 const path = require("path")
 const resolve = path.resolve
-// @ts-ignore
-// import createPaginatedPages from "gatsby-paginate"
 const createPaginatedPages = require("gatsby-paginate")
+
+// Import types
+import { GatsbyNode } from "gatsby"
+import { Page } from "../../contracts/page"
+import { Post, InstagramFeed } from "../../contracts/post"
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -24,7 +25,10 @@ const createPages: GatsbyNode["createPages"] = async ({
     "./src/templates/Blog/BlogCategoryPosts.tsx"
   )
 
-  const BlogPostsResult = await graphql<any>(`
+  const BlogPostsResult = await graphql<{
+    allWordpressPost: { edges: [{ node: Post }] }
+    allInstaNode: InstagramFeed
+  }>(`
     {
       allWordpressPost {
         edges {
@@ -134,7 +138,7 @@ const createPages: GatsbyNode["createPages"] = async ({
 
   const BlogPosts = BlogPostsResult?.data?.allWordpressPost?.edges
 
-  BlogPosts.forEach((post: any, index: number) => {
+  BlogPosts?.forEach((post: any, index: number) => {
     createPage({
       path: `/post/${post.node.slug}`,
       component: BlogPostTemplate,
@@ -150,7 +154,7 @@ const createPages: GatsbyNode["createPages"] = async ({
   const BlogTagPosts = new Map()
   const BlogCategoryPosts = new Map()
 
-  BlogPosts.forEach((post: any) => {
+  BlogPosts?.forEach((post: any) => {
     const tags = post.node.tags
     if (tags && tags.length > 0) {
       tags.forEach((tag: any) => {
@@ -187,7 +191,7 @@ const createPages: GatsbyNode["createPages"] = async ({
         context: {
           group: BlogTagPosts.get(BlogTagSlug),
           slug: BlogTagSlug,
-          allInstaNode: BlogPostsResult.data.allInstaNode,
+          allInstaNode: BlogPostsResult?.data?.allInstaNode,
         },
       })
     })
@@ -225,14 +229,16 @@ const createPages: GatsbyNode["createPages"] = async ({
   const HomePage = resolve("./src/templates/Page/HomePage.tsx")
   const FullWidthPage = resolve("./src/templates/Page/FullWidthPage.tsx")
   const CoverPage = resolve("./src/templates/Page/CoverPage.tsx")
-  const WorkPagesTemplate = resolve("./src/templates/Work/WorkPages.tsx")
+  const WorkIndexTemplate = resolve("./src/templates/Page/WorkIndex.tsx")
 
   /**
    * Query all pages and then render them
    * with the correct template and pass the id
    */
 
-  const PagesResult = await graphql<any>(`
+  const PagesResult = await graphql<{
+    allWordpressPage: { edges: [{ node: Page }] }
+  }>(`
     {
       allWordpressPage {
         edges {
@@ -277,7 +283,7 @@ const createPages: GatsbyNode["createPages"] = async ({
 
   const Pages = PagesResult?.data?.allWordpressPage?.edges
 
-  Pages.forEach((page: any) => {
+  Pages?.forEach((page: any) => {
     const pageOptions = {
       path: page.node.path,
       component: DefaultPage,
@@ -290,9 +296,8 @@ const createPages: GatsbyNode["createPages"] = async ({
     }
 
     // Get all project pages
-    const WorkPages = PagesResult?.data?.allWordpressPage?.edges.filter(
+    const WorkIndex = PagesResult?.data?.allWordpressPage?.edges.filter(
       (edge: any) => {
-        console.log("edge", edge)
         // Check if it is a project
         return (
           edge.node.template === "templates/template-project.php" &&
@@ -325,16 +330,16 @@ const createPages: GatsbyNode["createPages"] = async ({
           ...pageOptions,
           component: HomePage,
           // Pass edges as context data
-          context: { ...pageOptions.context, edges: WorkPages },
+          context: { ...pageOptions.context, edges: WorkIndex },
         })
         break
       case "templates/template-work-index.php":
         // Index template for projects
         createPage({
           ...pageOptions,
-          component: WorkPagesTemplate,
+          component: WorkIndexTemplate,
           // Pass edges as context data
-          context: { ...pageOptions.context, edges: WorkPages },
+          context: { ...pageOptions.context, edges: WorkIndex },
         })
         break
 

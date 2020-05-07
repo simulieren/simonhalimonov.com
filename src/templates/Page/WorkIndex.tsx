@@ -1,11 +1,11 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import { Flex, Box, Grid } from "theme-ui"
+import { Grid } from "theme-ui"
 
 import SEO from "../../components/SEO"
 
-import WorkPageTeaser from "./WorkPageTeaser"
+import WorkIndexTeaser from "./WorkIndexTeaser"
 
 export interface Props {
   pageContext: {
@@ -17,7 +17,7 @@ export interface Props {
 export default (props: Props) => {
   console.log("props", props)
   const { edges } = props.pageContext
-  console.log("edges", edges)
+
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -28,6 +28,7 @@ export default (props: Props) => {
       }
     }
   `)
+
   return (
     <>
       <SEO
@@ -39,7 +40,7 @@ export default (props: Props) => {
         gap={[3, 4, 5]}
         columns={[1, "1fr 1fr"]}
       >
-        {edges.map(WorkPageTeaser)}
+        {edges.map(WorkIndexTeaser)}
       </Grid>
     </>
   )
