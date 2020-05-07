@@ -30,6 +30,7 @@ const PreviewComponent = (props: Props) => {
     // checking if the post/page is a draft or a revision.
     let postUrl = `${rootURL}/wp/v2/${type}s/${id}`
     if (status === "draft") {
+      // TODO: Test with draft
       postUrl = `${rootURL}/wp/v2/${type}s/${rev}?_wpnonce=${wpnonce}`
     }
 
@@ -37,12 +38,10 @@ const PreviewComponent = (props: Props) => {
       .then((res) => res.json())
       .then((json: PreviewResponse) => {
         const { preview_content } = json
-        console.log("handlePreview -> json", json)
 
         const preview = Object.entries(preview_content).sort(
           (a, b) => b[1].ID - a[1].ID
         )[0][1]
-        console.log("handlePreview -> previews", preview)
 
         setLayout(json.template)
         setPreview(preview)
