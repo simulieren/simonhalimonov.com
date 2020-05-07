@@ -138,7 +138,7 @@ const createPages: GatsbyNode["createPages"] = async ({
 
   const BlogPosts = BlogPostsResult?.data?.allWordpressPost?.edges
 
-  BlogPosts?.forEach((post: any, index: number) => {
+  BlogPosts?.forEach((post, index: number) => {
     createPage({
       path: `/post/${post.node.slug}`,
       component: BlogPostTemplate,
@@ -154,10 +154,10 @@ const createPages: GatsbyNode["createPages"] = async ({
   const BlogTagPosts = new Map()
   const BlogCategoryPosts = new Map()
 
-  BlogPosts?.forEach((post: any) => {
+  BlogPosts?.forEach((post) => {
     const tags = post.node.tags
     if (tags && tags.length > 0) {
-      tags.forEach((tag: any) => {
+      tags.forEach((tag) => {
         if (BlogTagPosts.has(tag.slug)) {
           BlogTagPosts.set(tag.slug, [...BlogTagPosts.get(tag.slug), post])
         } else {
@@ -167,7 +167,7 @@ const createPages: GatsbyNode["createPages"] = async ({
     }
     const categories = post.node.categories
     if (categories && categories.length > 0) {
-      categories.forEach((category: any) => {
+      categories.forEach((category) => {
         if (BlogCategoryPosts.has(category.slug)) {
           BlogCategoryPosts.set(category.slug, [
             ...BlogCategoryPosts.get(category.slug),
@@ -283,9 +283,9 @@ const createPages: GatsbyNode["createPages"] = async ({
 
   const Pages = PagesResult?.data?.allWordpressPage?.edges
 
-  Pages?.forEach((page: any) => {
+  Pages?.forEach((page) => {
     const pageOptions = {
-      path: page.node.path,
+      path: page.node.path || "",
       component: DefaultPage,
       context: {
         id: page.node.wordpress_id,
@@ -297,7 +297,7 @@ const createPages: GatsbyNode["createPages"] = async ({
 
     // Get all project pages
     const WorkIndex = PagesResult?.data?.allWordpressPage?.edges.filter(
-      (edge: any) => {
+      (edge) => {
         // Check if it is a project
         return (
           edge.node.template === "templates/template-project.php" &&

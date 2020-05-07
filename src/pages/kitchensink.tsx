@@ -8,12 +8,11 @@ import SEO from "../components/SEO"
 import SocialSidebar from "../components/SocialSidebar/SocialSidebar"
 
 import H from "../components/Typography/H"
-import P from "../components/Typography/P"
-import S from "../components/Typography/S"
 
 import HTML from "../components/HTML/HTML"
 
 import { ChildImageSharp } from "../contracts/post"
+import { Page } from "../contracts/page"
 
 export interface Props {
   data: {
@@ -22,21 +21,11 @@ export interface Props {
   location: Location
 }
 
-export default (props: Props) => {
+export default () => {
   const {
     wordpressPage,
   }: {
-    wordpressPage: {
-      id: string
-      content: string
-      slug: string
-      title: string
-      type: string
-      excerpt: string
-      date: string
-      status: string
-      featured_media: any
-    }
+    wordpressPage: Page
   } = useStaticQuery(graphql`
     query {
       wordpressPage(slug: { eq: "kitchensink" }) {

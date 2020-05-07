@@ -21,7 +21,8 @@
     "serve": "yarn run purgeCache && gatsby build && gatsby serve",
     "purgeAll": "rm -rf node_modules && rm -rf yarn.lock rm -rf package-lock.json && rm -rf .cache && rm -rf public && npm install",
     "purgeCache": "gatsby clean",
-    "purgeDependencies": "rm -rf node_modules && rm -rf yarn.lock rm -rf package-lock.json && npm install"
+    "purgeDependencies": "rm -rf node_modules && rm -rf yarn.lock rm -rf package-lock.json && npm install",
+    "types": "type-coverage"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",

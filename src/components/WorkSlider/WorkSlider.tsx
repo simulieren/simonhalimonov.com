@@ -10,6 +10,8 @@ import S from "../Typography/S"
 
 import useInterval from "../../utils/useInterval"
 
+import { Page } from "../../contracts/page"
+
 interface ItemProps {
   data: {
     featured_media: any
@@ -157,7 +159,7 @@ const WorkSliderItem = ({ data, current, index, time }: ItemProps) => (
 )
 
 interface Props {
-  data: any[]
+  data: Page[]
   time: number
 }
 

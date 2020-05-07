@@ -1,4 +1,5 @@
 import { Templates } from "./templates"
+import { FluidObject } from "gatsby-image"
 
 export interface Page {
   id: number
@@ -7,6 +8,7 @@ export interface Page {
   guid: Guid
   modified: string
   modified_gmt: string
+  path?: string
   slug: string
   status: string
   type: string
@@ -15,7 +17,7 @@ export interface Page {
   content: Content
   excerpt: Excerpt
   author: number
-  featured_media: number
+  featured_media: Media
   parent: number
   menu_order: number
   comment_status: string
@@ -24,6 +26,20 @@ export interface Page {
   meta: any[]
   polylang_current_lang: string
   polylang_translations: PolylangTranslation[]
+  wordpress_id?: string
+}
+
+export interface ChildImageFluid {
+  fluid?: FluidObject
+}
+
+export interface ChildImageSharp {
+  childImageSharp?: ChildImageFluid
+}
+
+export interface Media {
+  localFile?: ChildImageSharp
+  file?: ChildImageSharp
 }
 
 export interface Guid {
