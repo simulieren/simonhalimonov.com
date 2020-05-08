@@ -5,7 +5,7 @@ import { Sun, Moon } from "react-feather"
 import { motion } from "framer-motion"
 
 import Logo from "../Logo/Logo"
-import S from "../Typography/S"
+import { XS } from "../Typography"
 
 export interface Props {
   location: Location
@@ -24,7 +24,7 @@ interface MenuNode {
 }
 
 const MenuItem = ({ title, url }: MenuNode["node"]["items"][0]) => (
-  <S>
+  <XS>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -34,7 +34,7 @@ const MenuItem = ({ title, url }: MenuNode["node"]["items"][0]) => (
         {title}
       </Link>
     </motion.div>
-  </S>
+  </XS>
 )
 
 const normalizeLinks = (links: MenuNode["node"]["items"]) => {
@@ -169,7 +169,7 @@ export const Header = ({ lang }: Props) => {
         <MenuItem key={index} {...item} />
       ))}
 
-      <S
+      <XS
         sx={{
           "&:hover": { opacity: 0.5, cursor: "pointer" },
         }}
@@ -200,7 +200,7 @@ export const Header = ({ lang }: Props) => {
             <Sun strokeWidth={1} />
           </motion.div>
         )}
-      </S>
+      </XS>
     </Grid>
   )
 }

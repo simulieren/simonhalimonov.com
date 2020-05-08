@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Link from "gatsby-link"
 import { Grid, Box } from "theme-ui"
 
-import S from "../Typography/S"
+import { XS } from "../Typography"
 import GridHelper from "../GridHelper/GridHelper"
 
 interface Props {
@@ -63,7 +63,7 @@ export const Footer = ({ lang }: Props) => {
             <>
               {site.siteMetadata.social.github &&
                 site.siteMetadata.social.github.length > 0 && (
-                  <S
+                  <XS
                     as="a"
                     sx={{ py: [2] }}
                     href={site.siteMetadata.social.github}
@@ -72,11 +72,11 @@ export const Footer = ({ lang }: Props) => {
                     title="github"
                   >
                     Github
-                  </S>
+                  </XS>
                 )}
               {site.siteMetadata.social.twitter &&
                 site.siteMetadata.social.twitter.length > 0 && (
-                  <S
+                  <XS
                     as="a"
                     sx={{ py: [2] }}
                     href={site.siteMetadata.social.twitter}
@@ -85,11 +85,11 @@ export const Footer = ({ lang }: Props) => {
                     title="twitter"
                   >
                     Twitter
-                  </S>
+                  </XS>
                 )}
               {site.siteMetadata.social.linkedin &&
                 site.siteMetadata.social.linkedin.length > 0 && (
-                  <S
+                  <XS
                     as="a"
                     sx={{ py: [2] }}
                     href={site.siteMetadata.social.linkedin}
@@ -98,11 +98,11 @@ export const Footer = ({ lang }: Props) => {
                     title="linkedin"
                   >
                     LinkedIn
-                  </S>
+                  </XS>
                 )}
               {site.siteMetadata.social.email &&
                 site.siteMetadata.social.email.length > 0 && (
-                  <S
+                  <XS
                     as="a"
                     sx={{ py: [2] }}
                     href={`mailto:${site.siteMetadata.social.email}`}
@@ -111,7 +111,7 @@ export const Footer = ({ lang }: Props) => {
                     title="mail"
                   >
                     E-Mail
-                  </S>
+                  </XS>
                 )}
             </>
           )}
@@ -124,31 +124,33 @@ export const Footer = ({ lang }: Props) => {
           columns={[2, 4]}
           gap={[3, 4, 5]}
         >
-          <S sx={{ py: [3] }}>Imprint</S>
+          <XS sx={{ py: [3] }}>Imprint</XS>
 
-          <S sx={{ py: [3] }}>Privacy</S>
+          <XS sx={{ py: [3] }}>Privacy</XS>
         </Grid>
 
-        <S sx={{ px: [3, 4], py: [3] }}>
+        <XS sx={{ px: [3, 4], py: [3] }}>
           Build with GatsbyJS and WordPress by Simon Halimonov. <br />
           See and get the full source code here. (Coming soon) <br />
           View all libraries used here: (Coming soon) <br />
           Read about how to this website works. (Coming soon) <br />
           Fonts used: IBM Plex Sans, IBM Plex Serif
-        </S>
+        </XS>
 
-        <S sx={{ px: [3, 4], py: [3] }} onClick={() => setShowGrid(!showGrid)}>
+        <XS sx={{ px: [3, 4], py: [3] }} onClick={() => setShowGrid(!showGrid)}>
           Press <kbd>CTRL</kbd> + <kbd>G</kbd> to view layout grid. Or click
           this text 👈.
-        </S>
+        </XS>
 
         <Link to="/kitchensink">
-          <S sx={{ px: [3, 4], py: [3] }}>View Kitchensink with all elements</S>
+          <XS sx={{ px: [3, 4], py: [3] }}>
+            View Kitchensink with all elements
+          </XS>
         </Link>
 
-        <S sx={{ px: [3, 4], py: [2] }}>
+        <XS sx={{ px: [3, 4], py: [2] }}>
           © Copyright {new Date().getFullYear()} All rights reserved
-        </S>
+        </XS>
       </Box>
       {showGrid && <GridHelper key={"grid"} />}
     </>

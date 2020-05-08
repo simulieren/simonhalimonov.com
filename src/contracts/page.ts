@@ -13,7 +13,7 @@ export interface Page {
   status: string
   type: string
   link: string
-  title: Title
+  title: string
   content: Content
   excerpt: Excerpt
   author: number

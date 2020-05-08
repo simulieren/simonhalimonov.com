@@ -1,7 +1,13 @@
 /** @jsx jsx */
 import { jsx, Box } from "theme-ui"
-import parse, { domToReact } from "html-react-parser"
+import parse, {
+  domToReact,
+  HTMLReactParserOptions,
+  DomElement,
+} from "html-react-parser"
+// @ts-ignore
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+// @ts-ignore
 import { ghcolors } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 import H from "../../components/Typography/H"
@@ -10,14 +16,16 @@ import S from "../../components/Typography/S"
 
 import { decodeHtmlCharCodes } from "../../utils"
 
-const getLanguage = (attribs) => {
+const getLanguage = (attribs: { [s: string]: string }) => {
   if (attribs.class != null) {
     return attribs.class
   }
   return null
 }
 
-const getCode = (children) => {
+const getCode = (children: DomElement[]) => {
+  if (typeof children === "undefined") return
+
   if (children.length > 0 && children[0].name === "code") {
     return children[0].children
   } else {
@@ -25,17 +33,25 @@ const getCode = (children) => {
   }
 }
 
-const PostCode = ({ language, children }) => (
+const PostCode = ({
+  language,
+  children,
+}: {
+  language: string
+  children: DomElement[]
+}) => (
   <SyntaxHighlighter style={ghcolors} language={language}>
     {children}
   </SyntaxHighlighter>
 )
 
-const options = {
-  replace: ({ attribs, children, name, ...rest }) => {
+const options: HTMLReactParserOptions = {
+  replace: ({ attribs, children, name, ...rest }: DomElement) => {
     const maxWidth = ["100%", "800px"]
     const mx = [3, 4]
     const px = [3, 4]
+
+    if (typeof children === "undefined") return
 
     if (
       name === "h1" ||
@@ -200,6 +216,9 @@ const options = {
                     p: [2],
                     m: 0,
                   },
+                  '& img[aria-hidden="true"]': {
+                    opacity: "0 !important",
+                  },
                 },
               },
               "& > ul + figcaption": {
@@ -225,13 +244,13 @@ const options = {
     }
 
     if (name === "figure") {
-      if (attribs.class === "wp-block-pullquote") {
+      if (attribs?.class === "wp-block-pullquote") {
         return <Box as={name}>{domToReact(children, options)}</Box>
       }
     }
 
     if (name === "blockquote") {
-      if (attribs.class === "wp-block-quote" || !attribs.class) {
+      if (attribs?.class === "wp-block-quote" || !attribs?.class) {
         return (
           <Box
             as={name}
@@ -280,6 +299,10 @@ const options = {
               borderColor: "text",
               cursor: "pointer",
             }}
+            //@ts-ignore
+            target={attribs?.target}
+            href={attribs?.href}
+            rel={attribs?.rel}
           >
             {domToReact(children, options)}
           </Box>
@@ -442,8 +465,11 @@ const options = {
     }
 
     if (name === "pre") {
+      if (typeof children === "undefined") return
+
       return (
-        children.length > 0 && (
+        children.length > 0 &&
+        typeof children !== "undefined" && (
           <Box as={name} sx={{ maxWidth, mx: "auto", px, mb: [3, 4] }}>
             <PostCode language={getLanguage(attribs)}>
               {domToReact(getCode(children))}
