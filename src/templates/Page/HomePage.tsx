@@ -1,7 +1,6 @@
 import React from "react"
 import { Flex, Box, Grid } from "theme-ui"
 import { motion } from "framer-motion"
-import { Parallax } from "react-scroll-parallax"
 
 import SEO from "../../components/SEO"
 
