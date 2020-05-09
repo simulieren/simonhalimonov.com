@@ -9,7 +9,7 @@ import HTML from "../../components/HTML/HTML"
 
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar"
 
-import { H, P, S } from "../../components/Typography"
+import { H, P, S, XS } from "../../components/Typography"
 
 import { Post, CategoryTagInfo, InstagramFeed } from "../../contracts/post"
 
@@ -45,6 +45,13 @@ export const BlogPostPage = (props: Props) => {
     (props.data.wordpressPost.tags && props.data.wordpressPost.tags.length) > 0
       ? props.data.wordpressPost.tags
       : new Array<CategoryTagInfo>()
+
+  const date =
+    props.data.wordpressPost.modified &&
+    props.data.wordpressPost.modified.length > 0
+      ? props.data.wordpressPost.modified
+      : props.data.wordpressPost.date
+
   return (
     <>
       <SEO
@@ -59,39 +66,36 @@ export const BlogPostPage = (props: Props) => {
             >
               <H>{decodeHtmlCharCodes(props.data.wordpressPost.title)}</H>
 
-              <Flex sx={{ alignItems: "baseline" }}>
+              <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
+                <XS sx={{ mr: [3] }}>{date}</XS>
+                <XS sx={{ mr: [3] }}>Category: </XS>
                 {categories &&
                   categories.length > 0 &&
                   categories.map((category, categoryIndex) => {
                     return (
-                      <S key={categoryIndex} sx={{ mr: [3] }}>
+                      <XS key={categoryIndex} sx={{ mr: [3] }}>
                         <Link
                           to={`/category/${category.slug}`}
                           title={category.name}
                         >
                           {capitalizeFirstLetter(category.name)}
                         </Link>
-                      </S>
+                      </XS>
                     )
                   })}
+
+                <XS sx={{ mx: [3] }}>Tags: </XS>
                 {tags &&
                   tags.length > 0 &&
                   tags.map((tag, tagIndex) => {
                     return (
-                      <S key={tagIndex} sx={{ mr: [3] }}>
+                      <XS key={tagIndex} sx={{ mr: [3] }}>
                         <Link to={`/tag/${tag.slug}`} title={tag.name}>
                           {capitalizeFirstLetter(tag.name)}
                         </Link>
-                      </S>
+                      </XS>
                     )
                   })}
-
-                <S sx={{ mr: [3] }}>
-                  {props.data.wordpressPost.modified &&
-                  props.data.wordpressPost.modified.length > 0
-                    ? props.data.wordpressPost.modified
-                    : props.data.wordpressPost.date}
-                </S>
               </Flex>
             </Box>
             {fluid && fluid?.src?.length > 0 && (

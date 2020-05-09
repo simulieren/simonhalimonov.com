@@ -3,9 +3,7 @@ import { jsx, Flex, Box } from "theme-ui"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
 
-import H from "../../components/Typography/H"
-import P from "../../components/Typography/P"
-import S from "../../components/Typography/S"
+import { H, P, S, XS } from "../../components/Typography"
 
 import { Post, CategoryTagInfo } from "../../contracts/post"
 import { decodeHtmlCharCodes, capitalizeFirstLetter } from "../../utils"
@@ -19,40 +17,43 @@ export default ({ node }: { node: Post }) => {
       : new Array<CategoryTagInfo>()
   const tags: CategoryTagInfo[] =
     node.tags && node.tags.length > 0 ? node.tags : new Array<CategoryTagInfo>()
+
+  const date =
+    node?.modified && node?.modified.length > 0 ? node?.modified : node?.date
   return (
     <Box as="article" key={node.slug} sx={{ mb: [4, 5] }}>
       <Box sx={{ maxWidth: "70ch", mx: "auto" }}>
         <Link to={`/post/${node.slug}`} title={node.slug}>
           <H>{decodeHtmlCharCodes(node.title)}</H>
         </Link>
-        <Flex sx={{ alignItems: "baseline" }}>
+
+        <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
+          <XS sx={{ mr: [3] }}>{date}</XS>
+          <XS sx={{ mr: [3] }}>Category: </XS>
           {categories &&
             categories.length > 0 &&
             categories.map((category, categoryIndex) => {
               return (
-                <S key={categoryIndex} sx={{ mr: [3] }}>
+                <XS key={categoryIndex} sx={{ mr: [3] }}>
                   <Link to={`/category/${category.slug}`} title={category.name}>
                     {capitalizeFirstLetter(category.name)}
                   </Link>
-                </S>
+                </XS>
               )
             })}
+
+          <XS sx={{ mx: [3] }}>Tags: </XS>
           {tags &&
             tags.length > 0 &&
             tags.map((tag, tagIndex) => {
               return (
-                <S key={tagIndex} sx={{ mr: [3] }}>
+                <XS key={tagIndex} sx={{ mr: [3] }}>
                   <Link to={`/tag/${tag.slug}`} title={tag.name}>
                     {capitalizeFirstLetter(tag.name)}
                   </Link>
-                </S>
+                </XS>
               )
             })}
-          <S sx={{ mr: [3] }}>
-            {node.modified && node.modified.length > 0
-              ? node.modified
-              : node.date}
-          </S>
         </Flex>
       </Box>
       {fluid && fluid?.src?.length > 0 && (
