@@ -3,9 +3,7 @@ import { jsx, Box } from "theme-ui"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
 
-import H from "../../components/Typography/H"
-import P from "../../components/Typography/P"
-import S from "../../components/Typography/S"
+import { H } from "../../components/Typography"
 
 import { Page } from "../../contracts/page"
 import { decodeHtmlCharCodes } from "../../utils"
@@ -28,27 +26,6 @@ export default ({ node }: { node: Page }) => {
           </Link>
         </Box>
       )}
-      <Box
-        sx={{
-          maxWidth: "70ch",
-          mx: "auto",
-          pb: [3, 4],
-          mb: [3, 4],
-          // border: "1px solid transparent",
-          // borderBottomColor: "text",
-        }}
-      >
-        {/* <P
-          dangerouslySetInnerHTML={{
-            __html: decodeHtmlCharCodes(node.excerpt),
-          }}
-        /> */}
-        {/* <div>
-          <Link to={node.path} title={node.slug}>
-            <S>Read more</S>
-          </Link>
-        </div> */}
-      </Box>
     </Box>
   )
 }

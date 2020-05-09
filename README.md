@@ -24,11 +24,12 @@ Install all dependencies
 
 ## WordPress Setup
 
-- Polylang
-  - Configure a main language that reflect the `gatsby-config.js`
-  - This site uses `en_US` as the default language
-  - The secondary language is `de_DE`
-  - Configure a menu for both languages
+- Create a single post and page
+  - Post
+    - Add a tag
+    - Add featured image
+  - Page
+    - Add featured image
 - Settings
   - User permalinks with post name.
   - Set a page as the front page
@@ -40,11 +41,16 @@ Install all dependencies
   - It disables the WP frontend
   - It reroutes all pages to the REST API
 - Install plugins and activate them
-  - TODO: Add links here
-  - Polylang
-  - Polylang REST API
+  - [Polylang](https://wordpress.org/plugins/polylang/)
+    - Configure a main language that reflect the `gatsby-config.js`
+    - This site uses `en_US` as the default language
+    - The secondary language is `de_DE`
+    - Configure a menu for both languages
+  - [Polylang REST API](https://github.com/maru3l/wp-rest-polylang)
+  - [WP REST API MENU](https://wordpress.org/plugins/wp-api-menus/)
+  - [WP Webhooks](https://wordpress.org/plugins/wp-webhooks/) (optional)
+    - Trigger a webhook on Vercel or Netlify for a redeploy
   - ACF (optional)
-  - WP REST API MENU
 
 ---
 
