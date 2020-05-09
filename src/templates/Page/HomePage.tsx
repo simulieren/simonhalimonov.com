@@ -43,7 +43,7 @@ export const Homepage = (props: Props) => {
               py: [4, 5, 6],
               mt: [6, 6, 0],
               zIndex: 10,
-              height: ["auto", "50vh", "50vh", "100vh"],
+              minHeight: ["auto", "50vh", "50vh", "100vh"],
               display: "flex",
               justifyContent: "center",
               flexDirection: "column",

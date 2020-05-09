@@ -159,7 +159,11 @@ export const Header = ({ lang }: Props) => {
       gap={[3, 4, 5]}
     >
       <Link to={homepageLink.url} title={homepageLink.title}>
-        <Box sx={{ "svg path": { fill: "text" } }}>
+        <Box
+          sx={{
+            "svg path": { fill: "text" },
+          }}
+        >
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <Logo />
           </motion.div>
