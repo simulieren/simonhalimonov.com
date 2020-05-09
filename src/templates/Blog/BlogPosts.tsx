@@ -7,9 +7,7 @@ import SEO from "../../components/SEO"
 
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar"
 
-import H from "../../components/Typography/H"
-import P from "../../components/Typography/P"
-import S from "../../components/Typography/S"
+import { S } from "../../components/Typography"
 
 import BlogPostTeaser from "./BlogPostTeaser"
 
@@ -46,7 +44,7 @@ export default (props: Props) => {
         description={site.siteMetadata.description}
       />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
-        <Box sx={{ gridColumn: ["1/13", "1/10"], pb: [4, 5] }}>
+        <Box sx={{ gridColumn: ["1/13", "1/13", "1/10"], pb: [4, 5] }}>
           {group.map(BlogPostTeaser)}
           <div className="navigation-links">
             {index > 1 && (
@@ -69,7 +67,7 @@ export default (props: Props) => {
           </div>
         </Box>
 
-        <Box sx={{ gridColumn: ["1/13", "10/13"] }}>
+        <Box sx={{ gridColumn: ["1/13", "1/13", "10/13"] }}>
           <SocialSidebar />
         </Box>
       </Grid>

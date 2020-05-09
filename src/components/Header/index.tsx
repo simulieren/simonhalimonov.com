@@ -155,7 +155,7 @@ export const Header = ({ lang }: Props) => {
         zIndex: 100,
         width: "100%",
       }}
-      columns={[6, 12]}
+      columns={[4, 4, 12]}
       gap={[3, 4, 5]}
     >
       <Link to={homepageLink.url} title={homepageLink.title}>

@@ -41,13 +41,13 @@ export const Homepage = (props: Props) => {
             sx={{
               p: [3, 4],
               py: [4, 5, 6],
-              mt: [6, 0],
+              mt: [6, 6, 0],
               zIndex: 10,
               height: ["auto", "50vh", "50vh", "100vh"],
               display: "flex",
               justifyContent: "center",
               flexDirection: "column",
-              width: ["100%", "50%"],
+              width: ["100%", "100%", "50%"],
             }}
           >
             <motion.div
@@ -55,43 +55,41 @@ export const Homepage = (props: Props) => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
             >
-              <Parallax y={[-20, 20]}>
-                <H>
-                  Simon Halimonov <br />
-                  I'm a <AnimateWords /> <br />
-                </H>
+              <H>
+                Simon Halimonov <br />
+                I'm a <AnimateWords /> <br />
+              </H>
 
-                <Box
-                  as="a"
-                  href="#design"
-                  sx={{ mt: [3, 4, 5, 6], display: "block" }}
+              <Box
+                as="a"
+                href="#design"
+                sx={{ mt: [3, 4, 5, 6], display: "block" }}
+              >
+                <motion.div
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 2, loop: Infinity }}
                 >
-                  <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 2, loop: Infinity }}
+                  <svg
+                    width="52"
+                    height="28"
+                    viewBox="0 0 26 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      width="52"
-                      height="28"
-                      viewBox="0 0 26 14"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <motion.path
-                        d="M1 1L13 13L25 1"
-                        stroke="currentColor"
-                        stroke-linecap="square"
-                        initial={{ pathLength: 1, pathOffset: 0 }}
-                        animate={{
-                          pathLength: [0.5, 1, 0.5],
-                          pathOffset: [1, 0, 0],
-                        }}
-                        transition={{ duration: 2, delay: 0.3, yoyo: Infinity }}
-                      />
-                    </svg>
-                  </motion.div>
-                </Box>
-              </Parallax>
+                    <motion.path
+                      d="M1 1L13 13L25 1"
+                      stroke="currentColor"
+                      stroke-linecap="square"
+                      initial={{ pathLength: 1, pathOffset: 0 }}
+                      animate={{
+                        pathLength: [0.5, 1, 0.5],
+                        pathOffset: [1, 0, 0],
+                      }}
+                      transition={{ duration: 2, delay: 0.3, yoyo: Infinity }}
+                    />
+                  </svg>
+                </motion.div>
+              </Box>
             </motion.div>
           </Box>
 
