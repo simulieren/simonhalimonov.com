@@ -16,12 +16,11 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "yarn run purgeCache && gatsby build",
-    "start": "yarn run purgeCache && gatsby develop",
-    "serve": "yarn run purgeCache && gatsby build && gatsby serve",
-    "purgeAll": "rm -rf node_modules && rm -rf yarn.lock rm -rf package-lock.json && rm -rf .cache && rm -rf public && npm install",
-    "purgeCache": "gatsby clean",
-    "purgeDependencies": "rm -rf node_modules && rm -rf yarn.lock rm -rf package-lock.json && npm install",
+    "build": "gatsby build",
+    "start": "gatsby develop",
+    "serve": "gatsby build && gatsby serve",
+    "clean:all": "rm -rf node_modules && rm -rf yarn.lock rm -rf package-lock.json && rm -rf .cache && rm -rf public && npm install",
+    "clean:dependencies": "rm -rf node_modules && rm -rf yarn.lock rm -rf package-lock.json && npm install",
     "types": "type-coverage"
   },
   "dependencies": {
