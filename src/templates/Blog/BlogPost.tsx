@@ -59,7 +59,10 @@ export const BlogPostPage = (props: Props) => {
         description={props.data.wordpressPost.excerpt}
       />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
-        <Box as="article" sx={{ pb: [4, 5], gridColumn: ["1/13", "1/10"] }}>
+        <Box
+          as="article"
+          sx={{ pb: [4, 5], gridColumn: ["1/13", "1/13", "1/10"] }}
+        >
           <article className="post">
             <Box
               sx={{ maxWidth: ["100%", "800px"], mx: "auto", px: [0, 0, 0, 3] }}
@@ -149,7 +152,7 @@ export const BlogPostPage = (props: Props) => {
           </article>
         </Box>
 
-        <Box sx={{ gridColumn: ["1/13", "10/13"] }}>
+        <Box sx={{ gridColumn: ["1/13", "1/13", "10/13"] }}>
           <SocialSidebar />
         </Box>
       </Grid>

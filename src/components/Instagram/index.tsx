@@ -74,7 +74,7 @@ export default (props: Props) => {
         <Box sx={{ ml: [2] }}>{props.title}</Box>
       </Flex>
 
-      <Grid columns={[3, 1]} gap={[3, 4, 5]}>
+      <Grid columns={[3, 3, 1]} gap={[3, 4, 5]}>
         {allInstaNode.edges.map((instagramPost, index) => {
           return instagramPost.node &&
             instagramPost.node.localFile &&
