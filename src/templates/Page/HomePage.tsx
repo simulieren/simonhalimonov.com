@@ -47,6 +47,7 @@ export const Homepage = (props: Props) => {
               display: "flex",
               justifyContent: "center",
               flexDirection: "column",
+              width: ["100%", "50%"],
             }}
           >
             <motion.div

@@ -23,7 +23,10 @@ export const AnimateWords = () => {
           i === index && (
             <motion.span
               key={word}
-              style={{ position: "absolute", marginLeft: ".25em" }}
+              style={{
+                position: "absolute",
+                marginLeft: ".25em",
+              }}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -40 }}
