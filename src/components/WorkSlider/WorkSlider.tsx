@@ -5,7 +5,7 @@ import { Box } from "theme-ui"
 import { motion, AnimatePresence } from "framer-motion"
 import { Parallax } from "react-scroll-parallax"
 
-import { P, S, XS } from "../Typography"
+import { P, XS } from "../Typography"
 
 import useInterval from "../../utils/useInterval"
 
@@ -55,7 +55,7 @@ const WorkSliderItem = ({ data, current, index, time }: ItemProps) => (
       width: "100%",
       height: "100%",
       position: "absolute",
-      p: [3, 4, 8, 8],
+      p: [3, 4],
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -116,35 +116,6 @@ const WorkSliderItem = ({ data, current, index, time }: ItemProps) => (
           </Parallax>
         </motion.div>
       )}
-      {/* {current === index && (
-        <BlockSlider
-          sx={{
-            position: "absolute",
-            left: "0px",
-            right: "0px",
-            top: "0px",
-            bottom: "0px",
-            "& > div": {
-              background:
-                `url(${data?.featured_media?.localFile?.childImageSharp?.fluid?.base64})` ||
-                "#fff",
-              backgroundSize: "500%",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              position: "absolute",
-              left: "0px",
-              right: "0px",
-              top: "0px",
-              bottom: "0px",
-              transformOrigin: "right",
-            },
-          }}
-          initial={{ x: "-100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{ duration: 0.5 }}
-        />
-      )} */}
       {current === index && (
         <BlockSlider
           sx={{ top: "auto", height: "2px" }}
