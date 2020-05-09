@@ -139,6 +139,7 @@ const options: HTMLReactParserOptions = {
       )
     }
 
+    // Image block
     if (name === "figure") {
       const styles = {
         mx: "auto",
@@ -149,9 +150,7 @@ const options: HTMLReactParserOptions = {
           maxWidth: "100% !important",
           overflow: "visible !important",
         },
-        '& img[aria-hidden="true"]': {
-          opacity: 0,
-        },
+        ...base64Bug,
       }
 
       if (attribs?.class?.includes("alignwide")) {
@@ -219,6 +218,7 @@ const options: HTMLReactParserOptions = {
             sx={{
               ...styles,
               mb: [3, 4],
+              mx: [-20, -40],
               "& ul": {
                 overflowX: "scroll",
                 maxWidth: "none",
