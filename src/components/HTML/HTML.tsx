@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, Box, useThemeUI } from "theme-ui"
+import React from "react"
+import { Box, useThemeUI } from "theme-ui"
 import parse, {
   domToReact,
   HTMLReactParserOptions,
@@ -7,10 +7,10 @@ import parse, {
 } from "html-react-parser"
 // @ts-ignore
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-// @ts-ignore
 import {
   ghcolors,
   atomDark,
+  // @ts-ignore
 } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 import { H, P, S } from "../../components/Typography"
@@ -502,6 +502,45 @@ const options: HTMLReactParserOptions = {
         }
       }
     }
+
+    if (attribs?.class?.includes("wp-block-embed")) {
+      return (
+        <Box
+          as={name}
+          sx={{
+            maxWidth,
+            mx: "auto",
+            mb: [3, 4],
+            width: "100%",
+            "& iframe": {
+              width: "100%",
+            },
+          }}
+        >
+          {domToReact(children, options)}
+        </Box>
+      )
+    }
+
+    // FIXME: Self closing iframe tags break the parsing algorithm
+    // if (name === "iframe") {
+    //   console.log(next)
+    //   return (
+    //     <Box>
+    //       <Box
+    //         as={name}
+    //         {...attribs}
+    //         sx={{
+    //           maxWidth,
+    //           mx: "auto",
+    //           mb: [3, 4],
+    //           width: "100%",
+    //         }}
+    //       ></Box>
+    //       {/* {domToReact(children, options)} */}
+    //     </Box>
+    //   )
+    // }
 
     if (name === "pre") {
       if (typeof children === "undefined") return
