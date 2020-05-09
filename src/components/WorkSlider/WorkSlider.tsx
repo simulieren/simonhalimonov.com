@@ -5,8 +5,7 @@ import { Box } from "theme-ui"
 import { motion, AnimatePresence } from "framer-motion"
 import { Parallax } from "react-scroll-parallax"
 
-import P from "../Typography/P"
-import S from "../Typography/S"
+import { P, S, XS } from "../Typography"
 
 import useInterval from "../../utils/useInterval"
 
@@ -79,7 +78,7 @@ const WorkSliderItem = ({ data, current, index, time }: ItemProps) => (
         transition={{ duration: 1 }}
       >
         <Link to={data?.path}>
-          <S>View Project</S>
+          <XS>View Project</XS>
           <P>{data?.title}</P>
         </Link>
       </motion.div>
@@ -165,7 +164,6 @@ interface Props {
 
 export default (props: Props) => {
   const { time, data } = props
-  console.log("data", data)
   const [state, setState] = useState({
     index: 0,
   })

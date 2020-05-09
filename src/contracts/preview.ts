@@ -1,7 +1,7 @@
 import { Page } from "./page"
 
 export interface PreviewResponse extends Page {
-  preview_content: PreviewContent
+  preview_content: Preview
 }
 
 export interface Guid {
@@ -25,10 +25,6 @@ export interface Excerpt {
 export interface PolylangTranslation {
   locale: string
   id: number
-}
-
-export interface PreviewContent {
-  [key: string]: Preview
 }
 
 export interface Preview {

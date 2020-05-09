@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Box } from "theme-ui"
+import { jsx, Box, useThemeUI } from "theme-ui"
 import parse, {
   domToReact,
   HTMLReactParserOptions,
@@ -8,17 +8,18 @@ import parse, {
 // @ts-ignore
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 // @ts-ignore
-import { ghcolors } from "react-syntax-highlighter/dist/esm/styles/prism"
+import {
+  ghcolors,
+  atomDark,
+} from "react-syntax-highlighter/dist/esm/styles/prism"
 
-import H from "../../components/Typography/H"
-import P from "../../components/Typography/P"
-import S from "../../components/Typography/S"
+import { H, P, S } from "../../components/Typography"
 
 import { decodeHtmlCharCodes } from "../../utils"
 
 const getLanguage = (attribs: { [s: string]: string }) => {
   if (attribs.class != null) {
-    return attribs.class
+    return attribs.class.replace("wp-block-code ", "")
   }
   return null
 }
@@ -39,17 +40,33 @@ const PostCode = ({
 }: {
   language: string
   children: DomElement[]
-}) => (
-  <SyntaxHighlighter style={ghcolors} language={language}>
-    {children}
-  </SyntaxHighlighter>
-)
+}) => {
+  const context = useThemeUI()
+  const { colorMode } = context
+
+  return (
+    <SyntaxHighlighter
+      style={colorMode === "default" ? ghcolors : atomDark}
+      language={language}
+    >
+      {children}
+    </SyntaxHighlighter>
+  )
+}
 
 const options: HTMLReactParserOptions = {
   replace: ({ attribs, children, name, ...rest }: DomElement) => {
     const maxWidth = ["100%", "800px"]
     const mx = [3, 4]
     const px = [3, 4]
+
+    // This fixes a weird bug where the base64 image doesn't
+    // disappear when img scrolled into view
+    const base64Bug = {
+      '& img[aria-hidden="true"]': {
+        opacity: "0 !important",
+      },
+    }
 
     if (typeof children === "undefined") return
 
@@ -163,7 +180,7 @@ const options: HTMLReactParserOptions = {
           <Box
             as={name}
             sx={{
-              maxWidth: "none",
+              maxWidth: "100%",
               ...styles,
               width: "100%",
               transform: "translateX(-50%)",
@@ -211,14 +228,12 @@ const options: HTMLReactParserOptions = {
                 pl: [0],
                 "& li": {
                   width: "100%",
-                  minWidth: "50%",
+                  minWidth: ["120%", "50%"],
                   "& figure": {
                     p: [2],
                     m: 0,
                   },
-                  '& img[aria-hidden="true"]': {
-                    opacity: "0 !important",
-                  },
+                  ...base64Bug,
                 },
               },
               "& > ul + figcaption": {
@@ -352,6 +367,7 @@ const options: HTMLReactParserOptions = {
 
       // Cover Block
       // FIXME: cover is not supported because it uses a CSS background-image
+      // This has to be fixed during the build time, while creating nodes
       if (attribs?.class?.includes("wp-block-cover")) {
         console.warn(
           "This block is not supported: wp-block-cover. \r\n It was not rendered in the page."
@@ -360,18 +376,44 @@ const options: HTMLReactParserOptions = {
       }
       // Columns Block
       if (attribs?.class?.includes("wp-block-columns")) {
+        const styles = {
+          maxWidth,
+          mx: "auto",
+          mb: [3, 4],
+          display: "flex",
+          flexDirection: ["column", "row"],
+          "& > div": {
+            width: "100%",
+            mb: [3, 4],
+          },
+        }
+
+        // Full width columns block
+        if (attribs?.class?.includes("alignfull")) {
+          return (
+            <Box
+              as={name}
+              sx={{
+                ...styles,
+                maxWidth: "100%",
+                width: "100%",
+                transform: "translateX(-50%)",
+                position: "relative",
+                left: "50%",
+                margin: 0,
+                display: "flex",
+              }}
+            >
+              {domToReact(children, options)}
+            </Box>
+          )
+        }
+
         return (
           <Box
             as={name}
             sx={{
-              maxWidth,
-              mx: "auto",
-              mb: [3, 4],
-              display: "flex",
-              flexDirection: ["column", "row"],
-              "& > div": {
-                width: "100%",
-              },
+              ...styles,
             }}
           >
             {domToReact(children, options)}
@@ -386,7 +428,7 @@ const options: HTMLReactParserOptions = {
           pb: [3, 4],
           px: [3, 0],
           "& .wp-block-media-text__media, & .wp-block-media-text__content": {
-            width: "50% !important",
+            width: ["100% !important", "50% !important"],
             overflow: "visible !important",
           },
           "& .wp-block-media-text__media": {
@@ -398,26 +440,23 @@ const options: HTMLReactParserOptions = {
             "& .gatsby-image-wrapper": {
               width: "100% !important",
             },
-            // This fixes a weird bug where the base64 image doesn't
-            // disappear when img scrolled into view
-            '& img[aria-hidden="true"]': {
-              opacity: "0 !important",
-            },
+            ...base64Bug,
           },
           "& .wp-block-media-text__content": {
-            p: [2, 3],
+            p: [0, 3],
             display: "flex",
             flexDirection: ["column"],
             justifyContent: "center",
             alignItems: "flex-start",
             "& > *": {
               mx: 0,
+              px: 0,
             },
           },
         }
         const flexDirection = attribs?.class?.includes("has-media-on-the-right")
-          ? ["row-reverse"]
-          : ["row"]
+          ? ["column", "row-reverse"]
+          : ["column", "row"]
 
         if (attribs?.class?.includes("alignwide")) {
           return (
@@ -470,7 +509,17 @@ const options: HTMLReactParserOptions = {
       return (
         children.length > 0 &&
         typeof children !== "undefined" && (
-          <Box as={name} sx={{ maxWidth, mx: "auto", px, mb: [3, 4] }}>
+          <Box
+            as={name}
+            sx={{
+              maxWidth,
+              mx: "auto",
+              px,
+              mb: [3, 4],
+              width: "100%",
+              overflowX: "scroll",
+            }}
+          >
             <PostCode language={getLanguage(attribs)}>
               {domToReact(getCode(children))}
             </PostCode>
@@ -493,8 +542,8 @@ const parseFunctions = (html: string | undefined) => {
 export default ({ html, sx }: { html: string; sx?: any }) => (
   <Box
     sx={{
-      ml: [-20, -40],
-      mr: [-20, -40],
+      ml: [0],
+      mr: [0],
       mb: [3, 4],
       position: "relative",
       gridColumn: ["1/5", "1/5"],

@@ -9,9 +9,7 @@ import HTML from "../../components/HTML/HTML"
 
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar"
 
-import H from "../../components/Typography/H"
-import P from "../../components/Typography/P"
-import S from "../../components/Typography/S"
+import { H, P, S } from "../../components/Typography"
 
 import { Post, CategoryTagInfo, InstagramFeed } from "../../contracts/post"
 
@@ -87,10 +85,6 @@ export const BlogPostPage = (props: Props) => {
                       </S>
                     )
                   })}
-
-                <S sx={{ mr: [3] }}>
-                  {capitalizeFirstLetter(props.data.wordpressPost.author.name)}
-                </S>
 
                 <S sx={{ mr: [3] }}>
                   {props.data.wordpressPost.modified &&
@@ -184,7 +178,7 @@ export const query = graphql`
       featured_media {
         localFile {
           childImageSharp {
-            fluid(maxWidth: 960, maxHeight: 600, quality: 85) {
+            fluid(maxWidth: 1000, quality: 85) {
               aspectRatio
               src
               srcSet

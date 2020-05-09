@@ -48,9 +48,6 @@ export default ({ node }: { node: Post }) => {
                 </S>
               )
             })}
-
-          <S sx={{ mr: [3] }}>{capitalizeFirstLetter(node.author.name)}</S>
-
           <S sx={{ mr: [3] }}>
             {node.modified && node.modified.length > 0
               ? node.modified
@@ -59,7 +56,14 @@ export default ({ node }: { node: Post }) => {
         </Flex>
       </Box>
       {fluid && fluid?.src?.length > 0 && (
-        <Box sx={{ my: [2, 3] }}>
+        <Box
+          sx={{
+            my: [2, 3],
+            "& img": {
+              width: "100%",
+            },
+          }}
+        >
           <Link to={`/post/${node.slug}`} title={node.slug}>
             <Image fluid={fluid} alt={node.title} title={node.title} />
           </Link>

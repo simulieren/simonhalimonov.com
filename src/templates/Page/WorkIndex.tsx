@@ -15,7 +15,6 @@ export interface Props {
 }
 
 export default (props: Props) => {
-  console.log("props", props)
   const { edges } = props.pageContext
 
   const { site } = useStaticQuery(graphql`

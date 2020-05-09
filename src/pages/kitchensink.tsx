@@ -61,10 +61,9 @@ export default () => {
   const fluid: FluidObject | null =
     wordpressPage?.featured_media?.localFile?.childImageSharp?.fluid || null
 
-  const title = wordpressPage?.title?.rendered || wordpressPage?.post_title
+  const title = wordpressPage?.title || wordpressPage?.post_title
 
-  const content =
-    wordpressPage?.content?.rendered || wordpressPage?.post_content
+  const content = wordpressPage?.content || wordpressPage?.post_content
 
   const [layout, setLayout] = React.useState<"default" | "fullwidth">("default")
 

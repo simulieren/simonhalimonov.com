@@ -57,7 +57,7 @@ const createPages: GatsbyNode["createPages"] = async ({
             featured_media {
               localFile {
                 childImageSharp {
-                  fluid(maxWidth: 960, maxHeight: 600, quality: 85) {
+                  fluid(quality: 85) {
                     aspectRatio
                     src
                     srcSet
@@ -106,7 +106,7 @@ const createPages: GatsbyNode["createPages"] = async ({
             caption
             localFile {
               childImageSharp {
-                fluid(maxWidth: 960, maxHeight: 600, quality: 85) {
+                fluid(maxWidth: 960, quality: 85) {
                   aspectRatio
                   src
                   srcSet

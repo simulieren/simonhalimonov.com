@@ -5,6 +5,8 @@ import { Box } from "theme-ui"
 import DefaultPage from "../templates/Page/DefaultPage"
 import CoverPage from "../templates/Page/CoverPage"
 import FullWidthPage from "../templates/Page/FullWidthPage"
+
+// TODO: Add preview for HomePage
 import HomePage from "../templates/Page/HomePage"
 
 import HTML from "../components/HTML/HTML"
@@ -60,6 +62,7 @@ const PreviewComponent = (props: Props) => {
     let postUrl = `${rootURL}/wp/v2/${type}s/${id}`
     if (status === "draft") {
       // TODO: Test with draft
+      // FIXME: This doesn't seem to work properly yet
       postUrl = `${rootURL}/wp/v2/${type}s/${rev}?_wpnonce=${wpnonce}`
     }
 
@@ -67,13 +70,10 @@ const PreviewComponent = (props: Props) => {
       .then((res) => res.json())
       .then((json: PreviewResponse) => {
         const { preview_content } = json
-
-        const preview = Object.entries(preview_content).sort(
-          (a, b) => b[1].ID - a[1].ID
-        )[0][1]
-
+        // Set the correct template layout for the preview
         setLayout(json.template)
-        setPreview(preview)
+        // Update the state with the preview content
+        setPreview(preview_content)
       })
   }
 
