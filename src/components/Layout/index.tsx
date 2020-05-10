@@ -42,6 +42,7 @@ export class Layout extends Component<Props> {
               boxSizing: "border-box",
               fontFamily: "IBM Plex Sans",
               lineHeight: 2,
+              color: theme.colors.text,
             },
             html: {
               scrollBehavior: "smooth",
@@ -51,6 +52,12 @@ export class Layout extends Component<Props> {
             },
             img: {
               maxWidth: "100%",
+            },
+            a: {
+              color: theme.colors.text,
+              "&:visited, &:link, a:active, a:hover": {
+                color: theme.colors.text,
+              },
             },
             kbd: {
               border: "1px solid transparent",
