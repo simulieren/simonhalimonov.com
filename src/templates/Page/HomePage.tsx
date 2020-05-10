@@ -288,6 +288,12 @@ export const Homepage = (props: Props) => {
                 CSS and JavaScript to React.js, Node.js and MongoDB I trained
                 the students to become Fullstack JavaScript Developers.
               </InviewMotion>
+              <InviewMotion>
+                He has taught more than 1200 hours in the classroom and has
+                given 20 workshops in three different cities in Germany. He
+                teaches on “Fullstack JavaScript Development” and “Design for
+                Developers”.
+              </InviewMotion>
             </H>
 
             <P
