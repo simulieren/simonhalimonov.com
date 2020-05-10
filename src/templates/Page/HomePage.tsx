@@ -289,9 +289,9 @@ export const Homepage = (props: Props) => {
                 the students to become Fullstack JavaScript Developers.
               </InviewMotion>
               <InviewMotion>
-                He has taught more than 1200 hours in the classroom and has
-                given 20 workshops in three different cities in Germany. He
-                teaches on “Fullstack JavaScript Development” and “Design for
+                I have taught more than 1200 hours in the classroom and have
+                given 20 workshops in three different cities in Germany. I teach
+                on “Fullstack JavaScript Development” and “Design for
                 Developers”.
               </InviewMotion>
             </H>
