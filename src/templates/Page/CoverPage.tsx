@@ -78,49 +78,46 @@ export const CoverPage = (props: Props) => {
                 alignItems: "center",
               }}
             >
-              <Parallax y={[-10, 10]}>
-                <motion.div
-                  initial={{ opacity: 1, x: -100, rotate: 5 }}
-                  animate={{ opacity: 1, x: -50, rotate: 0 }}
-                  transition={{ duration: 2.5, yoyo: Infinity }}
+              <motion.div
+                initial={{ opacity: 1, x: -100, rotate: 5 }}
+                animate={{ opacity: 1, x: -50, rotate: 0 }}
+                transition={{ duration: 2.5, yoyo: Infinity }}
+              >
+                <Box
+                  sx={{
+                    maxHeight: "75vh",
+                    position: "relative",
+                    width: "50vw",
+                    height: "80vh",
+                    "& img": {
+                      objectFit: "contain !important",
+                    },
+                  }}
                 >
-                  <Box
-                    sx={{
-                      maxHeight: "75vh",
-                      position: "relative",
-                      width: "50vw",
-                      height: "80vh",
-                      "& img": {
-                        objectFit: "contain !important",
-                      },
-                    }}
-                  >
-                    <StaticImage filename="leaf-01.png" />
-                  </Box>
-                </motion.div>
-              </Parallax>
-              <Parallax y={[-10, 10]}>
-                <motion.div
-                  initial={{ opacity: 1, x: -100, rotate: 5 }}
-                  animate={{ opacity: 1, x: -50, rotate: 0 }}
-                  transition={{ duration: 2.5, yoyo: Infinity }}
+                  <StaticImage filename="leaf-01.png" />
+                </Box>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 1, x: -100, rotate: 5 }}
+                animate={{ opacity: 1, x: -50, rotate: 0 }}
+                transition={{ duration: 2.5, yoyo: Infinity }}
+              >
+                <Box
+                  sx={{
+                    maxHeight: "75vh",
+                    position: "relative",
+                    width: "50vw",
+                    height: "80vh",
+                    right: "-70%",
+                    "& img": {
+                      objectFit: "contain !important",
+                    },
+                  }}
                 >
-                  <Box
-                    sx={{
-                      maxHeight: "75vh",
-                      position: "relative",
-                      width: "50vw",
-                      height: "80vh",
-                      right: "-70%",
-                      "& img": {
-                        objectFit: "contain !important",
-                      },
-                    }}
-                  >
-                    <StaticImage filename="leaf-03.png" />
-                  </Box>
-                </motion.div>
-              </Parallax>
+                  <StaticImage filename="leaf-03.png" />
+                </Box>
+              </motion.div>
             </Box>
             <Parallax y={[-20, 20]}>
               <Box

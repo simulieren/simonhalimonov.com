@@ -24,6 +24,8 @@ Install all dependencies
 
 ## WordPress Setup
 
+You can read about [how to setup a free WordPress site on GCP in my post](https://simonhalimonov.com/post/how-to-set-up-a-free-wordpress-cms-on-google-cloud-platform).
+
 - Create a single post and page
   - Post
     - Add a tag

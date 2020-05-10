@@ -147,7 +147,6 @@ export const Header = ({ lang }: Props) => {
 
   return (
     <Grid
-      className="header-container"
       sx={{
         p: [3, 4],
         alignItems: "center",
