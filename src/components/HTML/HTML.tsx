@@ -426,7 +426,7 @@ const options: HTMLReactParserOptions = {
         const styles = {
           mx: "auto",
           pb: [3, 4],
-          px: [3, 0],
+          px: [0, 3, 0],
           "& .wp-block-media-text__media, & .wp-block-media-text__content": {
             width: ["100% !important", "50% !important"],
             overflow: "visible !important",
