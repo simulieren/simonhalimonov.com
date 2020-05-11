@@ -3,7 +3,6 @@ import { Box, Grid } from "theme-ui"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
 import { motion } from "framer-motion"
-import { Parallax } from "react-scroll-parallax"
 
 import StaticImage from "../../components/Image/Image"
 
@@ -119,21 +118,20 @@ export const CoverPage = (props: Props) => {
                 </Box>
               </motion.div>
             </Box>
-            <Parallax y={[-20, 20]}>
-              <Box
-                sx={{
-                  p: [3, 4, 5],
-                  "& img": {
-                    objectFit: "contain !important",
-                    maxHeight: "75vh",
-                  },
-                }}
-              >
-                {fluid && fluid?.src?.length > 0 && (
-                  <Image fluid={fluid} alt={title} title={title} />
-                )}
-              </Box>
-            </Parallax>
+
+            <Box
+              sx={{
+                p: [3, 4, 5],
+                "& img": {
+                  objectFit: "contain !important",
+                  maxHeight: "75vh",
+                },
+              }}
+            >
+              {fluid && fluid?.src?.length > 0 && (
+                <Image fluid={fluid} alt={title} title={title} />
+              )}
+            </Box>
           </Box>
 
           <Box sx={{ maxWidth: "70ch", mx: "auto", mb: [2, 4] }}>
