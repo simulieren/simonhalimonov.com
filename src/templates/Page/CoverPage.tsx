@@ -37,6 +37,7 @@ export interface Props {
     page: {
       node: Page | Preview
     }
+    lang: string
   }
   location: Location
 }
@@ -44,6 +45,7 @@ export interface Props {
 export const CoverPage = (props: Props) => {
   const pageContext = props?.pageContext
   const page = pageContext?.page?.node
+  const lang = pageContext?.lang
 
   const fluid: FluidObject | null =
     page?.featured_media?.localFile?.childImageSharp?.fluid || null
@@ -56,7 +58,7 @@ export const CoverPage = (props: Props) => {
 
   return (
     <>
-      <SEO title={title} description={excerpt} />
+      <SEO title={title} description={excerpt} lang={lang} />
       <Box>
         <Box as="article" sx={{ mb: [4, 5] }}>
           <Box

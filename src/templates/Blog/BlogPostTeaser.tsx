@@ -81,14 +81,13 @@ export default ({ node }: { node: Post }) => {
         }}
       >
         <P
-          className="post-excerpt"
           dangerouslySetInnerHTML={{
             __html: decodeHtmlCharCodes(node.excerpt),
           }}
         />
-        <div className="read-more-container">
-          <Link to={`/post/${node.slug}`} title={node.slug}>
-            <S className="read-more">Read more</S>
+        <div>
+          <Link to={`/post/${node.slug}`} title={node.title}>
+            <S>Read more</S>
           </Link>
         </div>
       </Box>

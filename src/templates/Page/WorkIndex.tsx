@@ -4,21 +4,21 @@ import { Grid, Box } from "theme-ui"
 
 import SEO from "../../components/SEO"
 
-import StaticImage from "../../components/Image/Image"
-
-import { H, P, S, XS } from "../../components/Typography"
+import { P, XS } from "../../components/Typography"
 
 import WorkIndexTeaser from "./WorkIndexTeaser"
 
 export interface Props {
   pageContext: {
     edges: any[] // TODO: Add types
+    lang: string
   }
   location: Location
 }
 
 export default (props: Props) => {
   const { edges } = props.pageContext
+  const lang = props.pageContext.lang
 
   const { site } = useStaticQuery(graphql`
     query {
@@ -36,6 +36,7 @@ export default (props: Props) => {
       <SEO
         title={`${site.siteMetadata.title} | ${site.siteMetadata.description}`}
         description={site.siteMetadata.description}
+        lang={lang}
       />
       <Grid
         sx={{ p: [3, 4], pt: [6, 7, 8] }}
@@ -53,7 +54,7 @@ export default (props: Props) => {
               title="alle freiheit Werbeagentur GmbH"
               href="https://allefreiheit.de/"
               target="_blank"
-              rel="noreferrer noopener nofollow"
+              rel="noreferrer noopener nofollow external"
             >
               alle freiheit Werbeagentur GmbH
             </a>
@@ -66,7 +67,7 @@ export default (props: Props) => {
             title="Folienjargon"
             href="https://www.folienjargon.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             folienjargon.de
           </P>
@@ -77,7 +78,7 @@ export default (props: Props) => {
             title="beka GmbH"
             href="https://www.beka.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             beka.de
           </P>
@@ -88,7 +89,7 @@ export default (props: Props) => {
             title="alle freiheit Werbeagentur GmbH"
             href="https://allefreiheit.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             allefreiheit.de
           </P>
@@ -99,7 +100,7 @@ export default (props: Props) => {
             title="Rudolf Fuka GmbH"
             href="https://www.fuka.de/de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             fuka.de
           </P>
@@ -113,7 +114,7 @@ export default (props: Props) => {
               title="TWT reality bytes GmbH"
               href="https://www.twt-rb.de/referenzen"
               target="_blank"
-              rel="noreferrer noopener nofollow"
+              rel="noreferrer noopener nofollow external"
             >
               TWT reality bytes GmbH
             </a>
@@ -126,7 +127,7 @@ export default (props: Props) => {
             title="Covestro AG"
             href="https://www.covestro.com/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             covestro.com
           </P>
@@ -138,7 +139,7 @@ export default (props: Props) => {
             title="EIZO GmbH"
             href="https://www.eizo.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             eizo.de
           </P>
@@ -150,7 +151,7 @@ export default (props: Props) => {
             title="My Fujifilm"
             href="https://www.myfujifilm.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             myfujifilm.de
           </P>
@@ -161,7 +162,7 @@ export default (props: Props) => {
             title="Lekkerland Deutschland GmbH & Co. KG"
             href="https://www.lekkerland.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             lekkerland.de
           </P>
@@ -172,7 +173,7 @@ export default (props: Props) => {
             title="Hochschule Fresenius online plus GmbH"
             href="https://www.onlineplus.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             onlineplus.de
           </P>
@@ -183,7 +184,7 @@ export default (props: Props) => {
             title="rhenag Rheinische Energie Aktiengesellschaft"
             href="https://www.rhenag.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             rhenag.de
           </P>
@@ -194,7 +195,7 @@ export default (props: Props) => {
             title="Santander"
             href="https://www.santander.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             santander.de
           </P>
@@ -202,10 +203,10 @@ export default (props: Props) => {
         <Box>
           <P
             as="a"
-            title="Santander"
+            title="Vaillant"
             href="https://www.vaillant.de/"
             target="_blank"
-            rel="noreferrer noopener nofollow"
+            rel="noreferrer noopener nofollow external"
           >
             vaillant.de
           </P>

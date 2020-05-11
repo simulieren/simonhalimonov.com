@@ -42,6 +42,7 @@ export default (props: Props) => {
       <SEO
         title={`${site.siteMetadata.title} | ${site.siteMetadata.description}`}
         description={site.siteMetadata.description}
+        // TODO: Add lang for SEO
       />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
         <Box sx={{ gridColumn: ["1/13", "1/13", "1/10"], pb: [4, 5] }}>

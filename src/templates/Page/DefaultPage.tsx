@@ -29,6 +29,7 @@ export interface Props {
     page: {
       node: Page | Preview
     }
+    lang: string
   }
   location: Location
 }
@@ -36,6 +37,7 @@ export interface Props {
 export const DefaultPage = (props: Props) => {
   const pageContext = props?.pageContext
   const page = pageContext?.page?.node
+  const lang = pageContext?.lang
 
   const fluid: FluidObject | null =
     page?.featured_media?.localFile?.childImageSharp?.fluid || null
@@ -48,7 +50,7 @@ export const DefaultPage = (props: Props) => {
 
   return (
     <>
-      <SEO title={title} description={excerpt} />
+      <SEO title={title} description={excerpt} lang={lang} />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
         <Grid
           as="article"

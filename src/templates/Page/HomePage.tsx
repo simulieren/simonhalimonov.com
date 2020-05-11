@@ -19,16 +19,18 @@ import { Page } from "../../contracts/page"
 export interface Props {
   pageContext: {
     edges: [{ node: Page }]
+    lang: string
   }
   location: Location
 }
 
 export const Homepage = (props: Props) => {
   const workpages = props.pageContext.edges
+  const lang = props.pageContext.lang
 
   return (
     <>
-      <SEO title="Home" />
+      <SEO title="Home" lang={lang} />
 
       <Section>
         <Flex
@@ -105,154 +107,200 @@ export const Homepage = (props: Props) => {
                 top: [3, 4],
               }}
             >
-              <S as="a" href="#design" title="Design" sx={{ display: "block" }}>
-                <InviewMotion>Design</InviewMotion>
-              </S>
-              <S
-                as="a"
-                href="#development"
-                title="Development"
-                sx={{ display: "block" }}
-              >
-                <InviewMotion>Development</InviewMotion>
-              </S>
-              <S
-                as="a"
-                href="#mission"
-                title="Mission"
-                sx={{ display: "block" }}
-              >
-                <InviewMotion>Mission</InviewMotion>
-              </S>
-              <S
-                as="a"
-                href="#teaching"
-                title="Teaching"
-                sx={{ display: "block" }}
-              >
-                <InviewMotion>Teaching</InviewMotion>
-              </S>
-              <S as="a" href="#hire" title="Hire" sx={{ display: "block" }}>
-                <InviewMotion>Hire</InviewMotion>
-              </S>
+              <InviewMotion>
+                <S
+                  as="a"
+                  href="#design"
+                  title="Design"
+                  sx={{ display: "block" }}
+                >
+                  Design
+                </S>
+              </InviewMotion>
+              <InviewMotion>
+                <S
+                  as="a"
+                  href="#development"
+                  title="Development"
+                  sx={{ display: "block" }}
+                >
+                  Development
+                </S>
+              </InviewMotion>
+              <InviewMotion>
+                <S
+                  as="a"
+                  href="#mission"
+                  title="Mission"
+                  sx={{ display: "block" }}
+                >
+                  Mission
+                </S>
+              </InviewMotion>
+              <InviewMotion>
+                <S
+                  as="a"
+                  href="#teaching"
+                  title="Teaching"
+                  sx={{ display: "block" }}
+                >
+                  Teaching
+                </S>
+              </InviewMotion>
+              <InviewMotion>
+                <S as="a" href="#hire" title="Hire" sx={{ display: "block" }}>
+                  Hire
+                </S>
+              </InviewMotion>
             </Box>
           </Box>
           <Box sx={{ gridColumn: ["4/13"] }}>
-            <S
-              id="design"
-              sx={{
-                textTransform: "uppercase",
-                letterSpacing: "0.2em",
-              }}
-            >
-              <InviewMotion>Design Services</InviewMotion>
-            </S>
-            <H>
-              <InviewMotion>DIGITAL DESIGN</InviewMotion>
-            </H>
+            <InviewMotion>
+              <S
+                id="design"
+                sx={{
+                  textTransform: "uppercase",
+                  letterSpacing: "0.2em",
+                }}
+              >
+                Design Services
+              </S>
+            </InviewMotion>
+            <InviewMotion>
+              <H>DIGITAL DESIGN</H>
+            </InviewMotion>
 
-            <H>
-              <InviewMotion>
+            <InviewMotion>
+              <H>
                 I design with a focus on User Interfaces and User Experiences
                 with a systematic approach. Informed by strong technical
                 expertise.
-              </InviewMotion>
-            </H>
+              </H>
+            </InviewMotion>
 
-            <Grid columns={[3]} gap={[3, 4, 5]} mt={[3, 4, 5]}>
+            <Grid columns={[1, 2, 2, 3]} gap={[2, 2, 3, 5]} mt={[3, 4, 5]}>
+              <InviewMotion>
+                <S
+                  sx={{
+                    textTransform: "uppercase",
+                    color: "textlight",
+                    letterSpacing: "0.2em",
+                  }}
+                >
+                  Services
+                </S>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Research</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Ideation</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Concept</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Presentation</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Digital Art Direction</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>User Interface Design</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>User Experience Design</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Design Prototyping</P>
+              </InviewMotion>
+            </Grid>
+
+            <InviewMotion>
               <S
+                id="development"
                 sx={{
+                  mt: [6],
                   textTransform: "uppercase",
-                  color: "textlight",
                   letterSpacing: "0.2em",
                 }}
               >
-                <InviewMotion>Services</InviewMotion>
+                Development Services
               </S>
-              <P>
-                <InviewMotion>Research</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>Ideation</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>Concept</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>Presentation</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>User Interface Design</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>Design Prototyping</InviewMotion>
-              </P>
-            </Grid>
+            </InviewMotion>
+            <InviewMotion>
+              <H>DIGITAL DEVELOPMENT</H>
+            </InviewMotion>
 
-            <S
-              id="development"
-              sx={{
-                mt: [6],
-                textTransform: "uppercase",
-                letterSpacing: "0.2em",
-              }}
-            >
-              <InviewMotion>Development Services</InviewMotion>
-            </S>
-            <H>
-              <InviewMotion>DIGITAL DEVELOPMENT</InviewMotion>
-            </H>
-
-            <H>
-              <InviewMotion>
+            <InviewMotion>
+              <H>
                 I develop focused on a modern all rounder approach executed in
                 JavaScript for a wide variety of applications.
-              </InviewMotion>
-            </H>
+              </H>
+            </InviewMotion>
 
-            <Grid columns={[3]} gap={[3, 4, 5]} mt={[3, 4, 5]}>
+            <Grid columns={[1, 2, 2, 3]} gap={[2, 2, 3, 5]} mt={[3, 4, 5]}>
+              <InviewMotion>
+                <S
+                  sx={{
+                    textTransform: "uppercase",
+                    color: "textlight",
+                    letterSpacing: "0.2em",
+                  }}
+                >
+                  Services
+                </S>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Frontend Development</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>React.js Development</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>GatsbyJS Development</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Next.js Development</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Node.js Development</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Electron Development</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>JavaScript + TypeScript</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Performance Optimization</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Mobile Optimization</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>User Interface Animation</P>
+              </InviewMotion>
+              <InviewMotion>
+                <P>Technical Prototyping</P>
+              </InviewMotion>
+            </Grid>
+
+            <InviewMotion>
               <S
+                id="mission"
                 sx={{
+                  mt: [6],
                   textTransform: "uppercase",
-                  color: "textlight",
                   letterSpacing: "0.2em",
                 }}
               >
-                <InviewMotion>Services</InviewMotion>
+                Mission
               </S>
-              <P>
-                <InviewMotion>Research</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>Ideation</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>Concept</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>Presentation</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>User Interface Design</InviewMotion>
-              </P>
-              <P>
-                <InviewMotion>Design Prototyping</InviewMotion>
-              </P>
-            </Grid>
+            </InviewMotion>
 
-            <S
-              id="mission"
-              sx={{
-                mt: [6],
-                textTransform: "uppercase",
-                letterSpacing: "0.2em",
-              }}
-            >
-              <InviewMotion>Mission</InviewMotion>
-            </S>
-
-            <H sx={{ mt: [2] }}>
-              <InviewMotion>
+            <InviewMotion>
+              <H sx={{ mt: [2] }}>
                 As an independent Digital Product Designer and Frontend
                 Developer I conceive, design and develop digital products for
                 companies and company founders. My goal is to make technical and
@@ -261,54 +309,54 @@ export const Homepage = (props: Props) => {
                 order to bridge functionality and design, I create
                 comprehensively designed user interfaces for your website or
                 app.
-              </InviewMotion>
-            </H>
+              </H>
+            </InviewMotion>
 
-            <S
-              id="teaching"
-              sx={{
-                mt: [6],
-                textTransform: "uppercase",
-                letterSpacing: "0.2em",
-              }}
-            >
-              <InviewMotion>Teaching</InviewMotion>
-            </S>
+            <InviewMotion>
+              <S
+                id="teaching"
+                sx={{
+                  mt: [6],
+                  textTransform: "uppercase",
+                  letterSpacing: "0.2em",
+                }}
+              >
+                Teaching
+              </S>
+            </InviewMotion>
 
-            <H sx={{ mt: [2] }}>
-              <InviewMotion>
-                I teach at the Digital Career Institute.
-              </InviewMotion>
-            </H>
-            <H>
-              <InviewMotion>
+            <InviewMotion>
+              <H sx={{ mt: [2] }}>I teach at the Digital Career Institute.</H>
+            </InviewMotion>
+            <InviewMotion>
+              <H>
                 Since December 2018 I have taught over 100 participants about
                 webdevelopment. I worked together with other teachers on the
                 curriculum and taught the students how to program. From HTML,
                 CSS and JavaScript to React.js, Node.js and MongoDB I trained
                 the students to become Fullstack JavaScript Developers.
-              </InviewMotion>
-              <InviewMotion>
-                I have taught more than 1200 hours in the classroom and have
-                given 20 workshops in three different cities in Germany. I teach
-                on “Fullstack JavaScript Development” and “Design for
+                <br></br>I have taught more than 1200 hours in the classroom and
+                have given 20 workshops in three different cities in Germany. I
+                teach on “Fullstack JavaScript Development” and “Design for
                 Developers”.
-              </InviewMotion>
-            </H>
+              </H>
+            </InviewMotion>
 
-            <P
-              id="hire"
-              sx={{
-                textTransform: "uppercase",
-                mt: [6],
-              }}
-            >
-              <InviewMotion>Hire me</InviewMotion>
-            </P>
+            <InviewMotion>
+              <P
+                id="hire"
+                sx={{
+                  textTransform: "uppercase",
+                  mt: [6],
+                }}
+              >
+                Hire me
+              </P>
+            </InviewMotion>
 
-            <H sx={{ mt: [2] }}>
-              <InviewMotion>How I can help you</InviewMotion>
-            </H>
+            <InviewMotion>
+              <H sx={{ mt: [2] }}>How I can help you</H>
+            </InviewMotion>
 
             <InviewMotion>
               <Flex>

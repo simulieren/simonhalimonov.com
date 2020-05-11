@@ -68,7 +68,7 @@ export const Footer = ({ lang }: Props) => {
                     sx={{ py: [2] }}
                     href={site.siteMetadata.social.github}
                     target="_blank"
-                    rel="noreferrer noopener nofollow"
+                    rel="noreferrer noopener nofollow external"
                     title="github"
                   >
                     Github
@@ -81,7 +81,7 @@ export const Footer = ({ lang }: Props) => {
                     sx={{ py: [2] }}
                     href={site.siteMetadata.social.twitter}
                     target="_blank"
-                    rel="noreferrer noopener nofollow"
+                    rel="noreferrer noopener nofollow external"
                     title="twitter"
                   >
                     Twitter
@@ -94,7 +94,7 @@ export const Footer = ({ lang }: Props) => {
                     sx={{ py: [2] }}
                     href={site.siteMetadata.social.linkedin}
                     target="_blank"
-                    rel="noreferrer noopener nofollow"
+                    rel="noreferrer noopener nofollow external"
                     title="linkedin"
                   >
                     LinkedIn
@@ -107,7 +107,7 @@ export const Footer = ({ lang }: Props) => {
                     sx={{ py: [2] }}
                     href={`mailto:${site.siteMetadata.social.email}`}
                     target="_blank"
-                    rel="noreferrer noopener nofollow"
+                    rel="noreferrer noopener nofollow external"
                     title="mail"
                   >
                     E-Mail

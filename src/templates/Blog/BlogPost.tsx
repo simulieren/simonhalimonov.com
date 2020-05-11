@@ -57,6 +57,7 @@ export const BlogPostPage = (props: Props) => {
       <SEO
         title={props.data.wordpressPost.title}
         description={props.data.wordpressPost.excerpt}
+        // TODO: Add lang for SEO
       />
       <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
         <Box

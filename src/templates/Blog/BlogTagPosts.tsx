@@ -1,15 +1,13 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import { Flex, Box, Grid } from "theme-ui"
+import { Box, Grid } from "theme-ui"
 
 import SEO from "../../components/SEO"
 
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar"
 
-import H from "../../components/Typography/H"
-import P from "../../components/Typography/P"
-import S from "../../components/Typography/S"
+import { H } from "../../components/Typography"
 
 import BlogPostTeaser from "./BlogPostTeaser"
 
@@ -42,6 +40,7 @@ export const BlogTagPostsPage = (props: Props) => {
       <SEO
         title={`${site.siteMetadata.title} | ${site.siteMetadata.description}`}
         description={site.siteMetadata.description}
+        // TODO: Add lang for SEO
       />
       <Grid
         sx={{ p: [3, 4], pt: [6, 7, 8] }}
