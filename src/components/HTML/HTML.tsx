@@ -58,7 +58,7 @@ const options: HTMLReactParserOptions = {
   replace: ({ attribs, children, name, ...rest }: DomElement) => {
     const maxWidth = ["100%", "800px"]
     const mx = [3, 4]
-    const px = [3, 4]
+    const px = [0]
 
     // This fixes a weird bug where the base64 image doesn't
     // disappear when img scrolled into view

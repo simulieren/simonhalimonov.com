@@ -58,6 +58,9 @@ export class Layout extends Component<Props> {
               "&:visited, &:link, a:active, a:hover": {
                 color: theme.colors.text,
               },
+              "&:hover": {
+                opacity: 0.5,
+              },
             },
             kbd: {
               border: "1px solid transparent",
@@ -81,9 +84,6 @@ export class Layout extends Component<Props> {
             a: {
               color: "text",
               textDecoration: "underline",
-              "&:hover": {
-                opacity: 0.5,
-              },
             },
           }}
         >
@@ -93,7 +93,9 @@ export class Layout extends Component<Props> {
           />
           <ParallaxProvider>
             <Transition location={this.props.location}>
-              <main>{this.props.children}</main>
+              <Box sx={{ display: "flex", flexDirection: "column" }} as="main">
+                {this.props.children}
+              </Box>
               <Footer lang={this.props.pageContext.lang} />
             </Transition>
           </ParallaxProvider>
