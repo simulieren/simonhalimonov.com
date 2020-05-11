@@ -309,7 +309,7 @@ const options: HTMLReactParserOptions = {
               width: "auto",
               py: [2],
               my: 2,
-              px,
+              px: [3, 4],
               border: "1px solid transparent",
               borderColor: "text",
               cursor: "pointer",
