@@ -47,7 +47,9 @@ export default (props: Props) => {
   const { parallaxController } = useController()
 
   useInterval(() => {
-    parallaxController.update()
+    if (typeof parallaxController !== "undefined") {
+      parallaxController?.update()
+    }
   }, 200)
 
   return (
