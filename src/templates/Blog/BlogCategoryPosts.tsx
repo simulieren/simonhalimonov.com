@@ -15,16 +15,17 @@ import { Post, InstagramFeed } from "../../contracts/post"
 import { capitalizeFirstLetter } from "../../utils"
 
 export interface Props {
-  pathContext: {
+  pageContext: {
     group: { node: Post }[]
     allInstaNode: InstagramFeed
     slug: string
+    lang: string
   }
   location: Location
 }
 
 export const BlogCategoryPostsPage = (props: Props) => {
-  const { group } = props.pathContext
+  const { group, lang } = props.pageContext
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -40,7 +41,7 @@ export const BlogCategoryPostsPage = (props: Props) => {
       <SEO
         title={`${site.siteMetadata.title} | ${site.siteMetadata.description}`}
         description={site.siteMetadata.description}
-        // TODO: Add lang for SEO
+        lang={lang}
       />
       <Grid
         sx={{ p: [3, 4], pt: [6, 7, 8] }}
@@ -60,7 +61,7 @@ export const BlogCategoryPostsPage = (props: Props) => {
           >
             <H as="h3">
               Browsing Category Posts:{" "}
-              {capitalizeFirstLetter(props.pathContext.slug)}
+              {capitalizeFirstLetter(props.pageContext.slug)}
             </H>
           </Box>
           {group.map(BlogPostTeaser)}

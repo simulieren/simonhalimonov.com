@@ -13,12 +13,19 @@ module.exports = {
     title: `Simon Halimonov`,
     description: `Portfolio and Blog about UI/UX Design and Development`,
     author: `@SimonHalimonov`,
-    siteUrl: `http://localhost:8000`,
+    siteUrl: `https://simonhalimonov.com`,
     social: {
       twitter: "https://www.twitter.com/SimonHalimonov",
       email: "hello@simonhalimonov.de",
       linkedin: "https://www.linkedin.com/in/simon-halimonov-745431181/",
       github: "https://github.com/simulieren",
+    },
+    seo: {
+      // Use a landscape image at 1200 x 630 (1.9:1)
+      OpenGraphImage: "static/og-image-1200-630.png",
+      // Use 2:1 aspect ratio (eg: 1200 x 600 pixels)
+      TwitterCardImage: "static/twitter-image-1200-600.png",
+      logoImage: "static/logo.png",
     },
     languages: {
       // Define the default language
@@ -73,7 +80,6 @@ module.exports = {
               baseUrl: `${process.env.GATSBY_WORDPRESS_URL_PATH}`,
               protocol: `${process.env.GATSBY_WORDPRESS_URL_PROTOCOL}`,
               maxWidth: 1920,
-              // maxHeight: 1080,
               quality: 85,
               withWebp: true,
             },
@@ -124,21 +130,24 @@ module.exports = {
     },
     "gatsby-plugin-robots-txt",
     "gatsby-plugin-advanced-sitemap",
-    {
-      resolve: "gatsby-plugin-offline",
-      // Disabled for now
-      // options: {
-      //   precachePages: [
-      //     "",
-      //     "/posts/*",
-      //     "/post/*",
-      //     "/tag/*",
-      //     "/category/*",
-      //     "/about",
-      //     "/work/*",
-      //     "/work",
-      //   ],
-      // },
-    },
+    // Disable offline support for now
+    // Offline support is not necessary for a small site or blog
+    // It can cause bugs with other plugins and scripts
+    // {
+    //   resolve: "gatsby-plugin-offline",
+    //   // Disabled for now
+    //   // options: {
+    //   //   precachePages: [
+    //   //     "",
+    //   //     "/posts/*",
+    //   //     "/post/*",
+    //   //     "/tag/*",
+    //   //     "/category/*",
+    //   //     "/about",
+    //   //     "/work/*",
+    //   //     "/work",
+    //   //   ],
+    //   // },
+    // },
   ],
 }
