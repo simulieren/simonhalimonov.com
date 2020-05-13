@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Grid, Box } from "theme-ui"
 import { motion } from "framer-motion"
 import { useController } from "react-scroll-parallax"
+
 import useInterval from "../../utils/useInterval"
 
 import SEO from "../../components/SEO"

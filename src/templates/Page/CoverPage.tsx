@@ -3,6 +3,9 @@ import { Box, Grid } from "theme-ui"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
 import { motion } from "framer-motion"
+import { Parallax, useController } from "react-scroll-parallax"
+
+import useInterval from "../../utils/useInterval"
 
 import StaticImage from "../../components/Image/Image"
 
@@ -55,6 +58,12 @@ export const CoverPage = (props: Props) => {
   const excerpt = page?.excerpt || page?.post_excerpt
 
   const content = page?.content || page?.post_content
+
+  const { parallaxController } = useController()
+
+  useInterval(() => {
+    parallaxController.update()
+  }, 200)
 
   return (
     <>
@@ -130,9 +139,11 @@ export const CoverPage = (props: Props) => {
                 },
               }}
             >
-              {fluid && fluid?.src?.length > 0 && (
-                <Image fluid={fluid} alt={title} title={title} />
-              )}
+              <Parallax y={[-10, 10]}>
+                {fluid && fluid?.src?.length > 0 && (
+                  <Image fluid={fluid} alt={title} title={title} />
+                )}
+              </Parallax>
             </Box>
           </Box>
 
