@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { Grid, Box, useColorMode } from "theme-ui"
+import { Box, useColorMode, Flex } from "theme-ui"
 import { Sun, Moon } from "react-feather"
 import { motion } from "framer-motion"
 
@@ -24,7 +24,7 @@ interface MenuNode {
 }
 
 const MenuItem = ({ title, url }: MenuNode["node"]["items"][0]) => (
-  <XS>
+  <XS sx={{ mr: [3, 4, 5], "& a": { textDecoration: "none" } }}>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -146,7 +146,7 @@ export const Header = ({ lang }: Props) => {
   }, [colorMode])
 
   return (
-    <Grid
+    <Flex
       sx={{
         p: [3, 4],
         alignItems: "center",
@@ -154,12 +154,11 @@ export const Header = ({ lang }: Props) => {
         zIndex: 100,
         width: "100%",
       }}
-      columns={[4, 4, 12]}
-      gap={[3, 4, 5]}
     >
       <Link to={homepageLink.url} title={homepageLink.title}>
         <Box
           sx={{
+            mr: [3, 4, 5],
             "svg path": { fill: "text" },
           }}
         >
@@ -204,7 +203,7 @@ export const Header = ({ lang }: Props) => {
           </motion.div>
         )}
       </XS>
-    </Grid>
+    </Flex>
   )
 }
 
