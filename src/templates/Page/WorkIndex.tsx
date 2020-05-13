@@ -1,24 +1,36 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Grid, Box } from "theme-ui"
+import { motion } from "framer-motion"
+import { useController } from "react-scroll-parallax"
+import useInterval from "../../utils/useInterval"
 
 import SEO from "../../components/SEO"
 
-import { P, XS } from "../../components/Typography"
+import { XL, P, XS } from "../../components/Typography"
 
 import WorkIndexTeaser from "./WorkIndexTeaser"
 
+import { Page } from "../../contracts/page"
+
 export interface Props {
   pageContext: {
-    edges: any[] // TODO: Add types
+    edges: [{ node: Page }]
+    page: { node: Page }
     lang: string
   }
   location: Location
 }
 
 export default (props: Props) => {
-  const { edges } = props.pageContext
+  const {
+    edges,
+    page: { node: page },
+  } = props.pageContext
+
   const lang = props.pageContext.lang
+
+  const date = page.modified || page.date
 
   const { site } = useStaticQuery(graphql`
     query {
@@ -31,19 +43,46 @@ export default (props: Props) => {
     }
   `)
 
+  const { parallaxController } = useController()
+
+  useInterval(() => {
+    parallaxController.update()
+  }, 200)
+
   return (
     <>
       <SEO
         title={`${site.siteMetadata.title} | ${site.siteMetadata.description}`}
         description={site.siteMetadata.description}
         lang={lang}
+        datePublished={date}
       />
       <Grid
-        sx={{ p: [3, 4], pt: [6, 7, 8] }}
+        sx={{ p: [3, 4], pt: [6, 7, 8], overflowX: "hidden" }}
         gap={[3, 4, 5]}
-        columns={[1, "1fr 1fr"]}
+        columns={[1]}
       >
-        {edges.map(WorkIndexTeaser)}
+        <Box sx={{ mb: ["-35vmin"] }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              y: ["38vmin", "-38vmin"],
+            }}
+            transition={{ duration: 2, ease: [0.33, 1, 0.68, 1] }}
+          >
+            <XL>{page.title}</XL>
+          </motion.div>
+        </Box>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: [0, 1],
+          }}
+          transition={{ duration: 2, delay: 1, ease: [0.33, 1, 0.68, 1] }}
+        >
+          {edges.map(WorkIndexTeaser)}
+        </motion.div>
       </Grid>
       <Grid sx={{ p: [3, 4] }} gap={[3, 4, 5]} columns={[2, 4]}>
         <Box sx={{ gridColumn: ["1/3", "1/5"] }}>

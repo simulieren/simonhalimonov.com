@@ -18,13 +18,22 @@ const createPages: GatsbyNode["createPages"] = async ({
 }) => {
   const { createPage } = actions
 
-  // Get all Blog template paths
+  // Get all template paths for post related pages
+
+  // TODO: Remove this template and use default
   const BlogPostTemplate = resolve("./src/templates/Blog/BlogPost.tsx")
   const BlogPostsTemplate = resolve("./src/templates/Blog/BlogPosts.tsx")
   const BlogTagPostsTemplate = resolve("./src/templates/Blog/BlogTagPosts.tsx")
   const BlogCategoryPostsTemplate = resolve(
     "./src/templates/Blog/BlogCategoryPosts.tsx"
   )
+
+  // Get all templates paths for page related pages
+  const DefaultPage = resolve("./src/templates/Page/DefaultPage.tsx")
+  const HomePage = resolve("./src/templates/Page/HomePage.tsx")
+  const FullWidthPage = resolve("./src/templates/Page/FullWidthPage.tsx")
+  const CoverPage = resolve("./src/templates/Page/CoverPage.tsx")
+  const WorkIndexTemplate = resolve("./src/templates/Page/WorkIndex.tsx")
 
   const BlogPostsResult = await graphql<{
     allWordpressPost: { edges: [{ node: Post }] }
@@ -42,6 +51,7 @@ const createPages: GatsbyNode["createPages"] = async ({
             wordpress_id
             title
             excerpt
+            polylang_current_lang
             date(formatString: "MMMM DD, YYYY")
             modified(formatString: "MMMM DD, YYYY")
             author {
@@ -133,7 +143,10 @@ const createPages: GatsbyNode["createPages"] = async ({
   `)
 
   if (BlogPostsResult.errors) {
-    reporter.panicOnBuild("Error while running GraphQL query.")
+    reporter.panicOnBuild(
+      "Error while running GraphQL query on: BlogPostsResult"
+    )
+    console.error(BlogPostsResult.errors)
     return
   }
 
@@ -141,11 +154,13 @@ const createPages: GatsbyNode["createPages"] = async ({
 
   BlogPosts?.forEach((post, index: number) => {
     createPage({
+      // FIXME: Use path from WordPress to support multiple languages
       path: `/post/${post.node.slug}`,
       component: BlogPostTemplate,
       context: {
         id: post.node.wordpress_id,
         slug: post.node.slug,
+        lang: post.node.polylang_current_lang || "en",
         previous: index === 0 ? null : BlogPosts[index - 1].node,
         next: index === BlogPosts.length - 1 ? null : BlogPosts[index + 1].node,
       },
@@ -190,6 +205,7 @@ const createPages: GatsbyNode["createPages"] = async ({
         path: `/tag/${BlogTagSlug}`,
         component: BlogTagPostsTemplate,
         context: {
+          // FIXME: Add lang
           group: BlogTagPosts.get(BlogTagSlug),
           slug: BlogTagSlug,
           allInstaNode: BlogPostsResult?.data?.allInstaNode,
@@ -204,6 +220,7 @@ const createPages: GatsbyNode["createPages"] = async ({
         path: `/category/${BlogCategorySlug}`,
         component: BlogCategoryPostsTemplate,
         context: {
+          // FIXME: Add lang
           group: BlogCategoryPosts.get(BlogCategorySlug),
           slug: BlogCategorySlug,
           allInstaNode: BlogPostsResult?.data?.allInstaNode,
@@ -219,18 +236,10 @@ const createPages: GatsbyNode["createPages"] = async ({
     pageLength: 2,
     pathPrefix: "posts",
     context: {
+      // FIXME: Add lang
       allInstaNode: BlogPostsResult?.data?.allInstaNode,
     },
   })
-
-  /**
-   * Get all template directories necessary for rendering pages
-   */
-  const DefaultPage = resolve("./src/templates/Page/DefaultPage.tsx")
-  const HomePage = resolve("./src/templates/Page/HomePage.tsx")
-  const FullWidthPage = resolve("./src/templates/Page/FullWidthPage.tsx")
-  const CoverPage = resolve("./src/templates/Page/CoverPage.tsx")
-  const WorkIndexTemplate = resolve("./src/templates/Page/WorkIndex.tsx")
 
   /**
    * Query all pages and then render them
@@ -277,7 +286,8 @@ const createPages: GatsbyNode["createPages"] = async ({
   `)
 
   if (PagesResult.errors) {
-    reporter.panicOnBuild("Error while running GraphQL query.")
+    reporter.panicOnBuild("Error while running GraphQL query on: PagesResult")
+    console.error(PagesResult.errors)
     return
   }
 
