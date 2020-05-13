@@ -62,7 +62,7 @@ export const CoverPage = (props: Props) => {
   const { parallaxController } = useController()
 
   useInterval(() => {
-    if (typeof parallaxController !== "undefined") {
+    if (typeof window !== "undefined") {
       parallaxController?.update()
     }
   }, 200)
