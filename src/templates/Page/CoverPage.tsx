@@ -11,7 +11,6 @@ import StaticImage from "../../components/Image/Image"
 
 import SEO from "../../components/SEO"
 
-// import Comments from "../../components/Comments"
 import HTML from "../../components/HTML/HTML"
 
 import H from "../../components/Typography/H"
