@@ -220,6 +220,9 @@ const options: HTMLReactParserOptions = {
               mb: [3, 4],
               mx: [-20, -40],
               "& ul": {
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
                 overflowX: "scroll",
                 maxWidth: "none",
                 display: "flex",
