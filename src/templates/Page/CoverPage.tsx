@@ -59,12 +59,15 @@ export const CoverPage = (props: Props) => {
 
   const content = page?.content || page?.post_content
 
-  const { parallaxController } = useController()
+  const { parallaxController } =
+    typeof window !== "undefined"
+      ? useController()
+      : { parallaxController: null }
 
   useInterval(() => {
-    if (typeof window !== "undefined") {
-      parallaxController?.update()
-    }
+    if (typeof parallaxController === null) return
+
+    parallaxController?.update()
   }, 200)
 
   return (
