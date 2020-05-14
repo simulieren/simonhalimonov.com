@@ -148,8 +148,13 @@ export const Homepage = (props: Props) => {
                 </S>
               </InviewMotion>
               <InviewMotion>
-                <S as="a" href="#hire" title="Hire" sx={{ display: "block" }}>
-                  Hire
+                <S
+                  as="a"
+                  href="#services"
+                  title="Services"
+                  sx={{ display: "block" }}
+                >
+                  Services
                 </S>
               </InviewMotion>
             </Box>
@@ -172,9 +177,9 @@ export const Homepage = (props: Props) => {
 
             <InviewMotion>
               <H>
-                I design with a focus on User Interfaces and User Experiences
-                with a systematic approach. Informed by strong technical
-                expertise.
+                I design with a systematic approach and technical expertise. I
+                focus on User Interfaces and User Experience to give your
+                product a logical, maneuverable feel.
               </H>
             </InviewMotion>
 
@@ -234,8 +239,8 @@ export const Homepage = (props: Props) => {
 
             <InviewMotion>
               <H>
-                I develop focused on a modern all rounder approach executed in
-                JavaScript for a wide variety of applications.
+                I develop digital products with a modern, full-service approach
+                for a variety of applications.
               </H>
             </InviewMotion>
 
@@ -302,13 +307,20 @@ export const Homepage = (props: Props) => {
             <InviewMotion>
               <H sx={{ mt: [2] }}>
                 As an independent Digital Product Designer and Frontend
-                Developer I conceive, design and develop digital products for
-                companies and company founders. My goal is to make technical and
-                complex processes user-friendly. For cross-platform solutions, I
-                work with proven processes and state-of-the-art technology. In
-                order to bridge functionality and design, I create
-                comprehensively designed user interfaces for your website or
-                app.
+                Developer, I conceive, design and develop digital products for a
+                range of companies. I come to your projects with the artistry of
+                a innovative designer and the technical facility of an
+                experienced programmer.
+              </H>
+            </InviewMotion>
+
+            <InviewMotion>
+              <H sx={{ mt: [2] }}>
+                I’m here to take those complex digital processes your business
+                relies on, and make them user-friendly. For cross-platform
+                solutions, I work with state-of-the-art technology that bridges
+                functionality and design to give you the most attractive and
+                comprehensive interfaces for your website or app.
               </H>
             </InviewMotion>
 
@@ -321,62 +333,71 @@ export const Homepage = (props: Props) => {
                   letterSpacing: "0.2em",
                 }}
               >
-                Teaching
+                Background
               </S>
             </InviewMotion>
 
             <InviewMotion>
-              <H sx={{ mt: [2] }}>I teach at the Digital Career Institute.</H>
+              <H sx={{ mt: [2] }}>
+                As a remote worker for the last two years, I partner with a
+                variety of clients based in Germany, Switzerland, France and
+                other parts of the world.
+              </H>
             </InviewMotion>
             <InviewMotion>
               <H>
-                Since December 2018 I have taught over 100 participants about
-                webdevelopment. I worked together with other teachers on the
-                curriculum and taught the students how to program. From HTML,
-                CSS and JavaScript to React.js, Node.js and MongoDB I trained
-                the students to become Fullstack JavaScript Developers.
-                <br></br>I have taught more than 1200 hours in the classroom and
-                have given 20 workshops in three different cities in Germany. I
-                teach on “Fullstack JavaScript Development” and “Design for
-                Developers”.
+                As a teacher at the Digital Career Institute, I logged over 1200
+                classroom hours instructing students how to program.
+              </H>
+            </InviewMotion>
+            <InviewMotion>
+              <H>
+                Beginning in December 2018, I’ve taught a web development
+                curriculum I helped to devise that includes in-depth lesson on
+                “Fullstack JavaScript Development” and “Design for Developers”.
               </H>
             </InviewMotion>
 
             <InviewMotion>
               <P
-                id="hire"
+                id="services"
                 sx={{
                   textTransform: "uppercase",
                   mt: [6],
                 }}
               >
-                Hire me
+                Services
               </P>
             </InviewMotion>
 
             <InviewMotion>
-              <H sx={{ mt: [2] }}>How I can help you</H>
+              <H sx={{ mt: [2] }}>My services</H>
             </InviewMotion>
 
             <InviewMotion>
               <Flex>
                 <H sx={{ mr: [4] }}>1.</H>
                 <H>
-                  I plan, conceive, design and realize your digital project.
+                  I can help your team plan, conceive, design and realize a
+                  specific digital project.
                 </H>
               </Flex>
             </InviewMotion>
             <InviewMotion>
               <Flex>
                 <H sx={{ mr: [4] }}>2.</H>
-                <H>I support your team with my competences in your project.</H>
+                <H>
+                  I can support your team’s existing digital project by
+                  providing consultation, guidance, and advisement.
+                </H>
               </Flex>
             </InviewMotion>
             <InviewMotion>
               <Flex>
                 <H sx={{ mr: [4] }}>3.</H>
                 <H>
-                  I'm giving her team a workshop to take you to the next level.
+                  I can lead a workshop that will take your programming team’s
+                  digital skill set to the next level.
                 </H>
               </Flex>
             </InviewMotion>
@@ -384,8 +405,8 @@ export const Homepage = (props: Props) => {
               <Flex>
                 <H sx={{ mr: [4] }}>4.</H>
                 <H>
-                  I'm talking about current topics in the field of design and
-                  development at your event.
+                  I can speak at your upcoming event, and educate an audience on
+                  current topics in the field of design and development.
                 </H>
               </Flex>
             </InviewMotion>
