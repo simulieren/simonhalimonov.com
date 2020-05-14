@@ -89,7 +89,7 @@ export const Homepage = (props: Props) => {
     <>
       <SEO title="Home" lang={lang} />
 
-      <Header />
+      {/* <Header /> */}
 
       <Box
         sx={{
