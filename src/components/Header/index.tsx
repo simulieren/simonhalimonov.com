@@ -148,10 +148,12 @@ export const Header = ({ lang }: Props) => {
   }, [colorMode])
 
   return (
-    <Flex
-      style={{ display: "flex" }}
+    <Box
+      as="header"
+      className="header"
       sx={{
         p: [3, 4],
+        display: "flex",
         alignItems: "center",
         position: "absolute",
         zIndex: 100,
@@ -206,7 +208,7 @@ export const Header = ({ lang }: Props) => {
           </motion.div>
         )}
       </XS>
-    </Flex>
+    </Box>
   )
 }
 
