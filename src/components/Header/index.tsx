@@ -150,7 +150,6 @@ export const Header = ({ lang }: Props) => {
   return (
     <Box
       as="header"
-      className="header"
       sx={{
         p: [3, 4],
         display: "flex",
