@@ -24,7 +24,7 @@ interface MenuNode {
 }
 
 const MenuItem = ({ title, url }: MenuNode["node"]["items"][0]) => (
-  <XS sx={{ mr: [3, 4, 5], "& a": { textDecoration: "none" } }}>
+  <XS sx={{ mr: [4, 4, 5], "& a": { textDecoration: "none" } }}>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -158,7 +158,7 @@ export const Header = ({ lang }: Props) => {
       <Link to={homepageLink.url} title={homepageLink.title}>
         <Box
           sx={{
-            mr: [3, 4, 5],
+            mr: [4, 4, 5],
             "svg path": { fill: "text" },
           }}
         >

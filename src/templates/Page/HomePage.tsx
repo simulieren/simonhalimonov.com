@@ -15,7 +15,7 @@ import Section from "../../components/Layout/Section"
 import { Page } from "../../contracts/page"
 
 export const VennDiagram = () => {
-  const size = "40vw"
+  const size = "35vw"
   const overlap = "-8vw"
   return (
     <motion.div
@@ -91,10 +91,13 @@ export const Homepage = (props: Props) => {
       <Box
         sx={{
           mb: ["-35vmin"],
+          width: "100%",
+          overflow: "hidden",
           zIndex: 100,
           position: "absolute",
           left: "50%",
           transform: "translateX(-50%)",
+          pointerEvents: "none",
         }}
       >
         <motion.div
@@ -304,6 +307,8 @@ export const Homepage = (props: Props) => {
                 minHeight: "55vw",
                 display: "flex",
                 alignItems: "center",
+                overflow: "hidden",
+                width: "100%",
               }}
             >
               <VennDiagram />

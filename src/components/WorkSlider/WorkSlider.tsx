@@ -150,7 +150,7 @@ export default (props: Props) => {
   return (
     <Box
       sx={{
-        width: ["100vw", "100vw", "100vw", "50vw"],
+        width: ["100%", "100%", "100%", "50vw"],
         height: ["70vh", "100vh"],
         // TODO: Check with other images
         background:
@@ -179,7 +179,7 @@ export default (props: Props) => {
             )
         )}
       </AnimatePresence>
-      <BlockSlider
+      {/* <BlockSlider
         initial={{ scaleX: 1 }}
         animate={{ scaleX: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
@@ -188,7 +188,7 @@ export default (props: Props) => {
             backgroundColor: "#000",
           },
         }}
-      />
+      /> */}
     </Box>
   )
 }
