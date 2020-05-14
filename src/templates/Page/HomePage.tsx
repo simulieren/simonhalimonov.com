@@ -4,9 +4,7 @@ import { motion } from "framer-motion"
 
 import SEO from "../../components/SEO"
 
-import H from "../../components/Typography/H"
-import P from "../../components/Typography/P"
-import S from "../../components/Typography/S"
+import { XL, H, P, S } from "../../components/Typography"
 
 import InviewMotion from "../../components/InviewMotion/InviewMotion"
 
@@ -15,6 +13,64 @@ import { AnimateWords } from "../../components/AnimateWords/AnimateWords"
 import Section from "../../components/Layout/Section"
 
 import { Page } from "../../contracts/page"
+
+export const VennDiagram = () => {
+  const size = "40vw"
+  const overlap = "-8vw"
+  return (
+    <motion.div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        transformOrigin: "center",
+      }}
+      animate={{ rotate: 360 }}
+      transition={{ duration: 20, loop: Infinity, ease: "linear" }}
+    >
+      <motion.div
+        style={{
+          width: size,
+          height: size,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: "50%",
+          border: "1px solid #fff",
+          position: "relative",
+          right: overlap,
+        }}
+      >
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 20, loop: Infinity, ease: "linear" }}
+        >
+          <S>Design</S>
+        </motion.div>
+      </motion.div>
+      <motion.div
+        style={{
+          width: size,
+          height: size,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: "50%",
+          border: "1px solid #fff",
+          position: "relative",
+          left: overlap,
+        }}
+      >
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 20, loop: Infinity, ease: "linear" }}
+        >
+          <S>Development</S>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  )
+}
 
 export interface Props {
   pageContext: {
@@ -31,6 +87,27 @@ export const Homepage = (props: Props) => {
   return (
     <>
       <SEO title="Home" lang={lang} />
+
+      <Box
+        sx={{
+          mb: ["-35vmin"],
+          zIndex: 100,
+          position: "absolute",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            y: ["24vmin", "-24vmin"],
+          }}
+          transition={{ duration: 2, ease: [0.33, 1, 0.68, 1] }}
+        >
+          <XL>{"Welcome"}</XL>
+        </motion.div>
+      </Box>
 
       <Section>
         <Flex
@@ -57,14 +134,14 @@ export const Homepage = (props: Props) => {
               transition={{ duration: 1, delay: 0.3 }}
             >
               <H>
-                Simon Halimonov <br />
+                <em>Simon Halimonov</em> <br />
                 I'm a <AnimateWords /> <br />
               </H>
 
               <Box
                 as="a"
                 href="#design"
-                sx={{ mt: [3, 4, 5, 6], display: "block" }}
+                sx={{ mt: [3, 4, 5, 6], display: ["none", "none", "block"] }}
               >
                 <motion.div
                   animate={{ y: [0, 10, 0] }}
@@ -220,6 +297,17 @@ export const Homepage = (props: Props) => {
                 <P>Design Prototyping</P>
               </InviewMotion>
             </Grid>
+
+            <Box
+              sx={{
+                my: [3, 4, 5],
+                minHeight: "55vw",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <VennDiagram />
+            </Box>
 
             <InviewMotion>
               <S

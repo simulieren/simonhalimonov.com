@@ -24,9 +24,9 @@ interface ItemProps {
 
 const BlockSlider = ({ sx, ...rest }) => {
   const sxDefault = {
+    pointerEvents: "none",
     zIndex: 100,
     position: "absolute",
-    pointerEvents: "none",
     left: "0px",
     right: "0px",
     top: "0px",
@@ -106,19 +106,23 @@ const WorkSliderItem = ({ data, current, index, time }: ItemProps) => (
           transition={{ duration: 1 }}
           style={{ position: "relative", zIndex: 10 }}
         >
-          <Parallax y={[-10, 10]}>
-            {data?.featured_media?.localFile?.childImageSharp?.fluid?.src
-              ?.length > 0 && (
-              <Image
-                fluid={data?.featured_media?.localFile?.childImageSharp?.fluid}
-              />
-            )}
-          </Parallax>
+          <Link to={data?.path}>
+            <Parallax y={[-10, 10]}>
+              {data?.featured_media?.localFile?.childImageSharp?.fluid?.src
+                ?.length > 0 && (
+                <Image
+                  fluid={
+                    data?.featured_media?.localFile?.childImageSharp?.fluid
+                  }
+                />
+              )}
+            </Parallax>
+          </Link>
         </motion.div>
       )}
       {current === index && (
         <BlockSlider
-          sx={{ top: "auto", height: "2px" }}
+          sx={{ top: "auto", height: "2px", pointerEvents: "none" }}
           initial={{ scaleX: 1 }}
           animate={{ scaleX: 0 }}
           transition={{ duration: time / 1000 }}
@@ -179,6 +183,11 @@ export default (props: Props) => {
         initial={{ scaleX: 1 }}
         animate={{ scaleX: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
+        sx={{
+          "& > div": {
+            backgroundColor: "#000",
+          },
+        }}
       />
     </Box>
   )
