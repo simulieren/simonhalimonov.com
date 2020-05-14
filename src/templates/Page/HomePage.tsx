@@ -140,11 +140,11 @@ export const Homepage = (props: Props) => {
               <InviewMotion>
                 <S
                   as="a"
-                  href="#teaching"
-                  title="Teaching"
+                  href="#background"
+                  title="Background"
                   sx={{ display: "block" }}
                 >
-                  Teaching
+                  background
                 </S>
               </InviewMotion>
               <InviewMotion>
@@ -326,7 +326,7 @@ export const Homepage = (props: Props) => {
 
             <InviewMotion>
               <S
-                id="teaching"
+                id="background"
                 sx={{
                   mt: [6],
                   textTransform: "uppercase",
