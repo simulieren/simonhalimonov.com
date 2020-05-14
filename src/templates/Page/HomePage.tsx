@@ -144,7 +144,7 @@ export const Homepage = (props: Props) => {
                   title="Background"
                   sx={{ display: "block" }}
                 >
-                  background
+                  Background
                 </S>
               </InviewMotion>
               <InviewMotion>
