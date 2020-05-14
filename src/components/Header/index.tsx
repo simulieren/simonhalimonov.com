@@ -156,7 +156,7 @@ export const Header = ({ lang }: Props) => {
         display: "flex",
         alignItems: "center",
         position: "absolute",
-        zIndex: 100,
+        zIndex: 1000,
         width: "100%",
       }}
     >
