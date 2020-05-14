@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
 import React, { Component, RefObject, createRef } from "react"
 import { Global } from "@emotion/core"
 import { ParallaxProvider } from "react-scroll-parallax"
