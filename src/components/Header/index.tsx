@@ -149,6 +149,7 @@ export const Header = ({ lang }: Props) => {
 
   return (
     <Flex
+      style={{ display: "flex" }}
       sx={{
         p: [3, 4],
         alignItems: "center",
