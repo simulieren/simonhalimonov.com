@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui"
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { Box, useColorMode, Flex } from "theme-ui"
+import { Box, useColorMode } from "theme-ui"
 import { Sun, Moon } from "react-feather"
 import { motion } from "framer-motion"
 
