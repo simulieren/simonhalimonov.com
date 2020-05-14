@@ -76,30 +76,31 @@ export class Layout extends Component<Props> {
             },
           })}
         />
-        <Box
-          ref={this.target}
-          sx={{
-            backgroundColor: "background",
-            transition: "background-color .1s ease",
-            a: {
-              color: "text",
-              textDecoration: "underline",
-            },
-          }}
-        >
-          <Header
-            location={this.props.location}
-            lang={this.props.pageContext.lang}
-          />
-          <ParallaxProvider>
+        <ParallaxProvider>
+          <Box
+            ref={this.target}
+            sx={{
+              backgroundColor: "background",
+              transition: "background-color .1s ease",
+              a: {
+                color: "text",
+                textDecoration: "underline",
+              },
+            }}
+          >
+            <Header
+              location={this.props.location}
+              lang={this.props.pageContext.lang}
+            />
+
             <Transition location={this.props.location}>
               <Box sx={{ display: "flex", flexDirection: "column" }} as="main">
                 {this.props.children}
               </Box>
               <Footer lang={this.props.pageContext.lang} />
             </Transition>
-          </ParallaxProvider>
-        </Box>
+          </Box>
+        </ParallaxProvider>
       </>
     )
   }

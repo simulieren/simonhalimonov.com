@@ -464,10 +464,6 @@ export const Homepage = (props: Props) => {
             </InviewMotion>
 
             <InviewMotion>
-              <H sx={{ mt: [2] }}>My services</H>
-            </InviewMotion>
-
-            <InviewMotion>
               <Flex>
                 <H sx={{ mr: [4] }}>1.</H>
                 <H>
