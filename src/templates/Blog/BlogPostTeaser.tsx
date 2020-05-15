@@ -21,7 +21,15 @@ export default ({ node }: { node: Post }) => {
   const date =
     node?.modified && node?.modified.length > 0 ? node?.modified : node?.date
   return (
-    <Box as="article" key={node.slug} sx={{ mb: [4, 5], display: "flex" }}>
+    <Box
+      as="article"
+      key={node.slug}
+      sx={{
+        mb: [4, 5],
+        display: "flex",
+        flexDirection: ["column", "column", "row"],
+      }}
+    >
       {fluid && fluid?.src?.length > 0 && (
         <Box
           sx={{
