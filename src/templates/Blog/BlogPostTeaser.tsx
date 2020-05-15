@@ -21,44 +21,19 @@ export default ({ node }: { node: Post }) => {
   const date =
     node?.modified && node?.modified.length > 0 ? node?.modified : node?.date
   return (
-    <Box as="article" key={node.slug} sx={{ mb: [4, 5] }}>
-      <Box sx={{ maxWidth: "70ch", mx: "auto" }}>
-        <Link to={`/post/${node.slug}`} title={node.slug}>
-          <H>{decodeHtmlCharCodes(node.title)}</H>
-        </Link>
-
-        <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
-          <XS sx={{ mr: [3] }}>{date}</XS>
-          <XS sx={{ mr: [3] }}>Category: </XS>
-          {categories &&
-            categories.length > 0 &&
-            categories.map((category, categoryIndex) => {
-              return (
-                <XS key={categoryIndex} sx={{ mr: [3] }}>
-                  <Link to={`/category/${category.slug}`} title={category.name}>
-                    {capitalizeFirstLetter(category.name)}
-                  </Link>
-                </XS>
-              )
-            })}
-
-          <XS sx={{ mx: [3] }}>Tags: </XS>
-          {tags &&
-            tags.length > 0 &&
-            tags.map((tag, tagIndex) => {
-              return (
-                <XS key={tagIndex} sx={{ mr: [3] }}>
-                  <Link to={`/tag/${tag.slug}`} title={tag.name}>
-                    {capitalizeFirstLetter(tag.name)}
-                  </Link>
-                </XS>
-              )
-            })}
-        </Flex>
-      </Box>
+    <Box
+      as="article"
+      key={node.slug}
+      sx={{
+        mb: [4, 5],
+        display: "flex",
+        flexDirection: ["column", "column", "row"],
+      }}
+    >
       {fluid && fluid?.src?.length > 0 && (
         <Box
           sx={{
+            width: ["100%", "33%"],
             my: [2, 3],
             "& img": {
               width: "100%",
@@ -70,26 +45,65 @@ export default ({ node }: { node: Post }) => {
           </Link>
         </Box>
       )}
-      <Box
-        sx={{
-          maxWidth: "70ch",
-          mx: "auto",
-          pb: [3, 4],
-          mb: [3, 4],
-          border: "1px solid transparent",
-          borderBottomColor: "text",
-        }}
-      >
-        <P
-          dangerouslySetInnerHTML={{
-            __html: decodeHtmlCharCodes(node.excerpt),
-          }}
-        />
-        <div>
-          <Link to={`/post/${node.slug}`} title={node.title}>
-            <S>Read more</S>
+      <Box sx={{ width: "100%" }}>
+        <Box sx={{ maxWidth: "70ch", mx: "auto" }}>
+          <Link to={`/post/${node.slug}`} title={node.slug}>
+            <H>{decodeHtmlCharCodes(node.title)}</H>
           </Link>
-        </div>
+
+          <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
+            <XS sx={{ mr: [3] }}>{date}</XS>
+            <XS sx={{ mr: [3] }}>Category: </XS>
+            {categories &&
+              categories.length > 0 &&
+              categories.map((category, categoryIndex) => {
+                return (
+                  <XS key={categoryIndex} sx={{ mr: [3] }}>
+                    <Link
+                      to={`/category/${category.slug}`}
+                      title={category.name}
+                    >
+                      {capitalizeFirstLetter(category.name)}
+                    </Link>
+                  </XS>
+                )
+              })}
+
+            <XS sx={{ mx: [3] }}>Tags: </XS>
+            {tags &&
+              tags.length > 0 &&
+              tags.map((tag, tagIndex) => {
+                return (
+                  <XS key={tagIndex} sx={{ mr: [3] }}>
+                    <Link to={`/tag/${tag.slug}`} title={tag.name}>
+                      {capitalizeFirstLetter(tag.name)}
+                    </Link>
+                  </XS>
+                )
+              })}
+          </Flex>
+        </Box>
+        <Box
+          sx={{
+            maxWidth: "70ch",
+            mx: "auto",
+            pb: [3, 4],
+            mb: [3, 4],
+            border: "1px solid transparent",
+            borderBottomColor: "text",
+          }}
+        >
+          <P
+            dangerouslySetInnerHTML={{
+              __html: decodeHtmlCharCodes(node.excerpt),
+            }}
+          />
+          <div>
+            <Link to={`/post/${node.slug}`} title={node.title}>
+              <S>Read more</S>
+            </Link>
+          </div>
+        </Box>
       </Box>
     </Box>
   )

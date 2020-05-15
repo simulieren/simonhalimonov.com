@@ -7,7 +7,7 @@ export default (props) => (
     sx={{
       color: "text",
       fontFamily: "IBM Plex Sans",
-      fontSize: [1, 2],
+      fontSize: [0, 1, 2],
       ...props.sx,
     }}
   />
