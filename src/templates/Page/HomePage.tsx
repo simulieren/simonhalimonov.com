@@ -204,7 +204,7 @@ export const Homepage = (props: Props) => {
                   title="Development"
                   sx={{ display: "block" }}
                 >
-                  Development
+                  Develop
                 </S>
               </InviewMotion>
               <InviewMotion>
