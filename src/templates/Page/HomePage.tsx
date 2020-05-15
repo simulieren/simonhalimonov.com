@@ -11,7 +11,6 @@ import InviewMotion from "../../components/InviewMotion/InviewMotion"
 import WorkSlider from "../../components/WorkSlider/WorkSlider"
 import { AnimateWords } from "../../components/AnimateWords/AnimateWords"
 import Section from "../../components/Layout/Section"
-import Header from "../../components/Header"
 
 import { Page } from "../../contracts/page"
 
@@ -88,8 +87,6 @@ export const Homepage = (props: Props) => {
   return (
     <>
       <SEO title="Home" lang={lang} />
-
-      {/* <Header /> */}
 
       <Box
         sx={{
