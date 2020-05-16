@@ -5,7 +5,9 @@ import Image, { FluidObject } from "gatsby-image"
 import SEO from "../../components/SEO"
 import HTML from "../../components/HTML/HTML"
 
-import SocialSidebar from "../../components/SocialSidebar/SocialSidebar"
+import { PageTitleAnimation } from "../../components/Layout/PageTitleAnimation"
+
+import { ContentWithSidebar } from "../../components/Layouts/ContentWithSidebar"
 
 import H from "../../components/Typography/H"
 
@@ -50,8 +52,15 @@ export const DefaultPage = (props: Props) => {
 
   return (
     <>
-      <SEO title={title} description={excerpt} lang={lang} />
-      <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
+      <SEO
+        title={decodeHtmlCharCodes(title)}
+        description={excerpt}
+        lang={lang}
+      />
+
+      <PageTitleAnimation>{decodeHtmlCharCodes(title)}</PageTitleAnimation>
+
+      <ContentWithSidebar>
         <Grid
           as="article"
           sx={{ p: [3, 4], pb: [4, 5], gridColumn: ["1/13", "1/13", "1/10"] }}
@@ -82,11 +91,7 @@ export const DefaultPage = (props: Props) => {
             <HTML html={content} />
           </Grid>
         </Grid>
-
-        <Box sx={{ gridColumn: ["1/13", "1/13", "10/13"] }}>
-          <SocialSidebar />
-        </Box>
-      </Grid>
+      </ContentWithSidebar>
     </>
   )
 }

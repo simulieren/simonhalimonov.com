@@ -20,7 +20,6 @@ const createPages: GatsbyNode["createPages"] = async ({
 
   // Get all template paths for post related pages
 
-  // TODO: Remove this template and use default
   const BlogPostTemplate = resolve("./src/templates/Blog/BlogPost.tsx")
   const BlogPostsTemplate = resolve("./src/templates/Blog/BlogPosts.tsx")
   const BlogTagPostsTemplate = resolve("./src/templates/Blog/BlogTagPosts.tsx")

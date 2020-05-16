@@ -179,16 +179,6 @@ export default (props: Props) => {
             )
         )}
       </AnimatePresence>
-      {/* <BlockSlider
-        initial={{ scaleX: 1 }}
-        animate={{ scaleX: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        sx={{
-          "& > div": {
-            backgroundColor: "#000",
-          },
-        }}
-      /> */}
     </Box>
   )
 }
