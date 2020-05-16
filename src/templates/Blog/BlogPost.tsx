@@ -2,15 +2,16 @@ import React from "react"
 import { Flex, Box, Grid } from "theme-ui"
 import { graphql, Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
-import { motion } from "framer-motion"
 
 import SEO from "../../components/SEO"
 
 import HTML from "../../components/HTML/HTML"
 
-import SocialSidebar from "../../components/SocialSidebar/SocialSidebar"
+import { PageTitleAnimation } from "../../components/Layout/PageTitleAnimation"
 
-import { XL, H, P, S, XS } from "../../components/Typography"
+import { ContentWithSidebar } from "../../components/Layouts/ContentWithSidebar"
+
+import { H, P, S, XS } from "../../components/Typography"
 
 import { Post, CategoryTagInfo, InstagramFeed } from "../../contracts/post"
 
@@ -61,162 +62,111 @@ export const BlogPostPage = (props: Props) => {
         // TODO: Add lang for SEO
       />
 
-      <Box
-        sx={{
-          mb: ["-35vmin"],
-          width: "100%",
-          overflow: "hidden",
-          zIndex: 100,
-          position: "absolute",
-          left: "50%",
-          transform: "translateX(-50%)",
-          pointerEvents: "none",
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            y: ["24vmin", "-24vmin"],
-          }}
-          transition={{ duration: 2, ease: [0.33, 1, 0.68, 1] }}
-        >
-          <XL sx={{ whiteSpace: "nowrap" }}>
-            {decodeHtmlCharCodes(props.data.wordpressPost.title)}
-          </XL>
-        </motion.div>
-      </Box>
+      <PageTitleAnimation>
+        {decodeHtmlCharCodes(props.data.wordpressPost.title)}
+      </PageTitleAnimation>
 
-      <Grid sx={{ p: [3, 4], pt: [6, 7, 8] }} gap={[3, 4, 5]} columns={[12]}>
-        <Box
-          as="article"
-          sx={{ pb: [4, 5], gridColumn: ["1/13", "1/13", "1/10"] }}
-        >
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              y: ["24vmin", "0vmin"],
-            }}
-            transition={{
-              duration: 2.5,
-              delay: 0.25,
-              ease: [0.33, 1, 0.68, 1],
+      <ContentWithSidebar>
+        <article>
+          <Box
+            as="header"
+            sx={{
+              maxWidth: ["100%", "800px"],
+              mx: "auto",
+              px: [0, 0, 0, 3],
             }}
           >
-            <article>
+            <H>{decodeHtmlCharCodes(props.data.wordpressPost.title)}</H>
+
+            <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
+              <XS sx={{ mr: [3] }}>{date}</XS>
+              <XS sx={{ mr: [3] }}>Category: </XS>
+              {categories &&
+                categories.length > 0 &&
+                categories.map((category, categoryIndex) => {
+                  return (
+                    <XS key={categoryIndex} sx={{ mr: [3] }}>
+                      <Link
+                        to={`/category/${category.slug}`}
+                        title={category.name}
+                      >
+                        {capitalizeFirstLetter(category.name)}
+                      </Link>
+                    </XS>
+                  )
+                })}
+
+              <XS sx={{ mx: [3] }}>Tags: </XS>
+              {tags &&
+                tags.length > 0 &&
+                tags.map((tag, tagIndex) => {
+                  return (
+                    <XS key={tagIndex} sx={{ mr: [3] }}>
+                      <Link to={`/tag/${tag.slug}`} title={tag.name}>
+                        {capitalizeFirstLetter(tag.name)}
+                      </Link>
+                    </XS>
+                  )
+                })}
+            </Flex>
+          </Box>
+          {fluid && fluid?.src?.length > 0 && (
+            <Box sx={{ my: [2, 3] }}>
+              <Image
+                fluid={fluid}
+                alt={props.data.wordpressPost.title}
+                title={props.data.wordpressPost.title}
+              />
+            </Box>
+          )}
+
+          <HTML html={props.data.wordpressPost.content} />
+
+          <Grid as="footer" sx={{ mx: "auto" }} gap={[3, 4, 5]} columns={[2]}>
+            {props.pageContext.next && props.pageContext.next.slug && (
               <Box
                 sx={{
-                  maxWidth: ["100%", "800px"],
-                  mx: "auto",
-                  px: [0, 0, 0, 3],
+                  border: "1px solid transparent",
+                  borderTopColor: "text",
+                  pt: [3, 4],
                 }}
               >
-                <H>{decodeHtmlCharCodes(props.data.wordpressPost.title)}</H>
-
-                <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
-                  <XS sx={{ mr: [3] }}>{date}</XS>
-                  <XS sx={{ mr: [3] }}>Category: </XS>
-                  {categories &&
-                    categories.length > 0 &&
-                    categories.map((category, categoryIndex) => {
-                      return (
-                        <XS key={categoryIndex} sx={{ mr: [3] }}>
-                          <Link
-                            to={`/category/${category.slug}`}
-                            title={category.name}
-                          >
-                            {capitalizeFirstLetter(category.name)}
-                          </Link>
-                        </XS>
-                      )
-                    })}
-
-                  <XS sx={{ mx: [3] }}>Tags: </XS>
-                  {tags &&
-                    tags.length > 0 &&
-                    tags.map((tag, tagIndex) => {
-                      return (
-                        <XS key={tagIndex} sx={{ mr: [3] }}>
-                          <Link to={`/tag/${tag.slug}`} title={tag.name}>
-                            {capitalizeFirstLetter(tag.name)}
-                          </Link>
-                        </XS>
-                      )
-                    })}
-                </Flex>
+                <Link
+                  to={`/post/${props.pageContext.next.slug}`}
+                  title={props.pageContext.next.slug}
+                >
+                  <S type="primary">Go to Previous Post</S>
+                  <P>{props.pageContext.next.title}</P>
+                </Link>
               </Box>
-              {fluid && fluid?.src?.length > 0 && (
-                <Box sx={{ my: [2, 3] }}>
-                  <Image
-                    fluid={fluid}
-                    alt={props.data.wordpressPost.title}
-                    title={props.data.wordpressPost.title}
-                  />
-                </Box>
-              )}
-
-              <HTML html={props.data.wordpressPost.content} />
-
-              <Grid sx={{ mx: "auto" }} gap={[3, 4, 5]} columns={[2]}>
-                {props.pageContext.next && props.pageContext.next.slug && (
-                  <Box
-                    sx={{
-                      border: "1px solid transparent",
-                      borderTopColor: "text",
-                      pt: [3, 4],
-                    }}
-                  >
-                    <Link
-                      to={`/post/${props.pageContext.next.slug}`}
-                      title={props.pageContext.next.slug}
-                    >
-                      <S type="primary">Go to Previous Post</S>
-                      <P>{props.pageContext.next.title}</P>
-                    </Link>
-                  </Box>
-                )}
-                {props.pageContext.previous && props.pageContext.previous.slug && (
-                  <Box
-                    sx={{
-                      border: "1px solid transparent",
-                      borderTopColor: "text",
-                      pt: [3, 4],
-                    }}
-                  >
-                    <Link
-                      to={`/post/${props.pageContext.previous.slug}`}
-                      title={props.pageContext.previous.slug}
-                    >
-                      <S type="primary">Go to Next Post</S>
-                      <P>{props.pageContext.previous.title}</P>
-                    </Link>
-                  </Box>
-                )}
-              </Grid>
-            </article>
-          </motion.div>
-        </Box>
-
-        <Box sx={{ gridColumn: ["1/13", "1/13", "10/13"] }}>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              y: ["24vmin", "0vmin"],
-            }}
-            transition={{ duration: 3, delay: 0.5, ease: [0.33, 1, 0.68, 1] }}
-          >
-            <SocialSidebar />
-          </motion.div>
-        </Box>
-      </Grid>
+            )}
+            {props.pageContext.previous && props.pageContext.previous.slug && (
+              <Box
+                sx={{
+                  border: "1px solid transparent",
+                  borderTopColor: "text",
+                  pt: [3, 4],
+                }}
+              >
+                <Link
+                  to={`/post/${props.pageContext.previous.slug}`}
+                  title={props.pageContext.previous.slug}
+                >
+                  <S type="primary">Go to Next Post</S>
+                  <P>{props.pageContext.previous.title}</P>
+                </Link>
+              </Box>
+            )}
+          </Grid>
+        </article>
+      </ContentWithSidebar>
     </>
   )
 }
 
 export default BlogPostPage
 
+// TODO: Remove GarphLQ Query and use PageContext
 export const query = graphql`
   query($id: Int!) {
     wordpressPost(wordpress_id: { eq: $id }) {

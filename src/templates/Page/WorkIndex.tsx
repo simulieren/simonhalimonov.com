@@ -8,7 +8,9 @@ import useInterval from "../../utils/useInterval"
 
 import SEO from "../../components/SEO"
 
-import { XL, P, XS } from "../../components/Typography"
+import { PageTitleAnimation } from "../../components/Layout/PageTitleAnimation"
+
+import { P, XS } from "../../components/Typography"
 
 import WorkIndexTeaser from "./WorkIndexTeaser"
 
@@ -63,23 +65,14 @@ export default (props: Props) => {
         lang={lang}
         datePublished={date}
       />
+
+      <PageTitleAnimation>{page.title}</PageTitleAnimation>
+
       <Grid
         sx={{ p: [3, 4], pt: [6, 7, 8], overflowX: "hidden" }}
         gap={[3, 4, 5]}
         columns={[1]}
       >
-        <Box sx={{ mb: ["-35vmin"] }}>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              y: ["38vmin", "-38vmin"],
-            }}
-            transition={{ duration: 2, ease: [0.33, 1, 0.68, 1] }}
-          >
-            <XL>{page.title}</XL>
-          </motion.div>
-        </Box>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{
