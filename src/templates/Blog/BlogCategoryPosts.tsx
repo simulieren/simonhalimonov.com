@@ -40,9 +40,13 @@ export const BlogCategoryPostsPage = (props: Props) => {
   return (
     <>
       <SEO
-        title={`${site.siteMetadata.title} | ${site.siteMetadata.description}`}
+        title={`${capitalizeFirstLetter(props.pageContext.slug)} | Blog`}
         description={site.siteMetadata.description}
-        lang={lang}
+        // TODO: Add lang for SEO to support multiple languages
+        lang={"en"}
+        datePublished={new Date().toISOString()}
+        schemaType={"default"}
+        image={false}
       />
 
       <PageTitleAnimation>

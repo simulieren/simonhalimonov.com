@@ -35,10 +35,12 @@ export const BlogPostPage = (props: Props) => {
 
   const fluid: FluidObject | null =
     post?.featured_media?.localFile?.childImageSharp?.fluid || null
+
   const categories: CategoryTagInfo[] =
     post?.categories?.length > 0
       ? post.categories.filter((category) => category.name !== "Uncategorized")
       : new Array<CategoryTagInfo>()
+
   const tags: CategoryTagInfo[] =
     (post.tags && post.tags.length) > 0
       ? post.tags
@@ -50,9 +52,12 @@ export const BlogPostPage = (props: Props) => {
   return (
     <>
       <SEO
-        title={decodeHtmlCharCodes(post.title)}
-        description={decodeHtmlCharCodes(post.excerpt)}
-        // TODO: Add lang for SEO
+        title={post.title}
+        description={post.excerpt}
+        lang={post?.polylang_current_lang || "en"}
+        datePublished={date}
+        schemaType={"BlogPosting"}
+        image={fluid?.src || false}
       />
 
       <PageTitleAnimation>{decodeHtmlCharCodes(post.title)}</PageTitleAnimation>
@@ -123,7 +128,7 @@ export const BlogPostPage = (props: Props) => {
                   title={props.pageContext.next.slug}
                 >
                   <S type="primary">Go to Previous Post</S>
-                  <P>{props.pageContext.next.title}</P>
+                  <P>{decodeHtmlCharCodes(props.pageContext.next.title)}</P>
                 </Link>
               </Box>
             )}
@@ -140,7 +145,7 @@ export const BlogPostPage = (props: Props) => {
                   title={props.pageContext.previous.slug}
                 >
                   <S type="primary">Go to Next Post</S>
-                  <P>{props.pageContext.previous.title}</P>
+                  <P>{decodeHtmlCharCodes(props.pageContext.previous.title)}</P>
                 </Link>
               </Box>
             )}

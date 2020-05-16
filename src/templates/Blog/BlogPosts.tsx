@@ -42,7 +42,11 @@ export default (props: Props) => {
       <SEO
         title={`Blog`}
         description={site.siteMetadata.description}
-        // TODO: Add lang for SEO
+        // TODO: Add lang for SEO to support multiple languages
+        lang={"en"}
+        datePublished={new Date().toISOString()}
+        schemaType={"default"}
+        image={false}
       />
 
       <PageTitleAnimation>{"Blog"}</PageTitleAnimation>

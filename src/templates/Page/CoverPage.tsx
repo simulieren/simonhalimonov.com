@@ -74,9 +74,12 @@ export const CoverPage = (props: Props) => {
   return (
     <>
       <SEO
-        title={decodeHtmlCharCodes(title)}
-        description={decodeHtmlCharCodes(excerpt)}
+        title={title}
+        description={excerpt}
         lang={lang}
+        datePublished={new Date().toISOString()}
+        schemaType={"default"}
+        image={fluid?.src || false}
       />
 
       <PageTitleAnimation>{decodeHtmlCharCodes(title)}</PageTitleAnimation>
