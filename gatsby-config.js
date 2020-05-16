@@ -112,17 +112,18 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: process.env.GATSBY_GOOGLE_ANALYTICS,
-        head: false,
-        anonymize: true,
-        respectDNT: true,
-        exclude: ["/preview/**", "/do-not-track/me/too/"],
-        pageTransitionDelay: 0,
-      },
-    },
+    // Disable GS for now
+    // {
+    //   resolve: "gatsby-plugin-google-analytics",
+    //   options: {
+    //     trackingId: process.env.GATSBY_GOOGLE_ANALYTICS,
+    //     head: false,
+    //     anonymize: true,
+    //     respectDNT: true,
+    //     exclude: ["/preview/**", "/do-not-track/me/too/"],
+    //     pageTransitionDelay: 0,
+    //   },
+    // },
     {
       resolve: "gatsby-source-instagram",
       options: {

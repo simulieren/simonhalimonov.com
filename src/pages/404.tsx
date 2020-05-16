@@ -1,19 +1,11 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
 import { Flex, Box } from "theme-ui"
 
-import H from "../components/Typography/H"
-import P from "../components/Typography/P"
-import S from "../components/Typography/S"
-
-import { InstagramFeed } from "../contracts/post"
+import { H, P, S } from "../components/Typography/H"
 
 import SEO from "../components/SEO"
 
 export interface Props {
-  data: {
-    allInstaNode: InstagramFeed
-  }
   location: Location
 }
 

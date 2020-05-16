@@ -15,17 +15,13 @@ import HTML from "../../components/HTML/HTML"
 
 import { PageTitleAnimation } from "../../components/Layout/PageTitleAnimation"
 
-import H from "../../components/Typography/H"
-import S from "../../components/Typography/S"
+import { H, S } from "../../components/Typography"
 
 import { Page } from "../../contracts/page"
 import { Preview } from "../../contracts/preview"
 
 import { decodeHtmlCharCodes } from "../../utils"
 
-/**
- * Template for cover page
- */
 export interface Props {
   pageContext: {
     previous?: {
@@ -46,7 +42,11 @@ export interface Props {
   location: Location
 }
 
-export const CoverPage = (props: Props) => {
+/**
+ * Template for cover page
+ */
+
+export const CoverPage: React.FC<Props> = (props) => {
   const pageContext = props?.pageContext
   const page = pageContext?.page?.node
   const lang = pageContext?.lang
