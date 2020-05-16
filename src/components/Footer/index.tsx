@@ -124,9 +124,9 @@ export const Footer = ({ lang }: Props) => {
           columns={[2, 4]}
           gap={[3, 4, 5]}
         >
-          <XS sx={{ py: [3] }}>Imprint</XS>
-
-          <XS sx={{ py: [3] }}>Privacy</XS>
+          <Link to="/imprint">
+            <XS sx={{ py: [3] }}>Imprint & Privacy</XS>
+          </Link>
         </Grid>
 
         <XS sx={{ px: [3, 4], py: [3] }}>
