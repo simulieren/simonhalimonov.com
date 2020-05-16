@@ -28,7 +28,7 @@ const Transition = ({ children, location }: Props) => {
   }
 
   return (
-    <AnimateSharedLayout type="crossfade">
+    <AnimateSharedLayout type="crossfade" transition={{ duration }}>
       <AnimatePresence>
         <motion.div
           key={location.pathname}
