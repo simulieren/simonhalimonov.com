@@ -1,5 +1,5 @@
 import React from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion"
 
 export interface Props {
   children: React.ReactNode
@@ -28,18 +28,20 @@ const Transition = ({ children, location }: Props) => {
   }
 
   return (
-    <AnimatePresence>
-      <motion.div
-        key={location.pathname}
-        variants={variants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-        style={{ position: "relative" }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <AnimateSharedLayout type="crossfade">
+      <AnimatePresence>
+        <motion.div
+          key={location.pathname}
+          variants={variants}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+          style={{ position: "relative" }}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+    </AnimateSharedLayout>
   )
 }
 

@@ -2,6 +2,7 @@ import React from "react"
 import { Flex, Box, Grid } from "theme-ui"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
+import { motion } from "framer-motion"
 
 import SEO from "../../components/SEO"
 
@@ -67,7 +68,12 @@ export const BlogPostPage = (props: Props) => {
               px: [0, 0, 0, 3],
             }}
           >
-            <H as="h1">{decodeHtmlCharCodes(post.title)}</H>
+            <motion.div
+              layoutId={`post-title-${post.slug}`}
+              transition={{ delay: 1, duration: 1 }}
+            >
+              <H as="h1">{decodeHtmlCharCodes(post.title)}</H>
+            </motion.div>
 
             <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
               <XS sx={{ mr: [3] }}>{date}</XS>
@@ -102,9 +108,11 @@ export const BlogPostPage = (props: Props) => {
             </Flex>
           </Box>
           {fluid && fluid?.src?.length > 0 && (
-            <Box sx={{ my: [2, 3] }}>
-              <Image fluid={fluid} alt={post.title} title={post.title} />
-            </Box>
+            <motion.div layoutId={`post-image-${post.slug}`}>
+              <Box sx={{ my: [2, 3] }}>
+                <Image fluid={fluid} alt={post.title} title={post.title} />
+              </Box>
+            </motion.div>
           )}
 
           <HTML html={post.content} />

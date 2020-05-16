@@ -2,6 +2,7 @@
 import { jsx, Flex, Box } from "theme-ui"
 import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
+import { motion } from "framer-motion"
 
 import { H, P, S, XS } from "../../components/Typography"
 
@@ -40,15 +41,19 @@ export default ({ node }: { node: Post }) => {
             },
           }}
         >
-          <Link to={`/post/${node.slug}`} title={node.slug}>
-            <Image fluid={fluid} alt={node.title} title={node.title} />
-          </Link>
+          <motion.div layoutId={`post-image-${node.slug}`}>
+            <Link to={`/post/${node.slug}`} title={node.slug}>
+              <Image fluid={fluid} alt={node.title} title={node.title} />
+            </Link>
+          </motion.div>
         </Box>
       )}
       <Box sx={{ width: "100%" }}>
         <Box sx={{ maxWidth: "70ch", mx: "auto" }}>
           <Link to={`/post/${node.slug}`} title={node.slug}>
-            <H>{decodeHtmlCharCodes(node.title)}</H>
+            <motion.div layoutId={`post-title-${node.slug}`}>
+              <H>{decodeHtmlCharCodes(node.title)}</H>
+            </motion.div>
           </Link>
         </Box>
         <Box
