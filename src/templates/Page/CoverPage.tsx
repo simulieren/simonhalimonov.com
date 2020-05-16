@@ -15,8 +15,7 @@ import HTML from "../../components/HTML/HTML"
 
 import { PageTitleAnimation } from "../../components/Layout/PageTitleAnimation"
 
-import H from "../../components/Typography/H"
-import S from "../../components/Typography/S"
+import { H, S } from "../../components/Typography"
 
 import { Page } from "../../contracts/page"
 import { Preview } from "../../contracts/preview"
