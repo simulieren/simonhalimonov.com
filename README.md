@@ -1,7 +1,7 @@
 # simonhalimonov.com
 
 This is a personal site and blog. Built on GatsbyJS, TS and a headless WordPress CMS.
-I open source this project, so everyone can see how to build a fast, aesthetic and technically optimised site.
+I open source this project, so everyone can see how to build a fast, aesthetic, multilingual, editor-friendly and technically optimised site.
 
 ## Setup
 
@@ -10,7 +10,8 @@ Configure all environment variables and have your WordPress installation running
 1. Install all dependencies
    `npm i` or `yarn`
 1. Add environment variables
-1.
+1. Run development environment
+   `npm start` or `yarn start`
 
 ### Using the environment variables
 

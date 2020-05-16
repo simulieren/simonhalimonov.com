@@ -7,6 +7,7 @@ import { XL } from "../../components/Typography"
 export const PageTitleAnimation: React.FC = (props) => {
   return (
     <Box
+      aria-hidden="true"
       sx={{
         mb: ["-35vmin"],
         overflow: "hidden",

@@ -33,7 +33,7 @@ export default ({ node }: { node: Post }) => {
       {fluid && fluid?.src?.length > 0 && (
         <Box
           sx={{
-            width: ["100%", "33%"],
+            width: ["100%", "100%", "33%"],
             my: [2, 3],
             "& img": {
               width: "100%",

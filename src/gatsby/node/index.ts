@@ -19,7 +19,6 @@ const createPages: GatsbyNode["createPages"] = async ({
   const { createPage } = actions
 
   // Get all template paths for post related pages
-
   const BlogPostTemplate = resolve("./src/templates/Blog/BlogPost.tsx")
   const BlogPostsTemplate = resolve("./src/templates/Blog/BlogPosts.tsx")
   const BlogTagPostsTemplate = resolve("./src/templates/Blog/BlogTagPosts.tsx")
@@ -49,6 +48,7 @@ const createPages: GatsbyNode["createPages"] = async ({
             format
             wordpress_id
             title
+            content
             excerpt
             polylang_current_lang
             date(formatString: "MMMM DD, YYYY")
@@ -102,42 +102,6 @@ const createPages: GatsbyNode["createPages"] = async ({
           }
         }
       }
-      allInstaNode(limit: 8) {
-        edges {
-          node {
-            id
-            likes
-            comments
-            mediaType
-            preview
-            original
-            timestamp
-            caption
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 960, quality: 85) {
-                  aspectRatio
-                  src
-                  srcSet
-                  sizes
-                  base64
-                  srcWebp
-                  srcSetWebp
-                }
-              }
-            }
-            thumbnails {
-              src
-              config_width
-              config_height
-            }
-            dimensions {
-              height
-              width
-            }
-          }
-        }
-      }
     }
   `)
 
@@ -162,6 +126,7 @@ const createPages: GatsbyNode["createPages"] = async ({
         lang: post.node.polylang_current_lang || "en",
         previous: index === 0 ? null : BlogPosts[index - 1].node,
         next: index === BlogPosts.length - 1 ? null : BlogPosts[index + 1].node,
+        post,
       },
     })
   })
@@ -232,7 +197,7 @@ const createPages: GatsbyNode["createPages"] = async ({
     edges: BlogPosts,
     createPage: createPage,
     pageTemplate: BlogPostsTemplate,
-    pageLength: 2,
+    pageLength: 10,
     pathPrefix: "posts",
     context: {
       // FIXME: Add lang

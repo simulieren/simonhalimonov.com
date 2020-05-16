@@ -1,6 +1,6 @@
 import React from "react"
 import { Flex, Box, Grid } from "theme-ui"
-import { graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 import Image, { FluidObject } from "gatsby-image"
 
 import SEO from "../../components/SEO"
@@ -13,15 +13,11 @@ import { ContentWithSidebar } from "../../components/Layouts/ContentWithSidebar"
 
 import { H, P, S, XS } from "../../components/Typography"
 
-import { Post, CategoryTagInfo, InstagramFeed } from "../../contracts/post"
+import { Post, CategoryTagInfo } from "../../contracts/post"
 
 import { decodeHtmlCharCodes, capitalizeFirstLetter } from "../../utils"
 
 export interface Props {
-  data: {
-    wordpressPost: Post
-    allInstaNode: InstagramFeed
-  }
   pageContext: {
     previous: {
       slug: string
@@ -29,42 +25,37 @@ export interface Props {
     next: {
       slug: string
     }
+    post: { node: Post }
   }
   location: Location
 }
 
 export const BlogPostPage = (props: Props) => {
+  const post = props?.pageContext?.post?.node
+
   const fluid: FluidObject | null =
-    props?.data?.wordpressPost?.featured_media?.localFile?.childImageSharp
-      ?.fluid || null
+    post?.featured_media?.localFile?.childImageSharp?.fluid || null
   const categories: CategoryTagInfo[] =
-    props?.data?.wordpressPost?.categories?.length > 0
-      ? props.data.wordpressPost.categories.filter(
-          (category) => category.name !== "Uncategorized"
-        )
+    post?.categories?.length > 0
+      ? post.categories.filter((category) => category.name !== "Uncategorized")
       : new Array<CategoryTagInfo>()
   const tags: CategoryTagInfo[] =
-    (props.data.wordpressPost.tags && props.data.wordpressPost.tags.length) > 0
-      ? props.data.wordpressPost.tags
+    (post.tags && post.tags.length) > 0
+      ? post.tags
       : new Array<CategoryTagInfo>()
 
   const date =
-    props.data.wordpressPost.modified &&
-    props.data.wordpressPost.modified.length > 0
-      ? props.data.wordpressPost.modified
-      : props.data.wordpressPost.date
+    post.modified && post.modified.length > 0 ? post.modified : post.date
 
   return (
     <>
       <SEO
-        title={props.data.wordpressPost.title}
-        description={props.data.wordpressPost.excerpt}
+        title={decodeHtmlCharCodes(post.title)}
+        description={decodeHtmlCharCodes(post.excerpt)}
         // TODO: Add lang for SEO
       />
 
-      <PageTitleAnimation>
-        {decodeHtmlCharCodes(props.data.wordpressPost.title)}
-      </PageTitleAnimation>
+      <PageTitleAnimation>{decodeHtmlCharCodes(post.title)}</PageTitleAnimation>
 
       <ContentWithSidebar>
         <article>
@@ -76,7 +67,7 @@ export const BlogPostPage = (props: Props) => {
               px: [0, 0, 0, 3],
             }}
           >
-            <H>{decodeHtmlCharCodes(props.data.wordpressPost.title)}</H>
+            <H as="h1">{decodeHtmlCharCodes(post.title)}</H>
 
             <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
               <XS sx={{ mr: [3] }}>{date}</XS>
@@ -112,15 +103,11 @@ export const BlogPostPage = (props: Props) => {
           </Box>
           {fluid && fluid?.src?.length > 0 && (
             <Box sx={{ my: [2, 3] }}>
-              <Image
-                fluid={fluid}
-                alt={props.data.wordpressPost.title}
-                title={props.data.wordpressPost.title}
-              />
+              <Image fluid={fluid} alt={post.title} title={post.title} />
             </Box>
           )}
 
-          <HTML html={props.data.wordpressPost.content} />
+          <HTML html={post.content} />
 
           <Grid as="footer" sx={{ mx: "auto" }} gap={[3, 4, 5]} columns={[2]}>
             {props.pageContext.next && props.pageContext.next.slug && (
@@ -165,64 +152,3 @@ export const BlogPostPage = (props: Props) => {
 }
 
 export default BlogPostPage
-
-// TODO: Remove GarphLQ Query and use PageContext
-export const query = graphql`
-  query($id: Int!) {
-    wordpressPost(wordpress_id: { eq: $id }) {
-      title
-      content
-      excerpt
-      date(formatString: "MMMM DD, YYYY")
-      modified(formatString: "MMMM DD, YYYY")
-      author {
-        id
-        name
-        url
-        description
-        link
-        slug
-        path
-        wordpress_id
-      }
-      slug
-      wordpress_id
-      featured_media {
-        localFile {
-          childImageSharp {
-            fluid(maxWidth: 1000, quality: 85) {
-              aspectRatio
-              src
-              srcSet
-              sizes
-              base64
-              tracedSVG
-              srcWebp
-              srcSetWebp
-            }
-          }
-        }
-      }
-      categories {
-        id
-        link
-        wordpress_id
-        count
-        description
-        name
-        slug
-        path
-      }
-      tags {
-        id
-        link
-        wordpress_id
-        count
-        description
-        name
-        slug
-        path
-      }
-    }
-  }
-`

@@ -3,6 +3,7 @@ import { jsx, Heading } from "theme-ui"
 
 export default (props) => (
   <Heading
+    as="p"
     color="black"
     {...props}
     sx={{

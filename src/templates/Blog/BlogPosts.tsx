@@ -1,9 +1,9 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { motion } from "framer-motion"
-import { Box } from "theme-ui"
 
 import SEO from "../../components/SEO"
+
+import { PageTitleAnimation } from "../../components/Layout/PageTitleAnimation"
 
 import { ContentWithSidebar } from "../../components/Layouts/ContentWithSidebar"
 
@@ -45,28 +45,7 @@ export default (props: Props) => {
         // TODO: Add lang for SEO
       />
 
-      <Box
-        sx={{
-          mb: ["-35vmin"],
-          width: "100%",
-          zIndex: 100,
-          position: "absolute",
-          left: "50%",
-          transform: "translateX(-50%)",
-          pointerEvents: "none",
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            y: ["24vmin", "-24vmin"],
-          }}
-          transition={{ duration: 2, ease: [0.33, 1, 0.68, 1] }}
-        >
-          <XL>{"Blog"}</XL>
-        </motion.div>
-      </Box>
+      <PageTitleAnimation>{"Blog"}</PageTitleAnimation>
 
       <ContentWithSidebar>
         {group.map(BlogPostTeaser)}
