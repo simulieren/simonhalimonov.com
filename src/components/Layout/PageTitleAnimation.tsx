@@ -27,7 +27,9 @@ export const PageTitleAnimation: React.FC = (props) => {
         }}
         transition={{ duration: 2, ease: [0.33, 1, 0.68, 1] }}
       >
-        <XL sx={{ whiteSpace: "nowrap" }}>{props.children}</XL>
+        <XL as="div" sx={{ whiteSpace: "nowrap" }}>
+          {props.children}
+        </XL>
       </motion.div>
     </Box>
   )
