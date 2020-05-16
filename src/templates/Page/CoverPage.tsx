@@ -22,9 +22,6 @@ import { Preview } from "../../contracts/preview"
 
 import { decodeHtmlCharCodes } from "../../utils"
 
-/**
- * Template for cover page
- */
 export interface Props {
   pageContext: {
     previous?: {
@@ -45,7 +42,11 @@ export interface Props {
   location: Location
 }
 
-export const CoverPage = (props: Props) => {
+/**
+ * Template for cover page
+ */
+
+export const CoverPage: React.FC<Props> = (props) => {
   const pageContext = props?.pageContext
   const page = pageContext?.page?.node
   const lang = pageContext?.lang
