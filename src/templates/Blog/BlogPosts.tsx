@@ -7,7 +7,7 @@ import { PageTitleAnimation } from "../../components/Layout/PageTitleAnimation"
 
 import { ContentWithSidebar } from "../../components/Layouts/ContentWithSidebar"
 
-import { XL, S } from "../../components/Typography"
+import { S } from "../../components/Typography"
 
 import BlogPostTeaser from "./BlogPostTeaser"
 
