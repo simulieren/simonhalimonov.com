@@ -13,6 +13,8 @@ import SEO from "../../components/SEO"
 
 import HTML from "../../components/HTML/HTML"
 
+import { PageTitleAnimation } from "../../components/Layout/PageTitleAnimation"
+
 import H from "../../components/Typography/H"
 import S from "../../components/Typography/S"
 
@@ -71,7 +73,14 @@ export const CoverPage = (props: Props) => {
 
   return (
     <>
-      <SEO title={title} description={excerpt} lang={lang} />
+      <SEO
+        title={decodeHtmlCharCodes(title)}
+        description={decodeHtmlCharCodes(excerpt)}
+        lang={lang}
+      />
+
+      <PageTitleAnimation>{decodeHtmlCharCodes(title)}</PageTitleAnimation>
+
       <Box>
         <Box as="article" sx={{ mb: [4, 5] }}>
           <Box

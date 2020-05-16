@@ -33,7 +33,7 @@ export default ({ node }: { node: Post }) => {
       {fluid && fluid?.src?.length > 0 && (
         <Box
           sx={{
-            width: ["100%", "33%"],
+            width: ["100%", "100%", "33%"],
             my: [2, 3],
             "& img": {
               width: "100%",
@@ -50,38 +50,6 @@ export default ({ node }: { node: Post }) => {
           <Link to={`/post/${node.slug}`} title={node.slug}>
             <H>{decodeHtmlCharCodes(node.title)}</H>
           </Link>
-
-          <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
-            <XS sx={{ mr: [3] }}>{date}</XS>
-            <XS sx={{ mr: [3] }}>Category: </XS>
-            {categories &&
-              categories.length > 0 &&
-              categories.map((category, categoryIndex) => {
-                return (
-                  <XS key={categoryIndex} sx={{ mr: [3] }}>
-                    <Link
-                      to={`/category/${category.slug}`}
-                      title={category.name}
-                    >
-                      {capitalizeFirstLetter(category.name)}
-                    </Link>
-                  </XS>
-                )
-              })}
-
-            <XS sx={{ mx: [3] }}>Tags: </XS>
-            {tags &&
-              tags.length > 0 &&
-              tags.map((tag, tagIndex) => {
-                return (
-                  <XS key={tagIndex} sx={{ mr: [3] }}>
-                    <Link to={`/tag/${tag.slug}`} title={tag.name}>
-                      {capitalizeFirstLetter(tag.name)}
-                    </Link>
-                  </XS>
-                )
-              })}
-          </Flex>
         </Box>
         <Box
           sx={{
@@ -98,11 +66,50 @@ export default ({ node }: { node: Post }) => {
               __html: decodeHtmlCharCodes(node.excerpt),
             }}
           />
-          <div>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: ["column-reverse", "column-reverse", "row"],
+              justifyContent: "space-between",
+              alignItems: "baseline",
+            }}
+          >
             <Link to={`/post/${node.slug}`} title={node.title}>
               <S>Read more</S>
             </Link>
-          </div>
+
+            <Flex sx={{ alignItems: "baseline", flexWrap: "wrap" }}>
+              <XS sx={{ pr: 1 }}>{date}</XS>
+              <XS sx={{ p: 1 }}>Category: </XS>
+              {categories &&
+                categories.length > 0 &&
+                categories.map((category, categoryIndex) => {
+                  return (
+                    <XS key={categoryIndex} sx={{ p: 1 }}>
+                      <Link
+                        to={`/category/${category.slug}`}
+                        title={category.name}
+                      >
+                        {capitalizeFirstLetter(category.name)}
+                      </Link>
+                    </XS>
+                  )
+                })}
+
+              <XS sx={{ p: 1 }}>Tags: </XS>
+              {tags &&
+                tags.length > 0 &&
+                tags.map((tag, tagIndex) => {
+                  return (
+                    <XS key={tagIndex} sx={{ p: 1 }}>
+                      <Link to={`/tag/${tag.slug}`} title={tag.name}>
+                        {capitalizeFirstLetter(tag.name)}
+                      </Link>
+                    </XS>
+                  )
+                })}
+            </Flex>
+          </Box>
         </Box>
       </Box>
     </Box>
