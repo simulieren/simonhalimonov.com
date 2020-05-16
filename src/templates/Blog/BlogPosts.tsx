@@ -40,7 +40,7 @@ export default (props: Props) => {
   return (
     <>
       <SEO
-        title={`${site.siteMetadata.title} | ${site.siteMetadata.description}`}
+        title={`Blog`}
         description={site.siteMetadata.description}
         // TODO: Add lang for SEO
       />
