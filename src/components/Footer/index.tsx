@@ -131,6 +131,8 @@ export const Footer = ({ lang }: Props) => {
 
         <XS sx={{ px: [3, 4], py: [3] }}>
           Build with GatsbyJS and WordPress by Simon Halimonov. <br />
+          This website does not use Cookies 🍪 to track you. This is a safe
+          place. <br />
           See and get the full source code here. (Coming soon) <br />
           View all libraries used here: (Coming soon) <br />
           Read about how to this website works. (Coming soon) <br />
