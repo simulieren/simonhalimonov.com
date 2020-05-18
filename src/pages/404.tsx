@@ -1,7 +1,7 @@
 import React from "react"
 import { Flex, Box } from "theme-ui"
 
-import { H, P, S } from "../components/Typography/H"
+import { H, P, S } from "../components/Typography"
 
 import SEO from "../components/SEO"
 
