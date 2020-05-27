@@ -12,6 +12,7 @@ This project is open source to educate and simplify the development process of f
 - ✅ Accessibility optimised site
 - 🔃 Programmatic page creation
 - ⭐️ Gutenberg support _(Work in progress)_
+- 👍 WordPress theme optimised for headless
 
 ## Setup
 
