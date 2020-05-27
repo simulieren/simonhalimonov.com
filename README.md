@@ -138,7 +138,7 @@ This project uses a custom theme to deactivate most of the regular frontend of W
 │   │   └── AnimateWords.tsx
 │   ├── Footer
 │   │   └── index.tsx
-│   ├── GridHelper
+│   ├── GridHelper # Grid overlay
 │   │   └── GridHelper.tsx
 │   ├── HTML
 │   │   └── HTML.tsx
@@ -151,8 +151,11 @@ This project uses a custom theme to deactivate most of the regular frontend of W
 │   ├── InviewMotion
 │   │   └── InviewMotion.tsx
 │   ├── Layout # Common layout components
+│   │   ├── PageTitleAnimation.tsx
 │   │   ├── Section.tsx
-│   │   └── index.tsx
+│   │   └── index.tsx # Global layout wrapper
+│   ├── Layouts # Shared grid layouts
+│   │   └── ContentWithSidebar.tsx
 │   ├── Logo
 │   │   └── Logo.tsx
 │   ├── SEO # Component used for SEO
@@ -164,11 +167,12 @@ This project uses a custom theme to deactivate most of the regular frontend of W
 │   ├── Twitter
 │   │   └── index.tsx
 │   ├── Typography # Folder for typography components
-│   │   ├── XL.tsx
 │   │   ├── H.tsx
 │   │   ├── P.tsx
-│   │   └── S.tsx
-│   │   └── XS.tsx
+│   │   ├── S.tsx
+│   │   ├── XL.tsx
+│   │   ├── XS.tsx
+│   │   └── index.tsx # Barrel file
 │   └── WorkSlider
 │       └── WorkSlider.tsx
 ├── contracts # TypeScript definitions
