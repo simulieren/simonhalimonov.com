@@ -91,5 +91,8 @@
   },
   "bugs": {
     "url": "https://github.com/simulieren/simonhalimonov.com/issues"
+  },
+  "typeCoverage": {
+    "atLeast": 90
   }
 }

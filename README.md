@@ -1,4 +1,6 @@
-# simonhalimonov.com
+# [simonhalimonov.com](https://www.simonhalimonov.com)
+
+[![type-coverage](https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fsimulieren%2Fsimonhalimonov.com%2Fmaster%2Fpackage.json)](https://github.com/simulieren/simonhalimonov.com)
 
 This is a personal site and blog. Built on GatsbyJS, TS and a headless WordPress CMS.
 
@@ -13,6 +15,7 @@ This project is open source to educate and simplify the development process of f
 - 🔃 Programmatic page creation
 - ⭐️ Gutenberg support _(Work in progress)_
 - 👍 WordPress theme optimised for headless
+- 💯 High TypeScript type safety
 
 ## Setup
 
