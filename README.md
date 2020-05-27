@@ -1,7 +1,17 @@
 # simonhalimonov.com
 
 This is a personal site and blog. Built on GatsbyJS, TS and a headless WordPress CMS.
-I open source this project, so everyone can see how to build a fast, aesthetic, multilingual, editor-friendly and technically optimised site.
+
+This project is open source to educate and simplify the development process of future sites that use GatsbyJS and WordPress. The goal is to fully support these key features:
+
+- 🔥 Fast load speeds
+- 📐 Minimal and precise layout for easy customizations
+- 🌐 Multilingual support via i18n _(Work in progress)_
+- 📝 Editor-friendly setup with accurate previews
+- 🤖 SEO optimised site
+- ✅ Accessibility optimised site
+- 🔃 Programmatic page creation
+- ⭐️ Gutenberg support _(Work in progress)_
 
 ## Setup
 
@@ -31,31 +41,32 @@ You can read about [how to setup a free WordPress site on GCP in my post](https:
 
 - Create a single post and page
   - Post
-    - Add a tag
-    - Add featured image
+    - Add a tag _(required)_
+    - Add featured image _(required)_
   - Page
-    - Add featured image
+    - Add featured image _(required)_
 - Settings
-  - User permalinks with post name.
-  - Set a page as the front page
-  - Create a menu
+  - Use permalinks with post name _(required)_
+  - Set a page as the front page _(required)_
+  - Create a menu _(required)_
     - The first menu item will be used for the logo
     - All other menu items will be generated dynamically
-- Install the theme. It will do following things
-  - It modifies REST API
-  - It disables the WP frontend
-  - It reroutes all pages to the REST API
-- Install plugins and activate them
-  - [Polylang](https://wordpress.org/plugins/polylang/)
+- Install the theme _(required)_
+  - It will do following things:
+    - It modifies REST API
+    - It disables the WP frontend
+    - It reroutes all pages to the REST API
+- Install plugins and activate them _(required)_
+  - [Polylang](https://wordpress.org/plugins/polylang/) _(required)_
     - Configure a main language that reflect the `gatsby-config.js`
     - This site uses `en_US` as the default language
     - The secondary language is `de_DE`
     - Configure a menu for both languages
-  - [Polylang REST API](https://github.com/maru3l/wp-rest-polylang)
-  - [WP REST API MENU](https://wordpress.org/plugins/wp-api-menus/)
-  - [WP Webhooks](https://wordpress.org/plugins/wp-webhooks/) (optional)
+  - [Polylang REST API](https://github.com/maru3l/wp-rest-polylang) _(required)_
+  - [WP REST API MENU](https://wordpress.org/plugins/wp-api-menus/) _(required)_
+  - [WP Webhooks](https://wordpress.org/plugins/wp-webhooks/) _(optional)_
     - Trigger a webhook on Vercel or Netlify for a redeploy
-  - ACF (optional)
+  - ACF _(optional)_
 
 ### Setting up a cheap WordPress CMS
 
@@ -68,6 +79,22 @@ They also have 1-click install setups.
 ---
 
 ## Features
+
+#### i18n support
+
+This project supports Polylang via REST API. _Note: Full i18n support is a work in progress_
+
+#### Static, programatic and dynamic content
+
+**Static** content is written directly in the codebase. Add pages in `/src/pages/` to create new static content.
+
+**Programatic** content is created during build time. This uses GatsbyJS source plugins to fetch data and translating that data into static HTML files.
+
+**Dynamic** content is created on the client side. In GatsbyJS you can use a custom router to [create dynamic pages](https://www.gatsbyjs.org/docs/client-only-routes-and-user-authentication/). The preview feature uses this to show a preview of the revision of post/page.
+
+#### HTML Parsing to custom React components
+
+Content from WordPress is being parsed, converted to JSX and then rendered to HTML. This enables full control in the frontend to create rich interactive experiences with all features of React. Gutenberg Blocks translate into custom React components in the `HMTL.tsx` file.
 
 #### Posts, Tags, Categories and Pages
 
@@ -91,6 +118,10 @@ The modified REST API exposes the latest revisions of the post.
 This means that you don't have to deal with `nonce` and other authentication strategies.
 By default all revisions are only available with an authenticated REST API.
 I did this, because it was a pain in the ass to get it properly working.
+
+#### Custom WordPress Theme for a headless installation
+
+This project uses a custom theme to deactivate most of the regular frontend of WordPress.
 
 ---
 
