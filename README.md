@@ -15,7 +15,9 @@ This project is open source to educate and simplify the development process of f
 - 🔃 Programmatic page creation
 - ⭐️ Gutenberg support _(Work in progress)_
 - 👍 WordPress theme optimised for headless
-- 💯 High TypeScript type safety
+- 💯 High TypeScript coverage and high type safety
+
+<small>Note: Some features are still work in progress.</small>
 
 ## Setup
 
@@ -215,6 +217,20 @@ This project uses a custom theme to deactivate most of the regular frontend of W
     ├── index.ts
     └── useInterval.tsx
 ```
+
+---
+
+## Missing Features and To-Do's
+
+- [ ] Add WordPress Theme to repository
+  - [ ] Add instructions for local development
+  - [ ] Add instructions for deployment
+- [ ] Add i18n support
+  - [ ] Static pages
+  - [ ] Footer
+  - [ ] Overview pages
+- [ ] Add draft preview support
+- [ ] Add support for more essential Gutenberg Blocks
 
 ---
 
