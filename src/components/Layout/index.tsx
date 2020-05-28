@@ -1,4 +1,4 @@
-import React, { Component, RefObject, createRef } from "react"
+import React, { Component } from "react"
 import { Global } from "@emotion/core"
 import { ParallaxProvider } from "react-scroll-parallax"
 import { Box } from "theme-ui"
@@ -31,8 +31,6 @@ export interface Props {
  * Here we add Global states, styles, settings and components like the header and footer.
  */
 export class Layout extends Component<Props> {
-  target: RefObject<HTMLDivElement> = createRef()
-
   render() {
     return (
       <>
@@ -78,7 +76,7 @@ export class Layout extends Component<Props> {
         />
         <ParallaxProvider>
           <Box
-            ref={this.target}
+            aria-hidden="false"
             sx={{
               backgroundColor: "background",
               transition: "background-color .1s ease",
