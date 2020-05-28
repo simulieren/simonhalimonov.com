@@ -6,7 +6,7 @@ This is a personal site and blog. Built on GatsbyJS, TS and a headless WordPress
 
 This project is open source to educate and simplify the development process of future sites that use GatsbyJS and WordPress. The goal is to fully support these key features:
 
-- 🔥 Fast load speeds
+- 🔥 Fast load speeds. Under 1s on mobile and desktop.
 - 💯 High Lighthouse scores. Almost 100 on mobile and desktop.
 - 📐 Minimal and precise layout for easy customizations
 - 🌐 Multilingual support via i18n _(Work in progress)_
