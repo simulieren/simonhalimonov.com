@@ -12,7 +12,7 @@ This project is open source to educate and simplify the development process of f
 - 🌐 Multilingual support via i18n _(Work in progress)_
 - 📝 Editor-friendly setup with accurate previews
 - 🤖 SEO optimised site
-- ✅ Accessibility optimised site
+- ✅ Accessibility optimised site _(Work in progress)_
 - 🔃 Programmatic page creation
 - ⭐️ Gutenberg support _(Work in progress)_
 - 👍 WordPress theme optimised for headless
