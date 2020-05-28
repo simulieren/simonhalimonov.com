@@ -133,8 +133,26 @@ export const Footer = ({ lang }: Props) => {
           Build with GatsbyJS and WordPress by Simon Halimonov. <br />
           This website does not use Cookies 🍪 to track you. This is a safe
           place. <br />
-          See and get the full source code here. (Coming soon) <br />
-          View all libraries used here: (Coming soon) <br />
+          <a
+            href={"https://github.com/simulieren/simonhalimonov.com"}
+            target="_blank"
+            rel="noreferrer noopener nofollow external"
+            title="GitHub Repository with source code"
+          >
+            Get the full source code here.
+            <br />
+          </a>
+          <a
+            href={
+              "https://github.com/simulieren/simonhalimonov.com/blob/master/package.json"
+            }
+            target="_blank"
+            rel="noreferrer noopener nofollow external"
+            title="Libraries used"
+          >
+            View all libraries used here.
+            <br />
+          </a>
           Read about how to this website works. (Coming soon) <br />
           Fonts used: IBM Plex Sans, IBM Plex Serif
         </XS>
